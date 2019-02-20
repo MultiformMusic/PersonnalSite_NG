@@ -25,10 +25,14 @@
             "styles": [
               "src/css/animate.css",
               "src/css/style.css",
+              "src/css/fixed.css",
+              "src/css/owl.carousel.css",
+              "src/css/owl.theme.default.css",
               "src/styles.css"
             ],
             "scripts": [
-              "src/js/script.js"
+              "src/js/script.js",
+              "src/js/owl.carousel.js"
 
             ]
           },

@@ -103,21 +103,28 @@ $(document).ready(function() {
     });*/
 
 
+    $(document).ready(function() {
+        $("#team-slider").owlCarousel({
+            items: 2,
+            autoplay: true,
+            smartSpeed: 700,
+            loop: true,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                576: {
+                    items: 2
+                },
+                768: {
+                    items: 2
+                }
+            }
+        });
+    });
+    
+
+
 });
 
-sendEmail = () => {
-
-    alert('send email');
-
-    Email.send({
-        Host : "smtp.elasticemail.com",
-        Username : "michel.dio33@gmail.com",
-        Password : "22655bad-1c67-4d4f-8ed0-a20961e71579",
-        To : 'mdio@free.fr',
-        From : "michel.dio33@gmail.com",
-        Subject : "This is the subject",
-        Body : "And this is the body"
-    }).then(
-      message => alert(message)
-    );
-}

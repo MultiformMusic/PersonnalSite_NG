@@ -10,6 +10,7 @@ import { MisceallousComponent } from './misceallous/misceallous.component';
 import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './footer/footer.component';
 import { HttpModule } from '@angular/http';
+import { ProjectsComponent } from './projects/projects.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { HttpModule } from '@angular/http';
     MisceallousComponent,
     ContactComponent,
     FooterComponent,
+    ProjectsComponent,
   ],
   imports: [
     BrowserModule,

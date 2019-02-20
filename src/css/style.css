@@ -208,8 +208,76 @@ header {
 
 /* END ABOUT ME */
 
+/* PROJECTS */
+
+.projects {
+    background: rgb(12, 19, 19);
+
+}
+
+#fixed {
+    background-image: url(../assets/ProjectsBackground.jpeg);
+    z-index: -1;
+}
+
+.darkProjects {
+    background-color: rgba(0, 0, 0, 0.75);
+    text-align: center;
+    z-index: 1000!important;
+}
 
 .card {
+    border-radius: 0;
+    border: .1rem solid rgba(0, 0, 0, 0.075);
+    box-shadow: O O .8rem rgba(0, 0, 0, 0.75);
+    margin: 5rem 2rem;
+    transition: transform .4s ease;
+    background: #000;
+    width: 60%;
+}
+
+.card-img-top {
+
+    border-radius: 10;
+}
+
+.card:hover {
+    transform: scale(.95);
+}
+
+.card h4 {
+    font-weight: 700;
+}
+
+.card h5 {
+    color: #1EBBA3;
+}
+
+.card p {
+    border-top: .1rem solid rgba(0, 0, 0, 0.1);
+    border-bottom: .1rem solid rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin: 1rem 0 1.5rem
+}
+
+.card svg.svg-inline--fa {
+    color: #1EBBA3!important;
+    font-size: 1.3rem;
+    width: 2rem;
+}
+
+.card svg.svg-inline--fa:hover {
+    color: #6c757d!important;
+}
+
+.owl-dot.active span, .owl-dot:hover span {
+    background: #1EBBA3!important;
+}
+
+/* END PROJECTS */
+
+/* MISCEALLOUS */
+.cardMisceallous {
     box-shadow: 7px 18px 50px #555;
     max-width: 100%;
 }
@@ -226,6 +294,8 @@ header {
 
     background-color: #ffffff ;
 }
+
+/* END MISCEALLOUS */
 
 /* CONTACT */
 .contact {
