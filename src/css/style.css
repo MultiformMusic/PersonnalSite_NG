@@ -211,12 +211,12 @@ header {
 /* PROJECTS */
 
 .projects {
-    background: rgb(12, 19, 19);
+    background: rgb(12, 20, 0);
 
 }
 
 #fixed {
-    background-image: url(../assets/ProjectsBackground.jpeg);
+    background-image: url(../assets/Macbook.jpeg);
     z-index: -1;
 }
 
@@ -226,14 +226,19 @@ header {
     z-index: 1000!important;
 }
 
+.lightProjects {
+    background-color: rgba(255, 255, 255, 0.80);
+    padding: 3rem 2rem 2rem;
+    z-index: 1000!important;
+}
+
 .card {
     border-radius: 0;
-    border: .1rem solid rgba(0, 0, 0, 0.075);
-    box-shadow: O O .8rem rgba(0, 0, 0, 0.75);
-    margin: 5rem 2rem;
+    border: .1rem solid rgba(255, 255, 255, 0.075);
+    box-shadow: O O .8rem rgba(255, 255, 255, 0.75);
+    margin: 0rem 2rem;
     transition: transform .4s ease;
     background: #000;
-    width: 60%;
 }
 
 .card-img-top {

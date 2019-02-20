@@ -106,7 +106,7 @@ $(document).ready(function() {
     $(document).ready(function() {
         $("#team-slider").owlCarousel({
             items: 2,
-            autoplay: true,
+            autoplay: false,
             smartSpeed: 700,
             loop: true,
             autoplayHoverPause: true,
