@@ -105,7 +105,7 @@ $(document).ready(function() {
 
     $(document).ready(function() {
         $("#team-slider").owlCarousel({
-            items: 2,
+            items: 3,
             autoplay: false,
             smartSpeed: 700,
             loop: true,
@@ -115,10 +115,13 @@ $(document).ready(function() {
                     items: 1
                 },
                 576: {
-                    items: 2
+                    items: 1
                 },
                 768: {
                     items: 2
+                },
+                1150: {
+                    items: 3
                 }
             }
         });
