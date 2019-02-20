@@ -1,0 +1,40 @@
+<!-- CONTACT -->   
+  <section id="contact" class="contact p-5 mt-5" id="contact">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="os-animation" id="contactAnimation" style="opacity: 0" class="col-lg-5 pb-4">
+                  <h3 class="display-4 mb-2 text-center text-white">Get In Touch</h3>
+                  <h6 class="text-muted text-center">(all fields are mandatories)</h6>
+                  <br>
+                  <div *ngIf="sendingOK">
+                      <h5 class="text-success">Sending message ok</h5>
+                  </div>
+                  <form (ngSubmit)="sendEmail()" #f="ngForm" class="contact-form">
+                      <div class="form-group py-4">
+                          <input type="text" class="form-control my-2 p-2 input" 
+                                 placeholder="name"
+                                 ngModel name="name" required>
+                          <label for="name" class="label">Name</label>
+                      </div>
+                      <div class="form-group py-4">
+                          <p *ngIf="!email.valid && email.touched" class="text-danger">Please enter a valid email</p>
+                          <input type="email" class="form-control my-2 p-2 input" 
+                                 placeholder="Email Adress"
+                                 ngModel name="email" required email #email="ngModel">
+                          <label for="email" class="label">Email Adress</label>
+                      </div>
+                      <div class="form-group py-4 mb-3 mt-4">  
+                          <textarea class="form-control" id="message" rows="4" 
+                                    placeholder="message"
+                                    ngModel name="message"
+                                    required></textarea>       
+                      </div>                            
+                      <button *ngIf="!f.valid" [disabled]="!f.valid" type="submit" ngClass="{}" class="btb btn-block p-2 font-weight-bold text-uppercase">Send</button>
+                      <button *ngIf="f.valid" type="submit" ngClass="{}" class="btb btn-block p-2 font-weight-bold text-uppercase submit-button">Send</button>
+                  </form>
+              </div>
+          </div>
+      </div>
+  </section>
+
+  <!-- END CONTACT -->
