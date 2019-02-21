@@ -1,0 +1,59 @@
+/* ABOUT ME */
+
+.aboutme {
+    background: rgb(12, 19, 19);
+}
+
+.aboutme-back {
+    background: linear-gradient(rgba(0,0,0, .6), rgba(0,0,0, .5)), center no-repeat/cover;
+    max-width: 400px;
+}
+
+.dark {
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 2rem 2rem;
+}
+
+.underline {
+    width: 150px;
+    border: 3px solid #ed7010;
+    margin: auto;
+}
+
+.fromLeft {
+    animation-name: fromLeft;
+    animation-duration: 1s
+}
+
+.fromRight {
+    animation-name: fromRight;
+    animation-duration: 1s
+}
+
+@keyframes fromLeft {
+
+    0% {
+        transform: translateX(-200px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fromRight {
+
+    0% {
+        transform: translateX(200px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* END ABOUT ME */

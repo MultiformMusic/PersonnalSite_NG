@@ -1,0 +1,76 @@
+/* PROJECTS */
+
+.projects {
+    background: rgb(12, 19, 19);
+
+}
+
+#fixed {
+    background-image: url(../../assets/Macbook.jpeg);
+    z-index: -1;
+}
+
+.darkProjects {
+    background-color: rgba(0, 0, 0, 0.75);
+    text-align: center;
+    z-index: 1000!important;
+}
+
+.lightProjects {
+    background-color: rgba(255, 255, 255, 0.80);
+    padding: 3rem 2rem 2rem;
+    z-index: 1000!important;
+}
+
+.card {
+    border-radius: 0;
+    border: .1rem solid rgba(255, 255, 255, 0.075);
+    box-shadow: O O .8rem rgba(0, 0, 0, 0.75);
+    margin: 2rem 2rem;
+    transition: transform .4s ease;
+    background: #000;
+}
+
+.card-img-top {
+
+    border-radius: 10;
+}
+
+.card:hover {
+    transform: scale(.95);
+}
+
+.card h4 {
+    font-weight: 700;
+}
+
+.card h5 {
+    color: rgb(41, 145, 129);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.card p {
+    border-top: .1rem solid rgba(0, 0, 0, 0.1);
+    border-bottom: .1rem solid rgba(0, 0, 0, 0.1);
+    padding: 0rem;
+    margin: 0rem 0 0rem;
+    font-size: 0.8rem;
+    color: white
+}
+
+/*.card svg.svg-inline--fa {
+    color: #1EBBA3!important;
+    font-size: 1.3rem;
+    width: 2rem;
+}
+
+.card svg.svg-inline--fa:hover {
+    color: #6c757d!important;
+}*/
+
+.owl-dot.active span, .owl-dot:hover span {
+    background: #1EBBA3!important;
+}
+
+/* END PROJECTS */

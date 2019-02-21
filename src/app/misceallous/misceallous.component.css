@@ -1,0 +1,20 @@
+/* MISCEALLOUS */
+.cardMisceallous {
+    box-shadow: 7px 18px 50px #555;
+    max-width: 100%;
+}
+
+.card-youtube {
+    /*background: linear-gradient(rgba(0,0,0, .4), rgba(0,0,0, .5)), 
+                url(../images/l39.jpg) no-repeat center center/cover; */
+    background-color: #ffffff;
+}
+
+.card-soundcloud {
+    /*background: linear-gradient(rgba(0,0,0, .4), rgba(0,0,0, .5)), 
+    url(../images/music.jpeg) no-repeat center center/cover;*/
+
+    background-color: #ffffff ;
+}
+
+/* END MISCEALLOUS */
