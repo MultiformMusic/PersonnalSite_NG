@@ -105,6 +105,8 @@ $(document).ready(function() {
 
     $(document).ready(function() {
         $("#team-slider").owlCarousel({
+            animateOut: 'fadeOut',
+            animateIn: 'fadeIn',
             items: 2,
             autoplay: false,
             smartSpeed: 700,
@@ -127,7 +129,13 @@ $(document).ready(function() {
         });
     });
     
-
+    var owl = $('.owl-carousel');
+    $('.owl-carousel').on('mouseenter',function(){ //Kiedy myszka najedzie na element slidera
+        owl.trigger('stop.owl.autoplay'); // Rozpocznij przewijanie
+     })
+     $('.owl-carousel').on('mouseleave',function(){ //Kiedy kursor wyjedzie z slidera
+         owl.trigger('stop.owl.autoplay'); // Zatrzymaj przewijanie slidera
+     });
 
 });
 
