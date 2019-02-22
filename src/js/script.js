@@ -110,23 +110,35 @@ $(document).ready(function() {
             items: 2,
             autoplay: false,
             smartSpeed: 700,
-            loop: true,
+            loop: false,
             autoplayHoverPause: true,
+            mouseDrag: true,
+            touchDrag: false,
             responsive: {
                 0: {
-                    items: 1
+                    items: 1,
+                    mouseDrag: false,
+                    touchDrag: true
                 },
                 450: {
-                    items: 1
+                    items: 1,
+                    mouseDrag: false,
+                    touchDrag: true
                 },
                 576: {
-                    items: 2
+                    items: 2,
+                    mouseDrag: false,
+                    touchDrag: true
                 },
                 768: {
-                    items: 3
+                    items: 3,
+                    mouseDrag: false,
+                    touchDrag: true
                 },
                 1150: {
-                    items: 3
+                    items: 3,
+                    mouseDrag: false,
+                    touchDrag: true
                 }
             }
         });
