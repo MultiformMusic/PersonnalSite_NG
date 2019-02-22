@@ -110,7 +110,7 @@ $(document).ready(function() {
             items: 2,
             autoplay: false,
             smartSpeed: 700,
-            loop: false,
+            loop: true,
             autoplayHoverPause: true,
             mouseDrag: true,
             touchDrag: false,
