@@ -104,7 +104,7 @@ $(document).ready(function() {
 
 
     $(document).ready(function() {
-        $("#team-slider").owlCarousel({
+        $("#projects-slider").owlCarousel({
             animateOut: 'fadeOut',
             animateIn: 'fadeIn',
             items: 2,
@@ -116,11 +116,14 @@ $(document).ready(function() {
                 0: {
                     items: 1
                 },
-                576: {
+                450: {
                     items: 1
                 },
-                768: {
+                576: {
                     items: 2
+                },
+                768: {
+                    items: 3
                 },
                 1150: {
                     items: 3
