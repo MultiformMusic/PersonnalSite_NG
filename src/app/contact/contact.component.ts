@@ -26,6 +26,9 @@ export class ContactComponent implements OnInit {
   ngOnInit() {
   }
 
+  clearSubmitOk() {
+    this.sendingOK = false;
+  }
 
   sendEmail() {
 

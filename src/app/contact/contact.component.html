@@ -7,11 +7,12 @@
                   <h6 class="text-primary text-center">(all fields are mandatories)</h6>
                   <br>
                   <div *ngIf="sendingOK">
-                      <h5 class="text-success">Sending message ok</h5>
+                      <h5 class="text-success">Your message has been sent</h5>
                   </div>
                   <form (ngSubmit)="sendEmail()" #captchaProtectedForm="ngForm" class="contact-form">
                       <div class="form-group py-4">
-                          <input type="text" class="form-control my-2 p-2 input" 
+                          <input type="text" class="form-control my-2 p-2 input"
+                                 (change)="clearSubmitOk()" 
                                  placeholder="name"
                                  ngModel name="name" required>
                           <label for="name" class="label">Name</label>
@@ -20,6 +21,7 @@
                           <p *ngIf="!email.valid && email.touched" class="text-danger">Please enter a valid email</p>
                           <input type="email" class="form-control my-2 p-2 input" 
                                  placeholder="Email Adress"
+                                 (change)="clearSubmitOk()" 
                                  ngModel name="email" required email #email="ngModel">
                           <label for="email" class="label">Email Adress</label>
                       </div>
@@ -27,6 +29,7 @@
                           <textarea class="form-control" id="message" rows="4" 
                                     placeholder="message"
                                     ngModel name="message"
+                                    (change)="clearSubmitOk()" 
                                     required></textarea>       
                       </div>       
                       <re-captcha
