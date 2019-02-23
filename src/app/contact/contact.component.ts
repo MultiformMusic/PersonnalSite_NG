@@ -2,7 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { NgForm } from '@angular/forms';
 import { Contact } from 'src/models/contact.model';
-import { debug } from 'util';
+
+export interface FormModel {
+  captcha?: string;
+}
+
 
 @Component({
   selector: 'app-contact',
@@ -11,7 +15,9 @@ import { debug } from 'util';
 })
 export class ContactComponent implements OnInit {
 
-  @ViewChild('f') contactForm: NgForm;
+  public formModel: FormModel = {};
+
+  @ViewChild('captchaProtectedForm') contactForm: NgForm;
   contact: Contact = new Contact('', '', '')
   sendingOK = false;
 
@@ -30,12 +36,18 @@ export class ContactComponent implements OnInit {
     let url = `https://us-central1-personnalsite-c7bef.cloudfunctions.net/httpEmail`;
     let headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
 
-    this.http.post(url, this.contact, {headers: headers}).subscribe(
+    alert("Send Message");
+
+    this.sendingOK = true;
+    this.contactForm.reset();
+    this.formModel.captcha = '';
+
+    /*this.http.post(url, this.contact, {headers: headers}).subscribe(
       (response: Response) => {
         console.log("RESSSS = ", response.status);
         this.sendingOK = true;
       }
-    );
+    );*/
     
   }
 }

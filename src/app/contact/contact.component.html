@@ -4,12 +4,12 @@
           <div class="row">
               <div class="os-animation" id="contactAnimation" style="opacity: 0" class="col-lg-5 pb-4">
                   <h3 class="display-4 mb-2 text-center text-white">Get In Touch</h3>
-                  <h6 class="text-muted text-center">(all fields are mandatories)</h6>
+                  <h6 class="text-primary text-center">(all fields are mandatories)</h6>
                   <br>
                   <div *ngIf="sendingOK">
                       <h5 class="text-success">Sending message ok</h5>
                   </div>
-                  <form (ngSubmit)="sendEmail()" #f="ngForm" class="contact-form">
+                  <form (ngSubmit)="sendEmail()" #captchaProtectedForm="ngForm" class="contact-form">
                       <div class="form-group py-4">
                           <input type="text" class="form-control my-2 p-2 input" 
                                  placeholder="name"
@@ -28,10 +28,29 @@
                                     placeholder="message"
                                     ngModel name="message"
                                     required></textarea>       
-                      </div>                            
-                      <button *ngIf="!f.valid" [disabled]="!f.valid" type="submit" ngClass="{}" class="btb btn-block p-2 font-weight-bold text-uppercase">Send</button>
-                      <button *ngIf="f.valid" type="submit" ngClass="{}" class="btb btn-block p-2 font-weight-bold text-uppercase submit-button">Send</button>
-                  </form>
+                      </div>       
+                      <re-captcha
+                        [(ngModel)]="formModel.captcha"
+                        name="captcha"
+                        required
+                        siteKey="6LczZZMUAAAAAO2ec1c3I1MXSPmtKyVAG19EZfO7"
+                        theme="dark"
+                        #captchaControl="ngModel"
+                        size='compact'>
+                      </re-captcha> 
+                        
+                        <!--
+                        <div *ngIf="!captchaControl.valid || captchaControl.pristine" class="error">Captcha must be solved</div>
+                        <div *ngIf="captchaControl.valid" class="success">Captcha is valid</div>
+                        <div *ngIf="!captchaProtectedForm.form.valid" class="error">The form must be filled out</div>
+                        <div *ngIf="captchaProtectedForm.form.valid" class="success">The form is valid</div>                     
+                        <button (click)="formModel.captcha = ''">Reset Captcha</button>
+                        -->
+
+                        <button *ngIf="!captchaProtectedForm.valid" [disabled]="!captchaProtectedForm.valid" type="submit" ngClass="{}" class="btb btn-block p-2 mt-5 font-weight-bold text-uppercase">Send</button>
+                        <button *ngIf="captchaProtectedForm.valid" type="submit" ngClass="{}" class="btb btn-block p-2 mt-5 font-weight-bold text-uppercase submit-button">Send</button>
+
+                    </form>
               </div>
           </div>
       </div>

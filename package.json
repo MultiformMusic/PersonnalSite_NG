@@ -23,6 +23,7 @@
     "angular-animations": "0.0.8",
     "core-js": "^2.5.4",
     "gmail-send": "^1.2.14",
+    "ng-recaptcha": "^4.2.1",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
