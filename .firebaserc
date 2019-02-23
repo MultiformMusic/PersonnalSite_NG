@@ -1,5 +1,6 @@
 {
   "projects": {
-    "personnalsite": "personnalsite-c7bef"
+    "personnalsite": "personnalsite-c7bef",
+    "default": "personnalsite-c7bef"
   }
 }
