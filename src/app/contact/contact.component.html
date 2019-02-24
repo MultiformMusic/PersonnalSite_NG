@@ -5,14 +5,13 @@
               <div class="os-animation" id="contactAnimation" style="opacity: 0" class="col-lg-5 pb-4">
                   <h3 class="display-4 mb-2 text-center text-white">Get In Touch</h3>
                   <h6 class="text-primary text-center">(all fields are mandatories)</h6>
-                  <br>
-                  <h5 [className]="sendingOK ? 'text-success' : 'text-danger'">{{ messageSending }}</h5>
                   <form (ngSubmit)="sendContactMessage()" #captchaProtectedForm="ngForm" class="contact-form">
                       <div class="form-group py-4">
                           <input type="text" class="form-control my-2 p-2 input"
                                  (change)="clearSubmitOk()" 
                                  placeholder="name"
-                                 ngModel name="name" required>
+                                 ngModel name="name" required
+                                 maxlength="40">
                           <label for="name" class="label">Name</label>
                       </div>
                       <div class="form-group py-4">
@@ -20,7 +19,8 @@
                           <input type="email" class="form-control my-2 p-2 input" 
                                  placeholder="Email Adress"
                                  (change)="clearSubmitOk()" 
-                                 ngModel name="email" required email #email="ngModel">
+                                 ngModel name="email" required email #email="ngModel"
+                                 maxlength="40">
                           <label for="email" class="label">Email Adress</label>
                       </div>
                       <div class="form-group py-4 mb-3 mt-4">  
@@ -28,7 +28,8 @@
                                     placeholder="message"
                                     ngModel name="message"
                                     (change)="clearSubmitOk()" 
-                                    required></textarea>       
+                                    required
+                                    maxlength="250"></textarea>       
                       </div>       
                       <re-captcha
                         [(ngModel)]="formModel.captcha"
@@ -48,7 +49,7 @@
                         <div *ngIf="captchaProtectedForm.form.valid" class="success">The form is valid</div>                     
                         <button (click)="formModel.captcha = ''">Reset Captcha</button>
                         -->
-
+                        <h5 [className]="sendingOK ? 'text-success mb-3 mt-3' : 'text-danger mb-3 mt-3'">{{ messageSending }}</h5>
                         <button *ngIf="!captchaProtectedForm.valid" [disabled]="!captchaProtectedForm.valid" type="submit" ngClass="{}" class="btb btn-block p-2 mt-5 font-weight-bold text-uppercase">Send</button>
                         <button *ngIf="captchaProtectedForm.valid" type="submit" ngClass="{}" class="btb btn-block p-2 mt-5 font-weight-bold text-uppercase submit-button">Send</button>
 
