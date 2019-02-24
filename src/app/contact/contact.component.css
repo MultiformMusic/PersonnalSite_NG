@@ -9,7 +9,7 @@
 .contact {
   background: linear-gradient(105deg, rgba(21, 31, 32, 1) 0%, 
             rgba(21, 31, 32, .95) 50%, transparent 90%), 
-              url(../../assets/images/Contact.jpeg) center/cover;
+              url(../../assets/images/Contact.webp) center/cover;
               background-color: #000;
 
   /*background: url(../images/Contact.jpeg) center/cover;*/
