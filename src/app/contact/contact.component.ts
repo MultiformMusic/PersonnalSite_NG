@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import { Response } from '@angular/http';
 import { NgForm } from '@angular/forms';
 import { Contact } from 'src/models/contact.model';
+import { ContactService } from '../services/contact.service';
 
 export interface FormModel {
   captcha?: string;
@@ -19,38 +20,46 @@ export class ContactComponent implements OnInit {
 
   @ViewChild('captchaProtectedForm') contactForm: NgForm;
   contact: Contact = new Contact('', '', '')
-  sendingOK = false;
+  sendingOK = true;
+  messageSending = '';
 
-  constructor(private http: Http) { }
+  constructor(private contactService: ContactService) { }
 
   ngOnInit() {
   }
 
   clearSubmitOk() {
     this.sendingOK = false;
+    this.messageSending = '';
   }
 
-  sendEmail() {
+  sendContactMessage() {
 
     this.contact.email = this.contactForm.value.email;
     this.contact.name = this.contactForm.value.name;
     this.contact.message = this.contactForm.value.message;
 
-    let url = `https://us-central1-personnalsite-c7bef.cloudfunctions.net/httpEmail`;
-    let headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
-
-    alert("Send Message");
-
-    this.sendingOK = true;
-    this.contactForm.reset();
-    this.formModel.captcha = '';
-
-    /*this.http.post(url, this.contact, {headers: headers}).subscribe(
+    /* Envoi du mail */
+    this.contactService.sendEmail(this.contact).subscribe(
       (response: Response) => {
-        console.log("RESSSS = ", response.status);
-        this.sendingOK = true;
+        if (response.status == 200) {
+          this.sendingOK = true;
+          this.messageSending = 'Your message has been sent';
+          this.contactForm.reset();
+          this.formModel.captcha = '';
+        } else {
+          this.sendingOK = false;
+          this.messageSending = 'Error while sending your message, please try later';
+          this.formModel.captcha = '';
+        }
       }
-    );*/
-    
+    );
+
+    /** sauvegarde message dans Firebase */
+    this.contactService.storeContact(this.contact).subscribe(
+      (response) => console.log(response),
+      (error) => console.log(error)
+    );
+
   }
 }

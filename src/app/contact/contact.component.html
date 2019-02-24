@@ -6,10 +6,8 @@
                   <h3 class="display-4 mb-2 text-center text-white">Get In Touch</h3>
                   <h6 class="text-primary text-center">(all fields are mandatories)</h6>
                   <br>
-                  <div *ngIf="sendingOK">
-                      <h5 class="text-success">Your message has been sent</h5>
-                  </div>
-                  <form (ngSubmit)="sendEmail()" #captchaProtectedForm="ngForm" class="contact-form">
+                  <h5 [className]="sendingOK ? 'text-success' : 'text-danger'">{{ messageSending }}</h5>
+                  <form (ngSubmit)="sendContactMessage()" #captchaProtectedForm="ngForm" class="contact-form">
                       <div class="form-group py-4">
                           <input type="text" class="form-control my-2 p-2 input"
                                  (change)="clearSubmitOk()" 

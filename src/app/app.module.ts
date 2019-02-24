@@ -14,6 +14,7 @@ import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './footer/footer.component';
 import { HttpModule } from '@angular/http';
 import { ProjectsComponent } from './projects/projects.component';
+import { ContactService } from './services/contact.service';
 
 @NgModule({
   declarations: [
@@ -37,8 +38,8 @@ import { ProjectsComponent } from './projects/projects.component';
     {
       provide: RECAPTCHA_LANGUAGE,
       useValue: 'en', 
-    }
-
+    },
+    ContactService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,21 +1,7 @@
 
-export class Contact {
+class DateHelper {
 
-    public email: string;
-    public name: string;
-    public message: string;
-    public date: string;
-
-    constructor(email: string, name: string, message: string) {
-        this.email = email;
-        this.name = name;
-        this.message = message;
-        
-        this.date = this.getDate();
-        
-    }
-
-    getDate() {
+    static getDate() {
 
         var date = new Date(),
           year = date.getFullYear(),
@@ -32,5 +18,6 @@ export class Contact {
           
           return formatedDay + "/" + formatedMonth + "/" + year + " " + formatedHour + ':' + formatedMinute + ':' + formatedSecond;
       }
-
 }
+
+module.exports = DateHelper;

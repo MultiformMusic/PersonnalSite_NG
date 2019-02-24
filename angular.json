@@ -33,7 +33,6 @@
             "scripts": [
               "src/js/script.js",
               "src/js/owl.carousel.js"
-
             ]
           },
           "configurations": {
