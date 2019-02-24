@@ -1,8 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, SecurityContext } from '@angular/core';
+
 import { Response } from '@angular/http';
 import { NgForm } from '@angular/forms';
 import { Contact } from 'src/models/contact.model';
 import { ContactService } from '../services/contact.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { debug } from 'util';
 
 export interface FormModel {
   captcha?: string;
@@ -23,7 +26,8 @@ export class ContactComponent implements OnInit {
   sendingOK = true;
   messageSending = '';
 
-  constructor(private contactService: ContactService) { }
+  constructor(private contactService: ContactService, 
+              private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
   }
@@ -34,10 +38,10 @@ export class ContactComponent implements OnInit {
   }
 
   sendContactMessage() {
-
-    this.contact.email = this.contactForm.value.email;
-    this.contact.name = this.contactForm.value.name;
-    this.contact.message = this.contactForm.value.message;
+  
+    this.contact.email = this.sanitizer.sanitize(SecurityContext.HTML, this.contactForm.value.email);
+    this.contact.name = this.sanitizer.sanitize(SecurityContext.HTML, this.contactForm.value.name);
+    this.contact.message = this.sanitizer.sanitize(SecurityContext.HTML, this.contactForm.value.message);
 
     /* Envoi du mail */
     this.contactService.sendEmail(this.contact).subscribe(
