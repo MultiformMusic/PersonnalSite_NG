@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HttpModule } from '@angular/http';
 import { ProjectsComponent } from './projects/projects.component';
 import { ContactService } from './services/contact.service';
+import { ModalLoginComponent } from './modal-login/modal-login.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ContactService } from './services/contact.service';
     ContactComponent,
     FooterComponent,
     ProjectsComponent,
+    ModalLoginComponent,
   ],
   imports: [
     BrowserModule,

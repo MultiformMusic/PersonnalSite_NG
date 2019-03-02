@@ -32,11 +32,26 @@ header {
     font-size: 13px;
     letter-spacing: 1px;
     color: #eee;
+    cursor: pointer;
     transition: color .5s;
+}
+
+.login-link {
+    color: #fff;
 }
 
 .navbar-nav .nav-link.active, .navbar-nav .nav-link:hover {
     color: #70aed2;
+}
+.link-login:hover {
+    background: #b37474;
+    color: #aaa;
+}
+
+.link-login {
+    background: #b37474;
+    color: #fff;
+    transition: color .5s;
 }
 
 .line1, .line2, .line3 {
