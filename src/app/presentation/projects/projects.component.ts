@@ -15,7 +15,7 @@ export class ProjectsComponent implements OnInit {
     
     setTimeout( () => {
       this.videoplayer.nativeElement.play();
-    }, 100)
+    }, 300)
   }
 
 }
