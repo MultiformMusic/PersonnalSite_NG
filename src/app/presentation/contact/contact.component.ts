@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild, SecurityContext } from '@angular/core';
 import { Response } from '@angular/http';
 import { NgForm } from '@angular/forms';
 import { Contact } from 'src/models/contact.model';
-import { ContactService } from '../services/contact.service';
+import { ContactService } from '../../services/contact.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { debug } from 'util';
 
