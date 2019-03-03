@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router'
 import { FormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
@@ -16,6 +17,11 @@ import { HttpModule } from '@angular/http';
 import { ProjectsComponent } from './projects/projects.component';
 import { ContactService } from './services/contact.service';
 import { ModalLoginComponent } from './modal-login/modal-login.component';
+import { ConnectedModule } from './connected/connected.module';
+
+const routes: Routes = [
+  { path: 'connected', redirectTo: 'connected', pathMatch: 'full'}
+]
 
 @NgModule({
   declarations: [
@@ -28,13 +34,16 @@ import { ModalLoginComponent } from './modal-login/modal-login.component';
     ProjectsComponent,
     ModalLoginComponent,
   ],
+
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
     FormsModule,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    ConnectedModule,
+    RouterModule.forRoot(routes),
   ],
   providers: [
     {

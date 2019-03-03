@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'modal-login',
@@ -9,7 +10,7 @@ export class ModalLoginComponent implements OnInit {
 
   @ViewChild('modalLogin') modalLogin: any;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
 
@@ -31,4 +32,16 @@ export class ModalLoginComponent implements OnInit {
     }, 100)
     
   }
+
+  loginOK() {
+
+    this.modalLogin.nativeElement.className = 'modal fade';
+    setTimeout( () => {
+      this.modalLogin.nativeElement.style.display = 'none';
+    }, 100)
+
+    this.router.navigate(['/connected/home']);
+  }
+
+
 }
