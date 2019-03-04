@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class ModalLoginComponent implements OnInit {
 
   @ViewChild('modalLogin') modalLogin: any;
+  @ViewChild('modalContainer') modalContainer: any;
 
   constructor(private router: Router) { }
 
@@ -20,22 +21,22 @@ export class ModalLoginComponent implements OnInit {
 
     this.modalLogin.nativeElement.style.display = 'block';
     setTimeout( () => {
-      this.modalLogin.nativeElement.className = 'modal fade show';
+      this.modalLogin.nativeElement.className = 'modal fade show modal-transition-in';
     }, 100)
   }
 
   closeModal() {
     
-    this.modalLogin.nativeElement.className = 'modal fade';
+    this.modalLogin.nativeElement.className = 'modal fade modal-transition-in';
     setTimeout( () => {
       this.modalLogin.nativeElement.style.display = 'none';
-    }, 100)
+    }, 200)
     
   }
 
   loginOK() {
 
-    this.modalLogin.nativeElement.className = 'modal fade';
+    //this.modalLogin.nativeElement.className = 'modal fade';
     setTimeout( () => {
       this.modalLogin.nativeElement.style.display = 'none';
     }, 100)
