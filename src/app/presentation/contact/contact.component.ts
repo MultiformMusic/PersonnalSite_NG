@@ -5,12 +5,10 @@ import { NgForm } from '@angular/forms';
 import { Contact } from 'src/models/contact.model';
 import { ContactService } from '../../services/contact.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { debug } from 'util';
 
 export interface FormModel {
   captcha?: string;
 }
-
 
 @Component({
   selector: 'app-contact',
@@ -46,7 +44,7 @@ export class ContactComponent implements OnInit {
     /* Envoi du mail */
     this.contactService.sendEmail(this.contact).subscribe(
       (response: Response) => {
-        if (response.status == 200) {
+        if (response.status === 200) {
           this.sendingOK = true;
           this.messageSending = 'Your message has been sent';
           this.contactForm.reset();
@@ -61,8 +59,8 @@ export class ContactComponent implements OnInit {
 
     /** sauvegarde message dans Firebase */
     this.contactService.storeContact(this.contact).subscribe(
-      (response) => console.log(response),
-      (error) => console.log(error)
+      (response) => console.log("Save message OK"),
+      (error) => console.log("Save Message Erro")
     );
 
   }
