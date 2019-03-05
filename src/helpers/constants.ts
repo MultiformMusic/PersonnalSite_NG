@@ -1,3 +1,3 @@
-export const constantes = {
-    MAIL_API_KEY: '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'
+export const constants = {
+    URL_CLOUD_MAIL: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/httpEmail'
 }
