@@ -43,6 +43,5 @@ export class ModalLoginComponent implements OnInit {
 
     this.router.navigate(['/connected/home']);
   }
-
-
+  
 }

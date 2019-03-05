@@ -14,6 +14,7 @@ import { RecaptchaModule } from 'ng-recaptcha';
 import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 import { RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
 import { ContactService } from '../services/contact.service';
+import { ModalSigninComponent } from './modal-signin/modal-signin.component';
 
 const routes: Routes = [
     { path: '', 
@@ -23,7 +24,6 @@ const routes: Routes = [
      ]
     }
 ];
-
 
 @NgModule({
 
@@ -36,6 +36,7 @@ const routes: Routes = [
         FooterComponent,
         ProjectsComponent,
         ModalLoginComponent,
+        ModalSigninComponent,
     ],
     imports: [
         CommonModule,
