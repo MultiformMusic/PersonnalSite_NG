@@ -3,11 +3,20 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Please enter email/password</h4>
+          <h4 class="modal-title">Please enter your email / password</h4>
           <button (click)="closeModal()" type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-           Coucou
+
+           <input type="email" 
+                  class="form-control mb-3"
+                  maxlength="40"
+                  placeholder="email">
+            <input type="password"
+                   class="form-control"
+                   maxlength="40"
+                   placeholder="password">
+
         </div>
         <div class="modal-footer">
           <button (click)="closeModal()" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
