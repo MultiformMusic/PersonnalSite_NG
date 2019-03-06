@@ -6,6 +6,14 @@ const sgMail = require('@sendgrid/mail');
 const constantes = require('./constantes');
 sgMail.setApiKey(constantes.apiKeys.MAIL_API_KEY);
 
+const mongoose = require('mongoose');
+const FakeDb = require('./fake-db');
+
+/**
+ * 
+ * Envoi mail via Sendgrid
+ * 
+ */
 exports.httpEmail = functions.https.onRequest((req, res) => {
 
     cors( req, res, () => { 
@@ -31,6 +39,52 @@ exports.httpEmail = functions.https.onRequest((req, res) => {
             .catch(error => {
                 res.status(400).send(error);
         });
+    });
+
+});
+
+/** 
+ * Login utilisateur : email - password 
+ * 
+*/
+exports.mongoLogin = functions.https.onRequest((req, res) => {
+
+    const login = req.body.email;
+    const password = req.body.password
+
+    cors( req, res, () => { 
+
+        mongoose.connect(constantes.apiKeys.MONGO_URL, { useNewUrlParser: true })
+            .then(() => {
+                res.status(200).send({'connexion': req.body.email + ' -- ' + req.body.password});
+            }).catch(error => {
+                res.status(400).send({'connexion': false});
+            });
+    });
+
+});
+
+/**
+ *  Initialisation de la base avec un utilisateur 
+ * 
+*/
+exports.mongoInitDb = functions.https.onRequest((req, res) => {
+
+    cors( req, res, () => { 
+
+        mongoose.connect(constantes.apiKeys.MONGO_URL, { useNewUrlParser: true })
+            .then(() => {
+
+                const fakeDb = new FakeDb();
+                fakeDb.pushDatasToDb().then(
+                    res.status(200).send({'seek db 2': true})
+                ).catch(error => {
+                    res.status(400).send({'error': error})
+                });
+            
+            }).catch(error => {
+                res.status(400).send({'seek db': false});
+            });
     });
 
 });
