@@ -72,8 +72,6 @@ exports.mongoLogin = functions.https.onRequest((req, res) => {
                         return res.status(422).send({ errors: [{ title: 'Invalid user', detail: 'User does not exist'}]}); 
                     }
 
-                    console.log("USER : = ", user);
-
                     if(user.hasSamePassword(password)) {
 
                         const token = jwt.sign({
@@ -148,7 +146,7 @@ exports.mongoCreatetUser = functions.https.onRequest((req, res) => {
         mongoose.connect(constantes.apiKeys.MONGO_URL, { useNewUrlParser: true })
             .then(() => {
 
-                // Vérificatio  si email et username présents
+                // Vérification  si email et username présents
                 if (!username || !email) {
                     return res.status(422).send({ errors: [{ title: 'Data missing', detail: 'Provide email and pasword'}]});
                 }
@@ -191,6 +189,65 @@ exports.mongoCreatetUser = functions.https.onRequest((req, res) => {
                 res.status(400).send({'resultError': true});
             });
     });
+});
+
+/**
+*   Initialisation de la base avec un utilisateur 
+* 
+*/
+exports.mongoUpdateUser = functions.https.onRequest((req, res) => {
+
+    const { id, username, email } = req.body;
+
+    // le user sera positionné dans locals de la réponse pour avoir l'id
+    //const user = res.locals.user;
+
+    cors( req, res, () => { 
+
+        mongoose.connect(constantes.apiKeys.MONGO_URL, { useNewUrlParser: true })
+            .then(() => {
+
+                // recher si utilisateur avec email existe déjà
+                User.findOne({email}, function(err, existingUser) {
+
+                    if (err) {
+                        return res.status(422).send({errors: normalizeErrors(err.errors)});
+                    }
+
+                    // Vérification  si email et username présents
+                    if (!username || !email) {
+                        return res.status(422).send({ errors: [{ title: 'Data missing', detail: 'Provide email and pasword'}]});
+                    }
+
+                    if (existingUser) {
+                        return res.status(422).send({ errors: [{ title: 'Invalid email', detail: 'Email already exists'}]});
+                    }
+
+                    User.update(
+                        {_id: id},
+                        {
+                            $set: {
+                                "email": email,
+                                "username": username
+                            }
+                        }
+                        ,
+                        function(err, userUpdate) {
+
+                            if (err) {
+                                return res.status(422).send({errors: normalizeErrors(err.errors)});
+                            }
+                            return res.json({'user update': userUpdate});
+                        }
+                    );
+                });
+                    
+            
+            }).catch(error => {
+                res.status(400).send({'seek db': false});
+            });
+    });
+
 });
 
 /**
