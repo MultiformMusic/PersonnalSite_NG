@@ -15,6 +15,7 @@
     "firebase-admin": "~7.0.0",
     "firebase-functions": "^2.2.0",
     "gmail-send": "^1.2.14",
+    "jsonwebtoken": "^8.5.0",
     "mongoose": "^5.4.17",
     "sendgrid": "^5.2.3"
   },

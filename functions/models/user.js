@@ -25,6 +25,10 @@ const userSchema = new Schema({
     },
 });
 
+/** 
+ * Méthode appelée avant sauvegarde en base : encrypte mot de passe
+ * 
+ */
 userSchema.pre('save', function(next) {
 
     const user = this;
@@ -36,6 +40,18 @@ userSchema.pre('save', function(next) {
         });
     });
 });
+
+/**
+ * 
+ * Méthode permettant de comparer le password entré par l'utilisateur 
+ * avec celui de l'user trouvé en base
+ * Comparaison des mots de passe encryptés
+ * 
+ */
+userSchema.methods.hasSamePassword = function(requestedPassword) {
+
+    return bcrypt.compareSync(requestedPassword, this.password);
+}
 
 module.exports = mongoose.model('User', userSchema);
 
