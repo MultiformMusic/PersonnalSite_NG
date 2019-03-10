@@ -10,3 +10,8 @@
 .modal-content {
     background-color: #eee;
 }
+
+.alert-danger {
+    font-size: 0.8rem;
+    font-weight: 900;
+}

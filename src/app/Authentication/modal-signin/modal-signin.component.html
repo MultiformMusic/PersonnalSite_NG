@@ -1,0 +1,69 @@
+<!-- Modal -->
+<div #modalSignin class="modal fade" id="login-in">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Signin by entering your email / password</h4>
+        <button (click)="closeModal()" type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Signin Form-->
+      <form [formGroup]="signinForm" (ngSubmit)="signin()">
+
+        <div class="modal-body">
+          <input type="username"
+                class="form-control mb-3"
+                maxlength="40"
+                placeholder="user name"
+                formControlName="username">
+
+          <div *ngIf="isInvalidForm('username')" class="alert alert-danger">
+            <div *ngIf="isRequired('username')">
+              User Name is required.
+            </div>
+            <div *ngIf="!isRequired('username') && !signinForm.controls['username'].errors.minLength">
+              User Name needs minimun 4 characters.
+            </div>               
+          </div>
+              
+          <input type="email" 
+                 class="form-control mb-3"
+                 maxlength="40"
+                 placeholder="email"
+                 formControlName="email">
+            
+          <div *ngIf="isInvalidForm('email')" class="alert alert-danger">
+             <div *ngIf="isRequired('email')">
+               Email is required.
+             </div>
+             <div *ngIf="signinForm.controls['email'].errors.pattern">
+               Email is not formatted correctly.
+             </div>               
+          </div>
+
+          <input type="password"
+                 class="form-control mb-3"
+                 maxlength="40"
+                 placeholder="password"
+                 formControlName="password">
+
+                 
+          <input type="password"
+                 class="form-control"
+                 maxlength="40"
+                 placeholder="confirm password"
+                 formControlName="confirmpassword">
+
+        </div>
+        <div class="modal-footer">
+          <button (click)="closeModal()" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          <button (click)="signin()" type="button" class="btn btn-success" data-dismiss="modal">SignIn</button>
+        </div>
+
+      </form>
+      <!-- End Signin Form-->
+
+    </div>
+  </div>
+</div>
+<!-- End Modal -->

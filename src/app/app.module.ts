@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { ConnectedModule } from './connected/connected.module';
 import { PresentationModule } from './presentation/presentation.module';
+import { AuthenticationModule } from './Authentication/authentication.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: '', redirectTo: 'presentation', pathMatch: 'full'},

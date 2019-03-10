@@ -8,13 +8,12 @@ import { MisceallousComponent } from './misceallous/misceallous.component';
 import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProjectsComponent } from './projects/projects.component';
-import { ModalLoginComponent } from './modal-login/modal-login.component';
 import { FormsModule } from '@angular/forms';
 import { RecaptchaModule } from 'ng-recaptcha';
 import { RecaptchaFormsModule } from 'ng-recaptcha/forms';
 import { RECAPTCHA_LANGUAGE } from 'ng-recaptcha';
 import { ContactService } from '../services/contact.service';
-import { ModalSigninComponent } from './modal-signin/modal-signin.component';
+import { AuthenticationModule } from '../Authentication/authentication.module';
 
 const routes: Routes = [
     { path: '', 
@@ -35,14 +34,13 @@ const routes: Routes = [
         ContactComponent,
         FooterComponent,
         ProjectsComponent,
-        ModalLoginComponent,
-        ModalSigninComponent,
     ],
     imports: [
         CommonModule,
         FormsModule,
         RecaptchaModule,
         RecaptchaFormsModule,
+        AuthenticationModule,
         RouterModule.forChild(routes)
     ],
     providers: [
