@@ -137,9 +137,9 @@ exports.mongoExistUser = functions.https.onRequest((req, res) => {
 *   Création d'un user en base mongo
 * 
 */
-exports.mongoCreatetUser = functions.https.onRequest((req, res) => {
+exports.mongoCreateUser = functions.https.onRequest((req, res) => {
 
-    const { username, email, password, passwordConfirmation } = req.body;
+    const { username, email, password, confirmpassword } = req.body;
 
     cors( req, res, () => { 
 
@@ -152,7 +152,7 @@ exports.mongoCreatetUser = functions.https.onRequest((req, res) => {
                 }
             
                 // vérification si les deux mots de passe sont identiques
-                if (password !== passwordConfirmation) {
+                if (password !== confirmpassword) {
                     return res.status(422).send({ errors: [{ title: 'Invalid password', detail: 'Password is not equal to confirmation'}]});
                 }
 

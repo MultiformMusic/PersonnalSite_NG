@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { constants } from '../../../helpers/constants';
+import { AuthenticationService } from '../services/authentication.service';
+import { Response } from '@angular/http';
 
 @Component({
   selector: 'modal-signin',
@@ -15,7 +17,9 @@ export class ModalSigninComponent implements OnInit {
 
   signinForm: FormGroup;
 
-  constructor(private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private router: Router, 
+              private formBuilder: FormBuilder,
+              private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
     this.initForm();
@@ -71,14 +75,30 @@ export class ModalSigninComponent implements OnInit {
   
   signin() {
 
-    console.log(this.signinForm);
+    const user = {
+      username: this.signinForm.get('username').value,
+      email: this.signinForm.get('email').value,
+      password: this.signinForm.get('password').value,
+      confirmpassword: this.signinForm.get('confirmpassword').value
+    }
+
+    debugger;
+
+    this.authenticationService.cretateMongoUser(user).subscribe(
+      (res: Response) => {
+        console.log(res);
+        this.router.navigate(['/connected/home']);
+      },
+      (err) => {
+        console.log("ERROR : ", err);
+      }
+    );
+    
 
     //this.modalLogin.nativeElement.className = 'modal fade';
     setTimeout( () => {
       this.modalSignin.nativeElement.style.display = 'none';
     }, 100)
-
-    this.router.navigate(['/connected/home']);
   }
 
 }
