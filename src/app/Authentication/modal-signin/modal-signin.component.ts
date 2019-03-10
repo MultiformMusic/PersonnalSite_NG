@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { constants } from '../../../helpers/constants';
 
 @Component({
   selector: 'modal-signin',
@@ -25,9 +26,9 @@ export class ModalSigninComponent implements OnInit {
 
       this.signinForm = this.formBuilder.group({
         username: ['', [Validators.required, Validators.minLength(4)]],
-        email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$')]],
-        password: ['', [Validators.required, Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$')]],
-        confirmpassword: ['', Validators.required]
+        email: ['', [Validators.required, Validators.pattern(constants.PATTERN_EMAIL)]],
+        password: ['', [Validators.required, Validators.pattern(constants.PATTERN_PASSWORD)]],
+        confirmpassword: ['', [Validators.required, Validators.pattern(constants.PATTERN_PASSWORD)]]
       });
   }
 
@@ -43,6 +44,7 @@ export class ModalSigninComponent implements OnInit {
   }
   /** Fin validation du formulaier */
 
+  /** Gestion Modal */
   openModal() {
 
     this.modalSignin.nativeElement.style.display = 'block';
@@ -59,8 +61,17 @@ export class ModalSigninComponent implements OnInit {
     }, 200)
     
   }
+  /** Fin Gestion Modal */
 
+  resetConfirmPassword() {
+    this.signinForm.patchValue({
+      confirmpassword: ''
+    });
+  }
+  
   signin() {
+
+    console.log(this.signinForm);
 
     //this.modalLogin.nativeElement.className = 'modal fade';
     setTimeout( () => {

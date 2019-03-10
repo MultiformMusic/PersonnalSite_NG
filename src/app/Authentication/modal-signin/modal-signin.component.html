@@ -17,14 +17,14 @@
                 placeholder="user name"
                 formControlName="username">
 
-          <div *ngIf="isInvalidForm('username')" class="alert alert-danger">
-            <div *ngIf="isRequired('username')">
-              User Name is required.
+            <div *ngIf="isInvalidForm('username')" class="alert alert-danger">
+              <div *ngIf="isRequired('username')">
+                User Name is required.
+              </div>
+              <div *ngIf="!isRequired('username') && !signinForm.controls['username'].errors.minLength">
+                User Name needs minimun 4 characters.
+              </div>               
             </div>
-            <div *ngIf="!isRequired('username') && !signinForm.controls['username'].errors.minLength">
-              User Name needs minimun 4 characters.
-            </div>               
-          </div>
               
           <input type="email" 
                  class="form-control mb-3"
@@ -32,32 +32,54 @@
                  placeholder="email"
                  formControlName="email">
             
-          <div *ngIf="isInvalidForm('email')" class="alert alert-danger">
-             <div *ngIf="isRequired('email')">
-               Email is required.
-             </div>
-             <div *ngIf="signinForm.controls['email'].errors.pattern">
-               Email is not formatted correctly.
-             </div>               
-          </div>
+            <div *ngIf="isInvalidForm('email')" class="alert alert-danger">
+              <div *ngIf="isRequired('email')">
+                Email is required.
+              </div>
+              <div *ngIf="signinForm.controls['email'].errors.pattern">
+                Email is not formatted correctly.
+              </div>               
+            </div>
 
           <input type="password"
                  class="form-control mb-3"
-                 maxlength="40"
+                 maxlength="20"
                  placeholder="password"
-                 formControlName="password">
+                 formControlName="password"
+                 (keypress)="resetConfirmPassword()">
 
-                 
+            <div *ngIf="isInvalidForm('password')" class="alert alert-danger">
+              <div *ngIf="isRequired('password')">
+                Confirm passwors is required.
+              </div>
+              <div *ngIf="signinForm.controls['password'].errors.pattern">
+                Minimum six characters, at least one letter and one number
+              </div>               
+            </div>    
+
           <input type="password"
                  class="form-control"
-                 maxlength="40"
+                 maxlength="20"
                  placeholder="confirm password"
-                 formControlName="confirmpassword">
+                 formControlName="confirmpassword"
+                 validateEqual="password">
+                 
+            <div *ngIf="isInvalidForm('confirmpassword')" class="alert alert-danger">
+              <div *ngIf="isRequired('confirmpassword')">
+                Passwors is required.
+              </div>
+              <div *ngIf="signinForm.controls['confirmpassword'].errors.pattern">
+                Minimum six characters, at least one letter and one number
+              </div>    
+              <div *ngIf="!signinForm.controls['confirmpassword'].valid">
+                Password mismatch
+              </div>             
+            </div> 
 
         </div>
         <div class="modal-footer">
-          <button (click)="closeModal()" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-          <button (click)="signin()" type="button" class="btn btn-success" data-dismiss="modal">SignIn</button>
+          <button  (click)="closeModal()" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          <button [disabled]="!signinForm.valid" (click)="signin()" type="button" class="btn btn-success" >SignIn</button>
         </div>
 
       </form>
