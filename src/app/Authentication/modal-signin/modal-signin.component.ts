@@ -16,6 +16,7 @@ export class ModalSigninComponent implements OnInit {
   @ViewChild('modalContainer') modalContainer: any;
 
   signinForm: FormGroup;
+  errors: any[] = [];
 
   constructor(private router: Router, 
               private formBuilder: FormBuilder,
@@ -87,18 +88,19 @@ export class ModalSigninComponent implements OnInit {
     this.authenticationService.cretateMongoUser(user).subscribe(
       (res: Response) => {
         console.log(res);
-        this.router.navigate(['/connected/home']);
+        setTimeout( () => {
+          this.modalSignin.nativeElement.style.display = 'none';
+          this.router.navigate(['/connected/home']);
+        }, 100)
       },
-      (err) => {
-        console.log("ERROR : ", err);
+      (errorResponse) => {
+        debugger;
+        console.log('cretateMongoUser error = ', JSON.parse(errorResponse._body));
+        this.errors.push(JSON.parse(errorResponse._body).errors);
       }
     );
-    
 
     //this.modalLogin.nativeElement.className = 'modal fade';
-    setTimeout( () => {
-      this.modalSignin.nativeElement.style.display = 'none';
-    }, 100)
   }
 
 }
