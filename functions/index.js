@@ -12,6 +12,7 @@ const { normalizeErrors } = require('./helpers/mongoose');
 const jwt = require('jsonwebtoken');
 
 const User = require('./models/user');
+const { getToken } = require('./helpers/tokenHelper');
 
 /**
  * 
@@ -74,13 +75,16 @@ exports.mongoLogin = functions.https.onRequest((req, res) => {
 
                     if(user.hasSamePassword(password)) {
 
-                        const token = jwt.sign({
+                        const token = getToken(user);
+
+                        /*const token = jwt.sign({
                             userId: user.id,
                             username: user.username
                         }, constantes.apiKeys.JWT_SECRET, { expiresIn: '1h' });
+                        */
             
                         return res.json(token);
-                        //res.status(200).send({token});
+                        //return res.status(200).send({token});
             
                     } else {
             
@@ -180,8 +184,11 @@ exports.mongoCreateUser = functions.https.onRequest((req, res) => {
                         if (err) {
                             return res.status(422).send({errors: normalizeErrors(err.errors)});
                         }
-            
-                        return res.json({'register': true});
+                        const token = getToken(user);
+
+                        //return res.status(200).send({token});
+                        return res.json(token);
+
                     });
                 });
             
