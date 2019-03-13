@@ -78,7 +78,9 @@
 
         </div>
         <div *ngIf="errors.length > 0">
-          <p *ngFor="let error of errors">Erreur : {{ error }}</p>
+          <p *ngFor="let error of errors" class="error-message">
+            {{ error.detail }}
+          </p>
         </div>
         <div class="modal-footer">
           <button  (click)="closeModal()" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>

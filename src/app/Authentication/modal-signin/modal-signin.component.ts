@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { constants } from '../../../helpers/constants';
 import { AuthenticationService } from '../services/authentication.service';
 import { Response } from '@angular/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'modal-signin',
@@ -83,8 +84,6 @@ export class ModalSigninComponent implements OnInit {
       confirmpassword: this.signinForm.get('confirmpassword').value
     }
 
-    debugger;
-
     this.authenticationService.cretateMongoUser(user).subscribe(
       (res: Response) => {
         console.log(res);
@@ -94,9 +93,7 @@ export class ModalSigninComponent implements OnInit {
         }, 100)
       },
       (errorResponse) => {
-        debugger;
-        console.log('cretateMongoUser error = ', JSON.parse(errorResponse._body));
-        this.errors.push(JSON.parse(errorResponse._body).errors);
+        this.errors.push(JSON.parse(errorResponse._body).errors[0]);
       }
     );
 
