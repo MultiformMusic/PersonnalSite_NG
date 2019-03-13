@@ -7,7 +7,7 @@ import { AuthenticationGuard } from '../Authentication/authentication.guard';
 
 const routes: Routes = [
     { path: 'connected', 
-     component: ConnectedComponent,
+     component: ConnectedComponent, canActivate: [AuthenticationGuard], 
      children: [
          { path: 'home', component: HomeComponent, canActivate: [AuthenticationGuard] },
      ]

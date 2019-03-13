@@ -44,8 +44,6 @@ export class AuthenticationService {
      */
     public isAuthenticated(): boolean {
 
-        debugger;
-
         const authenticated: boolean = !this.jwtHelper.isTokenExpired(localStorage.getItem('psng_auth'));    
 
         return authenticated;

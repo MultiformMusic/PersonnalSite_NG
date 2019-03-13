@@ -9,7 +9,7 @@ module.exports = {
             userId: user.id,
             username: user.username,
             email: user.email
-        }, constantes.apiKeys.JWT_SECRET, { expiresIn: '30000' });
+        }, constantes.apiKeys.JWT_SECRET, { expiresIn: '1h' });
 
         return token;
     }

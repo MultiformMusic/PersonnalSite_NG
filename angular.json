@@ -28,6 +28,7 @@
               "src/css/fixed.css",
               "src/css/owl.carousel.css",
               "src/css/owl.theme.default.css",
+              "src/css/toast.css",
               "src/styles.css"
             ],
             "scripts": [

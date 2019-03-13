@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { constants } from '../../../helpers/constants';
 import { AuthenticationService } from '../services/authentication.service';
 import { Response } from '@angular/http';
-import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'modal-signin',
@@ -21,7 +21,8 @@ export class ModalSigninComponent implements OnInit {
 
   constructor(private router: Router, 
               private formBuilder: FormBuilder,
-              private authenticationService: AuthenticationService) { }
+              private authenticationService: AuthenticationService,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
     this.initForm();
@@ -75,6 +76,14 @@ export class ModalSigninComponent implements OnInit {
     });
   }
   
+  /**
+   * Enregistrement nouvel utilisateur
+   * 
+   * - création utilisateur base mongo
+   * - token sauvegardée par le service d'authentification
+   * - affichage toaster succés => redirection vers connected/home
+   * 
+   */
   signin() {
 
     const user = {
@@ -86,9 +95,9 @@ export class ModalSigninComponent implements OnInit {
 
     this.authenticationService.cretateMongoUser(user).subscribe(
       (res: Response) => {
-        console.log(res);
         setTimeout( () => {
           this.modalSignin.nativeElement.style.display = 'none';
+          this.toastr.success('', 'Welcome to your personnal page');
           this.router.navigate(['/connected/home']);
         }, 100)
       },
