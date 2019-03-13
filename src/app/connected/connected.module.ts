@@ -3,12 +3,13 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ConnectedComponent } from './connected.component';
+import { AuthenticationGuard } from '../Authentication/authentication.guard';
 
 const routes: Routes = [
     { path: 'connected', 
      component: ConnectedComponent,
      children: [
-         { path: 'home', component: HomeComponent },
+         { path: 'home', component: HomeComponent, canActivate: [AuthenticationGuard] },
      ]
     }
 ];
@@ -24,7 +25,7 @@ const routes: Routes = [
         CommonModule,
         RouterModule.forChild(routes)
     ],
-    providers: []
+    providers: [AuthenticationGuard]
 })
 export class ConnectedModule {
 

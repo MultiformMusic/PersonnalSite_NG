@@ -8,9 +8,14 @@ import {map} from 'rxjs/operators';
 @Injectable()
 export class AuthenticationService {
     
+    jwtHelper: JwtHelperService;
     decodedToken: any;
+    rawToken: string;
 
-    constructor(private http: Http) {}
+    constructor(private http: Http) {
+
+        this.jwtHelper = new JwtHelperService();
+    }
 
     /**
      * 
@@ -34,7 +39,21 @@ export class AuthenticationService {
     
     /**
      * 
-     * Déconnexion utilisateur
+     * Détermine si l'user à son token toujours valable
+     * 
+     */
+    public isAuthenticated(): boolean {
+
+        debugger;
+
+        const authenticated: boolean = !this.jwtHelper.isTokenExpired(localStorage.getItem('psng_auth'));    
+
+        return authenticated;
+    }
+
+    /**
+     * 
+     * Déconnexion utilisateur : RAZ des données d'authentification
      * 
      */
     public logout() {
@@ -43,6 +62,7 @@ export class AuthenticationService {
         localStorage.removeItem('psng_meta');
     
         this.decodedToken = {};
+        this.rawToken = '';
     }
 
     /**
@@ -53,10 +73,9 @@ export class AuthenticationService {
      */
     private saveToken(token: string): string {
 
-        debugger;
-
         const helper = new JwtHelperService();
         this.decodedToken = helper.decodeToken(token);
+        this.rawToken = token;
         localStorage.setItem('psng_auth', token);
         localStorage.setItem('psng_meta', JSON.stringify(this.decodedToken));
         return token;

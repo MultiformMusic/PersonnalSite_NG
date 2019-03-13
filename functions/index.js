@@ -270,7 +270,7 @@ exports.mongoInitDb = functions.https.onRequest((req, res) => {
 
                 const fakeDb = new FakeDb();
                 fakeDb.pushDatasToDb().then(
-                    res.status(200).send({'seek db 2': true})
+                    res.status(200).send({'seek db': true})
                 ).catch(error => {
                     res.status(400).send({'error': error})
                 });
