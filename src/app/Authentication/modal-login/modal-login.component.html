@@ -3,24 +3,48 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Please enter your email / password</h4>
+          <h4 class="modal-title">Enter your email / password</h4>
           <button (click)="closeModal()" type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
-        <div class="modal-body">
 
-           <input type="email" 
-                  class="form-control mb-3"
-                  maxlength="40"
-                  placeholder="email">
-            <input type="password"
-                   class="form-control"
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+          <div class="modal-body">
+
+            <input type="email" 
+                   class="form-control mb-3"
                    maxlength="40"
-                   placeholder="password">
+                   placeholder="email"
+                   formControlName="email">
 
+                   <div *ngIf="isInvalidForm('email')" class="alert alert-danger">
+                      <div *ngIf="isRequired('email')">
+                        Email is required.
+                      </div>          
+                    </div>         
+
+              <input type="password"
+                     class="form-control mb-3"
+                     maxlength="40"
+                     placeholder="password"
+                     formControlName="password">
+
+                    <div *ngIf="isInvalidForm('password')" class="alert alert-danger">
+                      <div *ngIf="isRequired('password')">
+                          Password is required.
+                      </div>             
+                    </div>  
+
+          </div>
+        </form>
+        <div *ngIf="errors.length > 0">
+          <p *ngFor="let error of errors" class="error-message">
+            {{ error.detail }}
+          </p>
         </div>
         <div class="modal-footer">
           <button (click)="closeModal()" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-          <button (click)="loginOK()" type="button" class="btn btn-success" data-dismiss="modal">Login</button>
+          <button [disabled]="!loginForm.valid" (click)="login()" type="button" class="btn btn-success" >LogIn</button>
         </div>
       </div>
     </div>

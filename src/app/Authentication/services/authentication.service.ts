@@ -36,6 +36,27 @@ export class AuthenticationService {
             })
         );
     }
+
+    /**
+     * 
+     * Authentification de l'user email/password
+     * 
+     * @param email 
+     * @param password 
+     */
+    public loginMongoUser(user: any): Observable<Response> {
+
+        const url = constants.MONGO_LOGIN_USER;
+        const headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+
+        return this.http.post(url, user, {headers: headers}).pipe(
+            map(res => {
+                const token = res.json();
+                this.saveToken(token);
+                return token;
+            })
+        );
+    }
     
     /**
      * 

@@ -77,27 +77,18 @@ exports.mongoLogin = functions.https.onRequest((req, res) => {
 
                         const token = getToken(user);
 
-                        /*const token = jwt.sign({
-                            userId: user.id,
-                            username: user.username
-                        }, constantes.apiKeys.JWT_SECRET, { expiresIn: '1h' });
-                        */
-            
                         return res.json(token);
-                        //return res.status(200).send({token});
             
                     } else {
             
-                        return res.status(422).send({ errors: [{ title: 'Wrong data', detail: 'Wrong email or password'}]}); 
+                        return res.status(422).send({ errors: [{ title: 'Wrong data', detail: 'User does not exist'}]}); 
                     }
 
                 });
-
-                //res.status(200).send({'connexion': req.body.email + ' -- ' + req.body.password});
             
             }).catch(error => {
 
-                res.status(400).send({'resultError': true});
+                res.status(400).send(error);
             });
     });
 
@@ -132,7 +123,7 @@ exports.mongoExistUser = functions.https.onRequest((req, res) => {
                 });
             
             }).catch(error => {
-                res.status(400).send({'resultError': true});
+                res.status(400).send(error);
             });
     });
 });
@@ -185,15 +176,13 @@ exports.mongoCreateUser = functions.https.onRequest((req, res) => {
                             return res.status(422).send({errors: normalizeErrors(err.errors)});
                         }
                         const token = getToken(user);
-
-                        //return res.status(200).send({token});
                         return res.json(token);
 
                     });
                 });
             
             }).catch(error => {
-                res.status(400).send({'resultError': true});
+                res.status(400).send(error);
             });
     });
 });

@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthenticationService } from '../services/authentication.service';
+import { Response } from '@angular/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'modal-login',
@@ -11,12 +15,29 @@ export class ModalLoginComponent implements OnInit {
   @ViewChild('modalLogin') modalLogin: any;
   @ViewChild('modalContainer') modalContainer: any;
 
-  constructor(private router: Router) { }
+  loginForm: FormGroup;
+  errors: any[] = [];
+
+  constructor(private router: Router,
+              private formBuilder: FormBuilder,
+              private authenticationService: AuthenticationService,
+              private toastr: ToastrService) { }
 
   ngOnInit() {
+    this.initForm();
+  }
+
+  /** Initialisation du formulaire (reactive forms) */
+  initForm() {
+
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+    });
 
   }
 
+  /** Gestion MODAL */
   openModal() {
 
     this.modalLogin.nativeElement.style.display = 'block';
@@ -27,6 +48,9 @@ export class ModalLoginComponent implements OnInit {
 
   closeModal() {
     
+    this.loginForm.reset();
+    this.errors = [];
+
     this.modalLogin.nativeElement.className = 'modal fade modal-transition-in';
     setTimeout( () => {
       this.modalLogin.nativeElement.style.display = 'none';
@@ -34,14 +58,50 @@ export class ModalLoginComponent implements OnInit {
     
   }
 
-  loginOK() {
+  /** Début validation du formulaire */
+  isInvalidForm(fieldName: string): boolean {
 
-    //this.modalLogin.nativeElement.className = 'modal fade';
-    setTimeout( () => {
-      this.modalLogin.nativeElement.style.display = 'none';
-    }, 100)
+    return this.loginForm.controls[fieldName].invalid && 
+           (this.loginForm.controls[fieldName].dirty || this.loginForm.controls[fieldName].touched);
+  }
 
-    this.router.navigate(['/connected/home']);
+  isRequired(fieldName: string): boolean {
+
+    return this.loginForm.controls[fieldName].errors.required;
+  }
+  /** Fin validation du formulaire */
+
+  /**
+   * Authentification utilisateur
+   * 
+   * - authentification utilisateur base mongo
+   * - token sauvegardée par le service d'authentification
+   * - affichage toaster succés => redirection vers connected/home
+   * 
+   */
+  login() {
+
+    this.errors = [];
+
+    const user = {
+      email: this.loginForm.get('email').value,
+      password: this.loginForm.get('password').value
+    }
+
+    this.authenticationService.loginMongoUser(user).subscribe(
+      (res: Response) => {
+        setTimeout( () => {
+          this.modalLogin.nativeElement.style.display = 'none';
+          this.toastr.success('', 'Welcome to your personnal page');
+          this.router.navigate(['/connected/home']);
+        }, 100)
+      },
+      (errorResponse) => {
+        this.errors = [];
+        this.errors.push(JSON.parse(errorResponse._body).errors[0]);
+      }
+    );
+
   }
   
 }

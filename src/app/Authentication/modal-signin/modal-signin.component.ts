@@ -39,17 +39,17 @@ export class ModalSigninComponent implements OnInit {
       });
   }
 
-  /** Début validation du formulaier */
+  /** Début validation du formulaire */
   isInvalidForm(fieldName: string): boolean {
 
     return this.signinForm.controls[fieldName].invalid && 
-           (this.signinForm.controls[fieldName].dirty || this.signinForm.controls[fieldName].touched)
+           (this.signinForm.controls[fieldName].dirty || this.signinForm.controls[fieldName].touched);
   }
 
   isRequired(fieldName: string): boolean {
-    return this.signinForm.controls[fieldName].errors.required
+    return this.signinForm.controls[fieldName].errors.required;
   }
-  /** Fin validation du formulaier */
+  /** Fin validation du formulaire */
 
   /** Gestion Modal */
   openModal() {
@@ -62,6 +62,9 @@ export class ModalSigninComponent implements OnInit {
 
   closeModal() {
     
+    this.signinForm.reset();
+    this.errors = [];
+
     this.modalSignin.nativeElement.className = 'modal fade modal-transition-in';
     setTimeout( () => {
       this.modalSignin.nativeElement.style.display = 'none';
@@ -86,6 +89,8 @@ export class ModalSigninComponent implements OnInit {
    */
   signin() {
 
+    this.errors = [];
+
     const user = {
       username: this.signinForm.get('username').value,
       email: this.signinForm.get('email').value,
@@ -102,11 +107,10 @@ export class ModalSigninComponent implements OnInit {
         }, 100)
       },
       (errorResponse) => {
+        this.errors = [];
         this.errors.push(JSON.parse(errorResponse._body).errors[0]);
       }
     );
-
-    //this.modalLogin.nativeElement.className = 'modal fade';
   }
 
 }

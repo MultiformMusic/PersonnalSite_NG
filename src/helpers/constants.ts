@@ -10,5 +10,6 @@ export const constants = {
 
     /** Mongo DB */
     MONGO_CREATE_USER: '/personnalsite/us-central1/mongoCreateUser',
+    MONGO_LOGIN_USER: '/personnalsite/us-central1/mongoLogin',
 
 }
