@@ -44,12 +44,12 @@ header {
     color: #70aed2;
 }
 .link-login:hover {
-    background: #b37474;
+    background: #6d70cd;
     color: #aaa;
 }
 
 .link-login {
-    background: #b37474;
+    background: #6d70cd;
     color: #fff;
     transition: color .5s;
 }
@@ -62,6 +62,17 @@ header {
 
 .link-signin:hover {
     background: #2b8313;
+    color: #aaa;
+}
+
+.link-logout {
+    background: #cd200d;
+    color: #fff;
+    transition: color .5s;
+}
+
+.link-logout:hover {
+    background: #cd200d;
     color: #aaa;
 }
 

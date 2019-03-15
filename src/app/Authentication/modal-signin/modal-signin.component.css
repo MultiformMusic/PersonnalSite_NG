@@ -15,3 +15,16 @@
     font-size: 0.8rem;
     font-weight: 900;
 }
+
+.callCloudFunctionMessage {
+    color: rgb(62, 126, 16);
+    font-size: 18px;
+}
+
+.blink_me {
+    animation: blinker 1s linear infinite;
+}
+  
+@keyframes blinker {  
+    50% { opacity: 0; }
+}

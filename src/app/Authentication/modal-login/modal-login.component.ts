@@ -17,6 +17,7 @@ export class ModalLoginComponent implements OnInit {
 
   loginForm: FormGroup;
   errors: any[] = [];
+  callCloudFunction: boolean = false;
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
@@ -72,6 +73,18 @@ export class ModalLoginComponent implements OnInit {
   /** Fin validation du formulaire */
 
   /**
+   * 
+   * Détection enter key positionné sur input
+   * 
+   * @param event 
+   */
+  onKeydown(event) {
+    if (event.key === "Enter" && this.loginForm.valid) {
+       this.login(); 
+    }
+  }
+
+  /**
    * Authentification utilisateur
    * 
    * - authentification utilisateur base mongo
@@ -81,6 +94,7 @@ export class ModalLoginComponent implements OnInit {
    */
   login() {
 
+    this.callCloudFunction = true;
     this.errors = [];
 
     const user = {
@@ -91,12 +105,14 @@ export class ModalLoginComponent implements OnInit {
     this.authenticationService.loginMongoUser(user).subscribe(
       (res: Response) => {
         setTimeout( () => {
+          this.callCloudFunction = false;
           this.modalLogin.nativeElement.style.display = 'none';
           this.toastr.success('', 'Welcome to your personnal page');
           this.router.navigate(['/connected/home']);
         }, 100)
       },
       (errorResponse) => {
+        this.callCloudFunction = false;
         this.errors = [];
         this.errors.push(JSON.parse(errorResponse._body).errors[0]);
       }

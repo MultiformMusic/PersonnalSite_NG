@@ -15,7 +15,8 @@
                 class="form-control mb-3"
                 maxlength="40"
                 placeholder="user name"
-                formControlName="username">
+                formControlName="username"
+                (keydown)="onKeydown($event)">
 
             <div *ngIf="isInvalidForm('username')" class="alert alert-danger">
               <div *ngIf="isRequired('username')">
@@ -30,7 +31,8 @@
                  class="form-control mb-3"
                  maxlength="40"
                  placeholder="email"
-                 formControlName="email">
+                 formControlName="email"
+                 (keydown)="onKeydown($event)">
             
             <div *ngIf="isInvalidForm('email')" class="alert alert-danger">
               <div *ngIf="isRequired('email')">
@@ -46,7 +48,8 @@
                  maxlength="20"
                  placeholder="password"
                  formControlName="password"
-                 (keypress)="resetConfirmPassword()">
+                 (keypress)="resetConfirmPassword()"
+                 (keydown)="onKeydown($event)">
 
             <div *ngIf="isInvalidForm('password')" class="alert alert-danger">
               <div *ngIf="isRequired('password')">
@@ -62,7 +65,8 @@
                  maxlength="20"
                  placeholder="confirm password"
                  formControlName="confirmpassword"
-                 validateEqual="password">
+                 validateEqual="password"
+                 (keydown)="onKeydown($event)">
                  
             <div *ngIf="isInvalidForm('confirmpassword')" class="alert alert-danger">
               <div *ngIf="isRequired('confirmpassword')">
@@ -82,6 +86,13 @@
             {{ error.detail }}
           </p>
         </div>
+
+        <ng-container *ngIf="callCloudFunction">
+          <p class="callCloudFunctionMessage text-center blink_me">
+            Signin in progress
+          </p>
+        </ng-container>
+
         <div class="modal-footer">
           <button  (click)="closeModal()" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
           <button [disabled]="!signinForm.valid" (click)="signin()" type="button" class="btn btn-success" >SignIn</button>

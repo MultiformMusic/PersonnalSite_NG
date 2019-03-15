@@ -15,7 +15,8 @@
                    class="form-control mb-3"
                    maxlength="40"
                    placeholder="email"
-                   formControlName="email">
+                   formControlName="email"
+                   (keydown)="onKeydown($event)">
 
                    <div *ngIf="isInvalidForm('email')" class="alert alert-danger">
                       <div *ngIf="isRequired('email')">
@@ -27,7 +28,8 @@
                      class="form-control mb-3"
                      maxlength="40"
                      placeholder="password"
-                     formControlName="password">
+                     formControlName="password"
+                     (keydown)="onKeydown($event)">
 
                     <div *ngIf="isInvalidForm('password')" class="alert alert-danger">
                       <div *ngIf="isRequired('password')">
@@ -42,6 +44,13 @@
             {{ error.detail }}
           </p>
         </div>
+
+        <ng-container *ngIf="callCloudFunction">
+          <p class="callCloudFunctionMessage text-center blink_me">
+            Authentication in progress
+          </p>
+        </ng-container>
+
         <div class="modal-footer">
           <button (click)="closeModal()" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
           <button [disabled]="!loginForm.valid" (click)="login()" type="button" class="btn btn-success" >LogIn</button>

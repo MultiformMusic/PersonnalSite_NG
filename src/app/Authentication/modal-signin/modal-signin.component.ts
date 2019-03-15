@@ -18,6 +18,7 @@ export class ModalSigninComponent implements OnInit {
 
   signinForm: FormGroup;
   errors: any[] = [];
+  callCloudFunction: boolean = false;
 
   constructor(private router: Router, 
               private formBuilder: FormBuilder,
@@ -73,10 +74,27 @@ export class ModalSigninComponent implements OnInit {
   }
   /** Fin Gestion Modal */
 
+  /**
+   * 
+   * Rest le confirm password si le password est modifié
+   * 
+   */
   resetConfirmPassword() {
     this.signinForm.patchValue({
       confirmpassword: ''
     });
+  }
+
+   /**
+   * 
+   * Détection enter key positionné sur input
+   * 
+   * @param event 
+   */
+  onKeydown(event) {
+    if (event.key === "Enter" && this.signinForm.valid) {
+       this.signin(); 
+    }
   }
   
   /**
@@ -89,6 +107,7 @@ export class ModalSigninComponent implements OnInit {
    */
   signin() {
 
+    this.callCloudFunction = true;
     this.errors = [];
 
     const user = {
@@ -101,12 +120,14 @@ export class ModalSigninComponent implements OnInit {
     this.authenticationService.cretateMongoUser(user).subscribe(
       (res: Response) => {
         setTimeout( () => {
+          this.callCloudFunction = false;
           this.modalSignin.nativeElement.style.display = 'none';
           this.toastr.success('', 'Welcome to your personnal page');
           this.router.navigate(['/connected/home']);
         }, 100)
       },
       (errorResponse) => {
+        this.callCloudFunction = false;
         this.errors = [];
         this.errors.push(JSON.parse(errorResponse._body).errors[0]);
       }

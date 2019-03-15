@@ -29,16 +29,25 @@
                 <li class="nav-item">
                     <a href="#contact" class="nav-link m-2 menu-item">Contact</a>
                 </li>
-                <li class="nav-item">
-                    <a (click)="modalLogin.openModal()" class="nav-link m-2 menu-item" >
-                        <span class="link-login p-2">Log In</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a (click)="modalSignin.openModal()" class="nav-link m-2 menu-item" >
-                        <span class="link-signin p-2">Sign In</span>
-                    </a>
-                </li>
+                <ng-container *ngIf="!authenticationService.isAuthenticated()">
+                    <li class="nav-item">
+                        <a (click)="modalLogin.openModal()" class="nav-link m-2 menu-item" >
+                            <span class="link-login p-2">Log In</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a (click)="modalSignin.openModal()" class="nav-link m-2 menu-item" >
+                            <span class="link-signin p-2">Sign In</span>
+                        </a>
+                    </li>
+                </ng-container>
+                <ng-container *ngIf="authenticationService.isAuthenticated()">
+                    <li class="nav-item">
+                        <a (click)="logout()" class="nav-link m-2 menu-item" >
+                            <span class="link-logout p-2">Log Out</span>
+                        </a>
+                    </li>
+                </ng-container>
             </ul>
         </div>
     </nav>
