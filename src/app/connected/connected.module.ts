@@ -4,12 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ConnectedComponent } from './connected.component';
 import { AuthenticationGuard } from '../Authentication/authentication.guard';
+import { SideMenuComponent } from './side-menu/side-menu.component';
 
 const routes: Routes = [
     { path: 'connected', 
      component: ConnectedComponent, canActivate: [AuthenticationGuard], 
      children: [
          { path: 'home', component: HomeComponent, canActivate: [AuthenticationGuard] },
+         { path: '**', component: HomeComponent, canActivate: [AuthenticationGuard] },
      ]
     }
 ];
@@ -20,6 +22,7 @@ const routes: Routes = [
     declarations: [   
         ConnectedComponent,
         HomeComponent,
+        SideMenuComponent,
     ],
     imports: [
         CommonModule,

@@ -4,6 +4,7 @@ import { constants } from '../../../helpers/constants';
 import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {map} from 'rxjs/operators';
+import { User } from 'src/app/models/user.model';
 
 @Injectable()
 export class AuthenticationService {
@@ -65,9 +66,24 @@ export class AuthenticationService {
      */
     public isAuthenticated(): boolean {
 
-        const authenticated: boolean = !this.jwtHelper.isTokenExpired(localStorage.getItem('psng_auth'));    
+        const authenticated: boolean = !this.jwtHelper.isTokenExpired(localStorage.getItem(constants.LOCALSTORAGE_TOKEN));    
 
         return authenticated;
+    }
+
+    /**
+     * 
+     * Renvoi un User à partir des infos stockées dans localstorage
+     * 
+     */
+    getUserFromToken(): User {
+
+        const userStorage = JSON.parse(localStorage.getItem(constants.LOCALSTORAGE_META_DATA));
+        const user = new User();
+        user._id = userStorage.userId;
+        user.username = userStorage.username;
+        user.email = userStorage.email;
+        return user;
     }
 
     /**
@@ -77,8 +93,8 @@ export class AuthenticationService {
      */
     public logout() {
 
-        localStorage.removeItem('psng_auth');
-        localStorage.removeItem('psng_meta');
+        localStorage.removeItem(constants.LOCALSTORAGE_TOKEN);
+        localStorage.removeItem(constants.LOCALSTORAGE_META_DATA);
     
         this.decodedToken = {};
         this.rawToken = '';
@@ -95,8 +111,8 @@ export class AuthenticationService {
         const helper = new JwtHelperService();
         this.decodedToken = helper.decodeToken(token);
         this.rawToken = token;
-        localStorage.setItem('psng_auth', token);
-        localStorage.setItem('psng_meta', JSON.stringify(this.decodedToken));
+        localStorage.setItem(constants.LOCALSTORAGE_TOKEN, token);
+        localStorage.setItem(constants.LOCALSTORAGE_META_DATA, JSON.stringify(this.decodedToken));
         return token;
     }
 }
