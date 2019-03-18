@@ -39,6 +39,18 @@ $(document).ready(function() {
         }
     });
 
+    
+    $("#sidemenu").inViewport(function(px){
+        var viewportWidth = $(window).width();
+        if (viewportWidth > 768 ) {
+            if(px) {
+                $("#myNavbar").addClass("fadeInLeft") ;
+                $("#myNavbar").css("opacity", "1");
+            }
+        } 
+    });
+    
+
     /* click event sur le bouton du navbar */
     $('.nav-button').click(function() {
         $('.nav-button').toggleClass('change');
@@ -78,6 +90,18 @@ $(document).ready(function() {
             $(this).addClass("active");
         });
     });
+
+
+
+    /*$(window).resize(function () {
+        var viewportWidth = $(window).width();
+        if (viewportWidth > 768 ) {
+            $('#sidebar').addClass("fixed-top");
+        } else {
+            $('#sidebar').removeClass("fixed-top");
+        }
+    });*/
+
 
     /*$(window).scroll(function() {
         let position = $(this).scrollTop();

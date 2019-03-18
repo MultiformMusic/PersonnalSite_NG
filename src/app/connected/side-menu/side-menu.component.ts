@@ -17,4 +17,19 @@ export class SideMenuComponent implements OnInit {
     this.user = this.authenticationService.getUserFromToken();
   }
 
+  /**
+   * 
+   * gestion de la postion sidemenu suivant largeur fenêtre
+   * ici breakpoiint à 768
+   * 
+   */
+  calculateClasses() {
+    let fixed = '';
+    if (window.innerWidth > 768) {
+      fixed = 'fixed-top';
+    }
+     const classes = "col-xl-2 col-lg-3 col-md-4 sidebar " + fixed;
+     return classes;
+  }
+
 }
