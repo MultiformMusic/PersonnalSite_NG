@@ -1,13 +1,13 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-md navbar-light" id="sidemenu">
-  <button class="navbar-toggler ml-auto mb-2 bg-light" type="button" data-toggle="collapse" data-target="#myNavbar">
+  <button class="navbar-toggler ml-auto mb-2 mt-3 bg-light" type="button" data-toggle="collapse" data-target="#myNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="myNavbar">
+  <div class="collapse navbar-collapse show" id="myNavbar">
     <div class="container-fluid">
       <div class="row">
         <!-- sidebar -->
-        <div [ngClass]="calculateClasses()" id="sidebar">
+        <div [ngClass]="calculateClasses()" id="sidebarmenu" style="opacity: 0">
           <div class="bottom-border mt-3">
             <p class="text-white text-center">{{ user.username }}</p>
           </div>

@@ -1432,6 +1432,12 @@
   animation-duration: 2.1s;
 }
 
+.fadeInLeftSpeed {
+  -webkit-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+  animation-duration: 1s;
+}
+
 @-webkit-keyframes fadeInLeftBig {
   from {
     -webkit-transform: translate3d(-2000px, 0, 0);

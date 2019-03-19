@@ -40,14 +40,14 @@ $(document).ready(function() {
     });
 
     
-    $("#sidemenu").inViewport(function(px){
+    $("#sidebarmenu").inViewport(function(px){
         var viewportWidth = $(window).width();
-        if (viewportWidth > 768 ) {
+        //if (viewportWidth > 768 ) {
             if(px) {
-                $("#myNavbar").addClass("fadeInLeft") ;
-                $("#myNavbar").css("opacity", "1");
+                $("#sidebarmenu").addClass("fadeInLeftSpeed") ;
+                $("#sidebarmenu").css("opacity", "1");
             }
-        } 
+        //} 
     });
     
 
