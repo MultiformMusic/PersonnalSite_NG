@@ -44,36 +44,32 @@ header {
     color: #70aed2;
 }
 .link-login:hover {
-    background: #6d70cd;
-    color: #aaa;
+    color: #70aed2;
 }
 
 .link-login {
-    background: #6d70cd;
-    color: #fff;
+    color: rgb(60, 159, 10);
     transition: color .5s;
 }
 
 .link-signin {
-    background: #2b8313;
+    background: #175a94;
     color: #fff;
     transition: color .5s;
 }
 
 .link-signin:hover {
-    background: #2b8313;
+    background: #175a94;
     color: #aaa;
 }
 
 .link-logout {
-    background: #cd200d;
-    color: #fff;
+    color: rgb(245, 133, 133);
     transition: color .5s;
 }
 
 .link-logout:hover {
-    background: #cd200d;
-    color: #aaa;
+    color: #70aed2;
 }
 
 .link-personnal {

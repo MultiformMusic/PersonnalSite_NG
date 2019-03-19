@@ -32,7 +32,7 @@
                 <ng-container *ngIf="!authenticationService.isAuthenticated()">
                     <li class="nav-item">
                         <a (click)="modalLogin.openModal()" class="nav-link m-2 menu-item" >
-                            <span class="link-login p-2">Log In</span>
+                            <i class="fas fa-sign-out-alt fa-2x fa-rotate-180 link-login" title="Log In"></i>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -43,13 +43,13 @@
                 </ng-container>
                 <ng-container *ngIf="authenticationService.isAuthenticated()">
                     <li class="nav-item">
-                        <a (click)="logout()" class="nav-link m-2 menu-item" >
-                            <span class="link-logout p-2">Log Out</span>
+                        <a (click)="logout()" class="nav-link m-2 menu-item">
+                            <i class="fas fa-sign-out-alt fa-2x link-logout" title="Log Out"></i>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="connected/home" class="nav-link m-2 menu-item" >
-                            <span class="link-personnal p-2">Personnal</span>
+                            <i class="fas fa-user-circle fa-2x" title="Personnal Page"></i>
                         </a>
                     </li>
                 </ng-container>
