@@ -18,6 +18,7 @@ export interface FormModel {
 export class ContactComponent implements OnInit {
 
   public formModel: FormModel = {};
+  callCloudFunction: boolean = false;
 
   @ViewChild('captchaProtectedForm') contactForm: NgForm;
   contact: Contact = new Contact('', '', '')
@@ -37,6 +38,9 @@ export class ContactComponent implements OnInit {
 
   sendContactMessage() {
   
+
+    this.callCloudFunction = true;
+
     this.contact.email = this.sanitizer.sanitize(SecurityContext.HTML, this.contactForm.value.email);
     this.contact.name = this.sanitizer.sanitize(SecurityContext.HTML, this.contactForm.value.name);
     this.contact.message = this.sanitizer.sanitize(SecurityContext.HTML, this.contactForm.value.message);
@@ -44,6 +48,9 @@ export class ContactComponent implements OnInit {
     /* Envoi du mail */
     this.contactService.sendEmail(this.contact).subscribe(
       (response: Response) => {
+
+        this.callCloudFunction = false;
+
         if (response.status === 200) {
           this.sendingOK = true;
           this.messageSending = 'Your message has been sent';

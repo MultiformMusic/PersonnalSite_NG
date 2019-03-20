@@ -8,6 +8,7 @@ import { HttpModule } from '@angular/http';
 import { ConnectedModule } from './connected/connected.module';
 import { PresentationModule } from './presentation/presentation.module';
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
     PresentationModule,
     ConnectedModule,
     ToastrModule.forRoot(),
+    MaterialModule,
     AppRoutingModule,
   ],
   providers: [

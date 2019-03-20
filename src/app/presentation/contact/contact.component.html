@@ -42,14 +42,14 @@
                         size='compact'>
                       </re-captcha> 
                         
-                        <!--
-                        <div *ngIf="!captchaControl.valid || captchaControl.pristine" class="error">Captcha must be solved</div>
-                        <div *ngIf="captchaControl.valid" class="success">Captcha is valid</div>
-                        <div *ngIf="!captchaProtectedForm.form.valid" class="error">The form must be filled out</div>
-                        <div *ngIf="captchaProtectedForm.form.valid" class="success">The form is valid</div>                     
-                        <button (click)="formModel.captcha = ''">Reset Captcha</button>
-                        -->
                         <h5 [className]="sendingOK ? 'text-success mb-3 mt-3' : 'text-danger mb-3 mt-3'">{{ messageSending }}</h5>
+                        
+                        <ng-container *ngIf="callCloudFunction">
+                            <p class="callCloudFunctionMessage text-center blink_me">
+                                Sending in progress
+                            </p>
+                        </ng-container>
+
                         <button *ngIf="!captchaProtectedForm.valid" [disabled]="!captchaProtectedForm.valid" type="submit" ngClass="{}" class="btb btn-block p-2 mt-5 font-weight-bold text-uppercase">Send</button>
                         <button *ngIf="captchaProtectedForm.valid" type="submit" ngClass="{}" class="btb btn-block p-2 mt-5 font-weight-bold text-uppercase submit-button">Send</button>
 

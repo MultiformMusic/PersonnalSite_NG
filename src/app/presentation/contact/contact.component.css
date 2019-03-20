@@ -85,4 +85,18 @@ textarea#message:focus {
   }
 }
 
+
+.callCloudFunctionMessage {
+  color: rgb(247, 222, 140);
+  font-size: 18px;
+}
+
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+
 /* END CONTACT */
