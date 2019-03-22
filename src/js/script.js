@@ -56,14 +56,14 @@ $(document).ready(function() {
         $('.nav-button').toggleClass('change');
     });
 
-    /* fonction détectant la fin du scroll sur window */
-    /*$(window).scroll(function() {
-        clearTimeout($.data(this, 'scrollTimer'));
-        $('.nav-menu').removeClass('custom-navbar');
-        $.data(this, 'scrollTimer', setTimeout(function() {
-            $('.nav-menu').addClass('custom-navbar');
-        }, 25));
-    });*/
+    $('.connected-nav-button').click(function() {
+        $('.connected-nav-button').toggleClass('change');
+    });
+
+    $('.rss-nav-button').click(function() {
+        $('.rss-nav-button').toggleClass('change');
+    });
+
 
     /* permet le scroll vers la section lors click sur navigation */
     $(document).ready(function() {
@@ -88,6 +88,13 @@ $(document).ready(function() {
         $('a').click(function(){
             $('a').removeClass("active");
             $(this).addClass("active");
+        });
+    });
+
+    $(document).ready(function(){
+        $('a').click(function(){
+            $('a').removeClass("current");
+            $(this).addClass("current");
         });
     });
 

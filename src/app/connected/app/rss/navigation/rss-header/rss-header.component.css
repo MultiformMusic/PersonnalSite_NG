@@ -1,0 +1,71 @@
+
+.custom-navbar {
+  padding: 30px;
+  background: linear-gradient(rgba(50, 50, 50, .7), rgba(0, 0, 0, .8)), url(../../../../../../assets/images/rssbannerbig.jpg) no-repeat center /cover;
+}
+
+.navbar {
+  min-height: 40px;
+}
+
+.top-navbar {
+  background-color: rgb(104, 69, 69);
+  margin-top: 0px;
+  width: 92vw;
+  height: 100vh;
+  opacity: .9;
+}
+
+a {
+  text-decoration: none;
+}
+
+.nav-item {
+  margin-top: .8rem;
+  text-transform: lowercase;
+  font-size: 1.1rem;
+}
+
+.rss-header-link {
+  transition: all .4s;
+}
+
+.rss-header-link:hover, .rss-header-link:active {
+  background-color: rgb(198, 93, 93);
+  border-radius: 5px;
+}
+
+.line1, .line2, .line3 {
+    width: 23px;
+    height: 3px;
+    margin: 5px;
+    transition: all .4s;
+}
+
+.change .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+.change .line2 {
+    opacity: 0;
+}
+.change .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+ @media (max-width: 768px) {
+
+    .sidebar {
+      position: static;
+      height: auto;
+    }
+  
+    .top-navbar {
+      position: static;
+    }
+}
+
+
+
+
+
+

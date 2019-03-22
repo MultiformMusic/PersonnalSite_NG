@@ -13,11 +13,13 @@ export const constants = {
     LOCALSTORAGE_META_DATA: 'psng_meta',
 
     /** Mongo DB */
+    
     MONGO_CREATE_USER: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/mongoCreateUser',
     MONGO_LOGIN_USER: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/mongoLogin',
     /*
     MONGO_CREATE_USER: '/personnalsite/us-central1/mongoCreateUser',
     MONGO_LOGIN_USER: '/personnalsite/us-central1/mongoLogin',
     */
+    
 
 }

@@ -1,7 +1,15 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-md navbar-light" id="sidemenu">
+  <!--
   <button class="navbar-toggler ml-auto mb-3 mt-3 bg-light" type="button" data-toggle="collapse" data-target="#myNavbar">
     <span class="navbar-toggler-icon"></span>
+  </button>
+  -->
+  <button class="navbar-toggler connected-nav-button ml-auto mb-3 mt-3" type="button" data-toggle="collapse" 
+        data-target="#myNavbar">
+    <div class="bg-light line1"></div>
+    <div class="bg-light line2"></div>
+    <div class="bg-light line3"></div>
   </button>
   <div class="collapse navbar-collapse show" id="myNavbar">
     <div class="container-fluid">
@@ -12,17 +20,16 @@
             <p class="text-white text-center">{{ user.username }}</p>
           </div>
           <ul class="navbar-nav flex-column mt-4">
-              <li class="nav-item"><a href="connected/home" class="nav-link text-white p-3 mb-2 current"><i class="fas fa-home text-light fa-lg mr-3"></i>Home</a></li>
-            <li class="nav-item"><a href="/" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-arrow-left text-light fa-lg mr-3"></i>Back</a></li>
-            <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-envelope text-light fa-lg mr-3"></i>Messages</a></li>
-            <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-rss text-light fa-lg mr-3"></i>RSS</a></li>
-            <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-user text-light fa-lg mr-3"></i>Profile</a></li>
+            <li class="nav-item"><a href="connected/home" class="nav-link text-white p-3 mb-2 sidebar-link current"><i class="fas fa-home text-light fa-lg mr-3"></i>Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-arrow-left text-light fa-lg mr-3"></i>Back</a></li>
+            <li class="nav-item"><a href="#card-section" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-envelope text-light fa-lg mr-3"></i>Messages</a></li>
+            <li class="nav-item"><a routerLink="rss" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-rss text-light fa-lg mr-3"></i>RSS</a></li>
+            <li class="nav-item"><a href="#sidemenu" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-user text-light fa-lg mr-3"></i>Profile</a></li>
             <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-wrench text-light fa-lg mr-3"></i>Settings</a></li>
             <li class="nav-item"><a href="#" class="nav-link text-white p-3 mb-2 sidebar-link"><i class="fas fa-file-alt text-light fa-lg mr-3"></i>Helps</a></li>
           </ul>
         </div>
-        <!-- end of sidebar -->
-
+        <!-- end of sidebar --> 
       </div>
     </div>
   </div>
