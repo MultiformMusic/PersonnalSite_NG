@@ -46,23 +46,28 @@ $(document).ready(function() {
             if(px) {
                 $("#sidebarmenu").addClass("fadeInLeftSpeed") ;
                 $("#sidebarmenu").css("opacity", "1");
+                $('.side-nav-button').toggleClass('change');
             }
         //} 
     });
-    
 
     /* click event sur le bouton du navbar */
+
+    // nav bar page presentation
     $('.nav-button').click(function() {
         $('.nav-button').toggleClass('change');
     });
 
-    $('.connected-nav-button').click(function() {
-        $('.connected-nav-button').toggleClass('change');
+    // side nav bar page connecté
+    $('.side-nav-button').click(function() {
+        $('.side-nav-button').toggleClass('change');
     });
 
+    //  nav bar page RSS
     $('.rss-nav-button').click(function() {
         $('.rss-nav-button').toggleClass('change');
     });
+
 
 
     /* permet le scroll vers la section lors click sur navigation */
@@ -83,8 +88,10 @@ $(document).ready(function() {
 
             /** side menu page connectée */
             if (event.currentTarget.innerText === 'RSS') {
-                $('.connected-navbar').collapse('hide');
-                $('.connected-nav-button').removeClass('change');
+                $('.side-navbar').collapse('hide');
+                $('.side-nav-button').removeClass('change');
+                $("#rssheader").addClass("bounceInUp") ;
+                $("#rssheader").css("opacity", "1");
             }
         });
     });

@@ -1100,7 +1100,7 @@
 .bounceInUp {
   -webkit-animation-name: bounceInUp;
   animation-name: bounceInUp;
-  animation-duration: 1.5s;
+  animation-duration: 1s;
 }
 
 @-webkit-keyframes bounceOut {
@@ -1435,7 +1435,7 @@
 .fadeInLeftSpeed {
   -webkit-animation-name: fadeInLeft;
   animation-name: fadeInLeft;
-  animation-duration: 1s;
+  animation-duration: .7s;
 }
 
 @-webkit-keyframes fadeInLeftBig {

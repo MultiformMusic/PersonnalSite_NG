@@ -38,6 +38,7 @@
     box-shadow: 2px 5px 20px #111;
     transform: translateY(-1px);
   }
+  
   .line1, .line2, .line3 {
     width: 23px;
     height: 3px;
