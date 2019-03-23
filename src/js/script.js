@@ -79,6 +79,12 @@ $(document).ready(function() {
                     $('.nav-button').removeClass('change');
                 }
             );
+            } 
+
+            /** side menu page connectée */
+            if (event.currentTarget.innerText === 'RSS') {
+                $('.connected-navbar').collapse('hide');
+                $('.connected-nav-button').removeClass('change');
             }
         });
     });

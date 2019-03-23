@@ -32,4 +32,8 @@ export class SideMenuComponent implements OnInit {
      return classes;
   }
 
+  hideToggle() {
+    
+  }
+
 }
