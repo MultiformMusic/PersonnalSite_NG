@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RssService } from './navigation/rss.service';
 
 @Component({
   selector: 'app-rss',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RssComponent implements OnInit {
 
-  constructor() { }
+  constructor(private rssService: RssService) { }
 
   ngOnInit() {
+    this.rssService.getRssDatas();
   }
 
 }

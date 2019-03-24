@@ -4,8 +4,10 @@
         <a href="#home" class="navbar-brand">
             <span class="ml-2">Advanced RSS Reader</span>
         </a>
-        <button class="navbar-toggler rss-nav-button" type="button" data-toggle="collapse" 
-                data-target="#rssNavbar">
+        <button (click)="toggle=!toggle"  
+                [ngClass]="toggle ? 'navbar-toggler rss-nav-button change' : 'navbar-toggler rss-nav-button'"
+                type="button" data-toggle="collapse" 
+                data-target="#rssNavbar" id="rssNavButton">
             <div class="bg-light line1"></div>
             <div class="bg-light line2"></div>
             <div class="bg-light line3"></div>

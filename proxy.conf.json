@@ -1,6 +1,6 @@
 {
     "/personnalsite": {
-      "target": " http://localhost:8010",
+      "target": "http://localhost:8010",
       "secure": false
     }
   }

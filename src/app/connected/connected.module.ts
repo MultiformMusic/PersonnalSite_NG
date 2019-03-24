@@ -16,6 +16,7 @@ const routes: Routes = [
      children: [
          { path: 'home', component: HomeComponent, canActivate: [AuthenticationGuard] },
          { path: 'rss', component: RssComponent, canActivate: [AuthenticationGuard] },
+         { path: 'rssDatas', component: RssComponent, canActivate: [AuthenticationGuard] },
          { path: '**', component: HomeComponent, canActivate: [AuthenticationGuard] },
      ]
     }

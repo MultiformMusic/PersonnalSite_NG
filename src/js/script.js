@@ -64,9 +64,10 @@ $(document).ready(function() {
     });
 
     //  nav bar page RSS
-    $('.rss-nav-button').click(function() {
+    /*$('.rss-nav-button').click(function() {
+        console.log("rss nav button")
         $('.rss-nav-button').toggleClass('change');
-    });
+    });*/
 
 
 
@@ -110,42 +111,6 @@ $(document).ready(function() {
             $(this).addClass("current");
         });
     });
-
-
-
-    /*$(window).resize(function () {
-        var viewportWidth = $(window).width();
-        if (viewportWidth > 768 ) {
-            $('#sidebar').addClass("fixed-top");
-        } else {
-            $('#sidebar').removeClass("fixed-top");
-        }
-    });*/
-
-
-    /*$(window).scroll(function() {
-        let position = $(this).scrollTop();
-        if (position >= 200) {
-            $('.nav-menu').addClass('custom-navbar');
-        } else {
-            $('.nav-menu').removeClass('custom-navbar');
-        }
-    });*/
-
-    /*$(window).scroll(function() {
-        let position = $(this).scrollTop();
-        let windowWidth = $(this).width();
-        //console.log(windowWidth);
-        if (position >= 100) {
-            $('.about-img').addClass('fromLeft');
-            $('.about-text').addClass('fromRight');
-        } else {
-            $('.about-img').removeClass('fromLeft');
-            $('.about-text').removeClass('fromRight');            
-        }
-
-    });*/
-
 
     $(document).ready(function() {
         $("#projects-slider").owlCarousel({

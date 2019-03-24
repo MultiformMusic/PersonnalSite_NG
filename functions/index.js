@@ -9,10 +9,14 @@ sgMail.setApiKey(constantes.apiKeys.MAIL_API_KEY);
 const mongoose = require('mongoose');
 const FakeDb = require('./fake-db');
 const { normalizeErrors } = require('./helpers/mongoose');
-const jwt = require('jsonwebtoken');
 
 const User = require('./models/user');
 const { getToken } = require('./helpers/tokenHelper');
+
+const request = require('request');
+const RssParser = require('rss-parser');
+let rssParser = new RssParser();
+
 
 /**
  * 
@@ -267,6 +271,40 @@ exports.mongoInitDb = functions.https.onRequest((req, res) => {
             }).catch(error => {
                 res.status(400).send({'seek db': false});
             });
+    });
+
+});
+
+/**
+ * 
+ * Récupére les feeds d'une url rss passé en requête
+ * 
+ */
+exports.rssDatasFromUrl = functions.https.onRequest((req, res) => {
+
+    const { rssUrls } = req.body;
+    const arrayRssUrls = rssUrls.split('|');
+
+    cors( req, res, async () => { 
+
+        /*request(rssUrl, function (error, response, body) {
+            console.log('error:', error); // Print the error if one occurred
+            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+            console.log('body:', body); // Print the HTML for the Google homepage.
+            return res.send(body);
+        });*/
+
+        /*rssParser.parseURL(rssUrl).then(
+
+            feed => {
+                return res.json(feed);
+            }
+        );*/
+
+        const feed = await rssParser.parseURL(arrayRssUrls[0]);
+        return res.json(feed);
+        
+
     });
 
 });
