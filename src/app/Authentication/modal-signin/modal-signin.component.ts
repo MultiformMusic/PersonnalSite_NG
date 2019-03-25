@@ -122,7 +122,7 @@ export class ModalSigninComponent implements OnInit {
         setTimeout( () => {
           this.callCloudFunction = false;
           this.modalSignin.nativeElement.style.display = 'none';
-          this.toastr.success('', 'Welcome to your personnal page');
+          //this.toastr.success('', 'Welcome to your personnal page');
           this.router.navigate(['/connected/home']);
           location.reload();
         }, 100)

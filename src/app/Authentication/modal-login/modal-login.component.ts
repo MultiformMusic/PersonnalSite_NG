@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication.service';
 import { Response } from '@angular/http';
@@ -104,13 +104,15 @@ export class ModalLoginComponent implements OnInit {
 
     this.authenticationService.loginMongoUser(user).subscribe(
       (res: Response) => {
-        setTimeout( () => {
-          this.callCloudFunction = false;
-          this.modalLogin.nativeElement.style.display = 'none';
-          this.toastr.success('', 'Welcome to your personnal page');
-          this.router.navigate(['/connected/home']);
+
+        this.callCloudFunction = false;
+        this.modalLogin.nativeElement.style.display = 'none';
+        this.router.navigate(['/connected/home']);
+
+        setTimeout(() => {
           location.reload();
-        }, 100)
+        }, 1);
+
       },
       (errorResponse) => {
         this.callCloudFunction = false;

@@ -283,7 +283,7 @@ exports.mongoInitDb = functions.https.onRequest((req, res) => {
 exports.rssDatasFromUrl = functions.https.onRequest((req, res) => {
 
     const { rssUrls } = req.body;
-    const arrayRssUrls = rssUrls.split('|');
+    //const arrayRssUrls = rssUrls.split('|');
 
     cors( req, res, async () => { 
 
@@ -301,10 +301,8 @@ exports.rssDatasFromUrl = functions.https.onRequest((req, res) => {
             }
         );*/
 
-        const feed = await rssParser.parseURL(arrayRssUrls[0]);
+        const feed = await rssParser.parseURL(rssUrls);
         return res.json(feed);
-        
-
     });
 
 });

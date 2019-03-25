@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { RssService } from '../services/rss.service';
 
 @Component({
   selector: 'app-rss-header',
@@ -9,8 +11,9 @@ export class RssHeaderComponent implements OnInit {
 
   toggle: boolean = false;
 
-  constructor() { }
+  constructor(private rssService: RssService) { }
 
   ngOnInit() {
+    this.rssService.getFeedFromUrl('https://www.lemonde.fr/rss/une.xml');
   }
 }

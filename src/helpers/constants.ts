@@ -20,6 +20,10 @@ export const constants = {
     MONGO_CREATE_USER: '/personnalsite/us-central1/mongoCreateUser',
     MONGO_LOGIN_USER: '/personnalsite/us-central1/mongoLogin',
     */
-    
 
+    /** RSS functions */
+    //FEED_FROM_URL: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/rssDatasFromUrl',
+
+    FEED_FROM_URL: '/personnalsite/us-central1/rssDatasFromUrl',
+   
 }

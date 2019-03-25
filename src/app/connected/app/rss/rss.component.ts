@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { RssService } from './navigation/rss.service';
+import { Subscription} from 'rxjs';
+import { RssService } from './navigation/services/rss.service';
 
 @Component({
   selector: 'app-rss',
@@ -7,11 +8,18 @@ import { RssService } from './navigation/rss.service';
   styleUrls: ['./rss.component.css']
 })
 export class RssComponent implements OnInit {
+  
+  feedSubscription: Subscription;
 
   constructor(private rssService: RssService) { }
 
   ngOnInit() {
-    this.rssService.getRssDatas();
+    this.feedSubscription = this.rssService.feedLoading.subscribe(
+      (feeds) => {
+        debugger;
+      }
+    );
+    this.rssService.getFeedFromUrl('https://www.lemonde.fr/rss/une.xml');
   }
 
 }

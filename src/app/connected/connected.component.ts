@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-connected',
@@ -7,9 +9,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConnectedComponent implements OnInit {
 
-  constructor() { }
+  reload: boolean = true;
+
+  constructor(private router: Router) { 
+
+    /*this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    }*/
+
+    /*this.router.events.subscribe(
+      evt => {
+
+        if (evt instanceof NavigationEnd) {
+          debugger;
+          if (this.reload) {
+            this.router.navigated = false;
+            this.reload = false;
+            location.reload();
+          }
+          
+        }
+      }
+    );*/
+  }
 
   ngOnInit() {
+
   }
 
 }

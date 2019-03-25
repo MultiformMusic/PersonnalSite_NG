@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '../../../material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { RssService } from './navigation/rss.service';
+import { RssService } from './navigation/services/rss.service';
 
 @NgModule({
     
