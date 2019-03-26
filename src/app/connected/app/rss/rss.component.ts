@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription} from 'rxjs';
 import { RssService } from './navigation/services/rss.service';
 
@@ -7,19 +7,27 @@ import { RssService } from './navigation/services/rss.service';
   templateUrl: './rss.component.html',
   styleUrls: ['./rss.component.css']
 })
-export class RssComponent implements OnInit {
+export class RssComponent implements OnInit, OnDestroy {
   
   feedSubscription: Subscription;
+  feeds: any[] = [];
+  arrayOfRssUrl: string[] = ['https://www.lemonde.fr/rss/une.xml'];
 
   constructor(private rssService: RssService) { }
 
   ngOnInit() {
+
     this.feedSubscription = this.rssService.feedLoading.subscribe(
       (feeds) => {
-        debugger;
+        this.feeds = [...this.feeds, feeds];
       }
     );
-    this.rssService.getFeedFromUrl('https://www.lemonde.fr/rss/une.xml');
+
+    this.rssService.getFeedFromUrl(this.arrayOfRssUrl);
+  }
+
+  ngOnDestroy() {
+    this.feedSubscription.unsubscribe();
   }
 
 }

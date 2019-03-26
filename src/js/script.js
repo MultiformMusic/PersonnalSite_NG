@@ -51,16 +51,6 @@ $(document).ready(function() {
         //} 
     });
 
-    $("#card-section").inViewport(function(px){
-        var viewportWidth = $(window).width();
-        //if (viewportWidth > 768 ) {
-            if(px) {
-                $("#card-section").addClass("fadeInUp") ;
-                $("#card-section").css("opacity", "1");
-            }
-        //} 
-    });
-
     /* click event sur le bouton du navbar */
 
     // nav bar page presentation
@@ -103,6 +93,8 @@ $(document).ready(function() {
                 $('.side-nav-button').removeClass('change');
                 $("#rssheader").addClass("bounceInUp") ;
                 $("#rssheader").css("opacity", "1");
+                $("#rssItemsList").addClass("fadeInUp") ;
+                $("#rssItemsList").css("opacity", "1");
             }
         });
     });

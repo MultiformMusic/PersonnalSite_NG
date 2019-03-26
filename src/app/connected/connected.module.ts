@@ -9,6 +9,7 @@ import { RssComponent } from './app/rss/rss.component';
 import { MaterialModule } from '../material.module';
 import { RssModule } from './app/rss/rss.module';
 import { RssHeaderComponent } from './app/rss/navigation/rss-header/rss-header.component';
+import { RssListComponent } from './app/rss/rss-list/rss-list.component';
 
 const routes: Routes = [
     { path: 'connected', 
@@ -16,12 +17,10 @@ const routes: Routes = [
      children: [
          { path: 'home', component: HomeComponent, canActivate: [AuthenticationGuard] },
          { path: 'rss', component: RssComponent, canActivate: [AuthenticationGuard] },
-         { path: 'rssDatas', component: RssComponent, canActivate: [AuthenticationGuard] },
          { path: '**', component: HomeComponent, canActivate: [AuthenticationGuard] },
      ]
     }
 ];
-
 
 @NgModule({
 
@@ -30,6 +29,7 @@ const routes: Routes = [
         HomeComponent,
         SideMenuComponent,
         RssComponent,
+        RssListComponent,
         RssHeaderComponent,
     ],
     imports: [

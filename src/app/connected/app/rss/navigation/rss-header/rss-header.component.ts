@@ -14,6 +14,5 @@ export class RssHeaderComponent implements OnInit {
   constructor(private rssService: RssService) { }
 
   ngOnInit() {
-    this.rssService.getFeedFromUrl('https://www.lemonde.fr/rss/une.xml');
   }
 }

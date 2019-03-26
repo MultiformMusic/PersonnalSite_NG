@@ -301,7 +301,7 @@ exports.rssDatasFromUrl = functions.https.onRequest((req, res) => {
             }
         );*/
 
-        const feed = await rssParser.parseURL(rssUrls);
+        const feed = await rssParser.parseURL(rssUrls[0]);
         return res.json(feed);
     });
 

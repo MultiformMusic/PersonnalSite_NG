@@ -22,8 +22,8 @@ export const constants = {
     */
 
     /** RSS functions */
-    //FEED_FROM_URL: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/rssDatasFromUrl',
+    FEED_FROM_URL: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/rssDatasFromUrl',
 
-    FEED_FROM_URL: '/personnalsite/us-central1/rssDatasFromUrl',
+    //FEED_FROM_URL: '/personnalsite/us-central1/rssDatasFromUrl',
    
 }
