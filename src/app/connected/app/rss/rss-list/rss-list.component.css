@@ -1,4 +1,35 @@
 .rss-list {
-    background-color: rgb(92, 43, 43);
+    background-color: rgb(38, 16, 16);
 }
 
+.card-common {
+    margin: 6px;
+    height: 22rem;
+    background-color: #6a4f4f;
+    box-shadow: 1px 2px 5px rgb(97, 61, 61);
+    transition: all .4s;
+  }
+  
+  .card-common:hover {
+    box-shadow: 2px 3px 15px rgb(128, 81, 81);
+    transform: scale(1.05);
+  }
+
+  .card-img {
+      width: 100%;
+      height: auto;
+  }
+
+
+  .item-title {
+    margin-top: 0.5rem;
+    color: rgb(237, 237, 237);
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+.card-footer-text {
+    background-color: #887d7d;
+    color: rgb(245, 244, 244);
+    font-size: .8rem;
+}

@@ -12,8 +12,6 @@ export class RssService {
     constructor(private http: Http) {}
 
     getFeedFromUrl(rssUrls: string[]) {
-        
-        debugger;
 
         const url = constants.FEED_FROM_URL;
         const headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
@@ -23,7 +21,6 @@ export class RssService {
         }
         this.http.post(url, rss, {headers: headers}).subscribe(
             res => {
-                debugger;
                 console.log(res.json().items);
                 this.feedLoading.next(res.json().items);
             },
