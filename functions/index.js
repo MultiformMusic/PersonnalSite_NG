@@ -287,22 +287,18 @@ exports.rssDatasFromUrl = functions.https.onRequest((req, res) => {
 
     cors( req, res, async () => { 
 
-        /*request(rssUrl, function (error, response, body) {
-            console.log('error:', error); // Print the error if one occurred
-            console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-            console.log('body:', body); // Print the HTML for the Google homepage.
-            return res.send(body);
-        });*/
+        let allFeeds = [];
 
-        /*rssParser.parseURL(rssUrl).then(
-
-            feed => {
-                return res.json(feed);
+        await Promise.all(rssUrls.map(async (url) => {
+            try {
+                const feed = await rssParser.parseURL(url);
+                allFeeds = [...allFeeds, ...feed.items];
+            } catch (error) {
+              console.log('error'+ error);
             }
-        );*/
-
-        const feed = await rssParser.parseURL(rssUrls[0]);
-        return res.json(feed);
+          }))
+          
+        return res.json(allFeeds);
     });
 
 });
