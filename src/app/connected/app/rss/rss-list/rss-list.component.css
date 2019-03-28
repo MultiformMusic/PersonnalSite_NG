@@ -2,9 +2,23 @@
     background-color: rgb(38, 16, 16);
 }
 
+.callCloudFunctionMessage {
+  color: rgb(226, 183, 41);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.blink_me {
+  animation: blinker 2s linear infinite;
+}
+
+@keyframes blinker {  
+  50% { opacity: 0; }
+}
+
 .card-common {
     margin: 6px;
-    height: 22rem;
+    height: 23rem;
     background-color: #6a4f4f;
     box-shadow: 1px 2px 5px rgb(97, 61, 61);
     transition: all .4s;
@@ -22,10 +36,9 @@
 
 
   .item-title {
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     color: rgb(237, 237, 237);
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 0.9rem;
   }
   
 .card-footer-text {

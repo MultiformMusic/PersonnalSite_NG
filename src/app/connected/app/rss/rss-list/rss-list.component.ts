@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RssService } from '../navigation/services/rss.service';
 import { Subscription } from 'rxjs';
+import { RssService } from '../services/rss.service';
+import { constants } from '../../../../../helpers/constants'
 
 @Component({
   selector: 'app-rss-list',
@@ -10,8 +11,10 @@ import { Subscription } from 'rxjs';
 export class RssListComponent implements OnInit {
 
   feedSubscription: Subscription;
+  beginLoadingSubscription: Subscription;
+
   feeds: any[] = [];
-  arrayOfRssUrl: string[] = ['https://www.lemonde.fr/rss/une.xml'];
+  loading: boolean = false;
 
   constructor(private rssService: RssService) { }
 
@@ -19,15 +22,26 @@ export class RssListComponent implements OnInit {
 
     this.feedSubscription = this.rssService.feedLoading.subscribe(
       (feeds) => {
-        this.feeds = [...this.feeds, ...feeds];
+        this.feeds = [...feeds];
+        this.loading = false;
       }
     );
 
-    this.rssService.getFeedFromUrl(this.arrayOfRssUrl);
+    this.beginLoadingSubscription = this.rssService.beginLoading.subscribe(
+      (begin) => {
+        this.loading = begin;
+      }
+    );
+
+    this.loading = true;
+
+    this.rssService.getFeedFromUrls(constants.arrayOfRssUrl);
+    
   }
 
   ngOnDestroy() {
     this.feedSubscription.unsubscribe();
+    this.beginLoadingSubscription.unsubscribe();
   }
 
 }

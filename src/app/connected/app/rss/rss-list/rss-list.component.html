@@ -1,25 +1,30 @@
 <!-- Item RSS -->
-    <div class="row rss-list" id="rssItemsList">
-      <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
-        <div class="row pt-md-5 mt-md-3 mb-5">
-          <div *ngFor="let item of feeds" class="col-xl-3 col-sm-6 p-2">
-            <div class="card card-common">
-              <div class="card-body">
-                <div class="">
-                  <img class="card-img" src={{item.enclosure.url}} alt="">
-                  <div class="text-left">
-                    <p class="item-title">{{item.title}}</p>
-                  </div>
+<div *ngIf="loading" class="text-center pt-5">
+  <p class="callCloudFunctionMessage blink_me">Loading...</p>
+</div>
+<ng-container *ngIf="!loading">
+  <div class="row rss-list fadeInUp" id="rssItemsList">
+    <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+      <div class="row pt-md-5 mt-md-3 mb-5">
+        <div *ngFor="let item of feeds" class="col-xl-3 col-sm-6 p-2">
+          <div class="card card-common">
+            <div class="card-body">
+              <div class="">
+                <img class="card-img" src={{item.enclosure.url}} alt="">
+                <div class="text-left">
+                  <p class="item-title">{{item.title}}</p>
                 </div>
               </div>
-              <div class="card-footer card-footer-text">
-                <div>Le Monde</div>
-                <div>{{item.pubDate}}</div>
-              </div>
+            </div>
+            <div class="card-footer card-footer-text">
+              <div>Le Monde</div>
+              <div>{{item.pubDate}}</div>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+</ng-container>
 
 <!-- end of cards -->

@@ -51,6 +51,16 @@ $(document).ready(function() {
         //} 
     });
 
+    $("#rssItemsList").inViewport(function(px){
+        //if (viewportWidth > 768 ) {
+            console.log(px);
+            if(px) {
+                $("#rssItemsList").addClass("fadeInUp") ;
+                $("#rssItemsList").css("opacity", "1");
+            }
+        //} 
+    });
+
     /* click event sur le bouton du navbar */
 
     // nav bar page presentation
@@ -62,13 +72,6 @@ $(document).ready(function() {
     $('.side-nav-button').click(function() {
         $('.side-nav-button').toggleClass('change');
     });
-
-    //  nav bar page RSS
-    /*$('.rss-nav-button').click(function() {
-        console.log("rss nav button")
-        $('.rss-nav-button').toggleClass('change');
-    });*/
-
 
 
     /* permet le scroll vers la section lors click sur navigation */
@@ -93,8 +96,13 @@ $(document).ready(function() {
                 $('.side-nav-button').removeClass('change');
                 $("#rssheader").addClass("bounceInUp") ;
                 $("#rssheader").css("opacity", "1");
-                $("#rssItemsList").addClass("fadeInUp") ;
-                $("#rssItemsList").css("opacity", "1");
+            }
+
+
+            /** nav bar RSS : clikc Refresh */
+            if (event.currentTarget.innerText === 'refresh') {
+                $('#rssNavbar').collapse('hide');
+                //$('#rssNavButton').removeClass('change');
             }
         });
     });

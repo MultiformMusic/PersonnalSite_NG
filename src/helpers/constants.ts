@@ -26,4 +26,8 @@ export const constants = {
 
     //FEED_FROM_URL: '/personnalsite/us-central1/rssDatasFromUrl',
    
+
+    // URL
+
+    arrayOfRssUrl: ['https://www.lemonde.fr/rss/une.xml'],
 }
