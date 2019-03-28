@@ -73,8 +73,10 @@
   position: absolute;
   color: rgb(242, 231, 194);
   font-size: 1rem;
-  top: 50%;
-  left: 40%;
+  top: 43%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
   transform: translate(-50%, -50%);
 }
 

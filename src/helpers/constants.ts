@@ -29,5 +29,5 @@ export const constants = {
 
     // URL
 
-    arrayOfRssUrl: ['https://www.lemonde.fr/rss/une.xml'],
+    arrayOfRssUrl: ['https://www.futura-sciences.com/rss/actualites.xml', 'https://www.lemonde.fr/rss/une.xml'],
 }

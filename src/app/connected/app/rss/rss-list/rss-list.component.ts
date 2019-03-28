@@ -57,7 +57,7 @@ export class RssListComponent implements OnInit {
     this.beginLoadingSubscription.unsubscribe();
   }
 
-  showFaceDetails(i) {
+  showBackContent() {
     if (this.screenWidth < 700) {
       this.rotate = true;
     } else {
