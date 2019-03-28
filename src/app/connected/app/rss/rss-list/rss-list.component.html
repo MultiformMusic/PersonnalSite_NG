@@ -6,7 +6,8 @@
   <div class="row rss-list fadeInUp" id="rssItemsList">
     <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
       <div class="row pt-md-5 mt-md-3 mb-5">
-        <div *ngFor="let item of feeds" class="col-xl-3 col-sm-6 p-2">
+        <div (click)="showFaceDetails(i)" *ngFor="let item of feeds; index as i" 
+             [ngClass]="rotate ? 'col-xl-3 col-sm-6 p-2 rotate' : 'col-xl-3 col-sm-6 p-2'">
           <div class="card card-common">
             <div class="card-body">
               <div class="">
@@ -19,6 +20,14 @@
             <div class="card-footer card-footer-text">
               <div>Le Monde</div>
               <div>{{item.pubDate}}</div>
+            </div>
+            <div class="back">
+              <div class="back-content">
+                <p>{{item.content}}</p>
+                <div class="align-items-end">
+                  <a  target="_blank" href={{item.link}} class="px-4 btn">Read more</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>

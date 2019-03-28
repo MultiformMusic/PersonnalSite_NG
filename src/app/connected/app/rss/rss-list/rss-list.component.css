@@ -17,6 +17,7 @@
 }
 
 .card-common {
+  position: relative;
     margin: 6px;
     height: 23rem;
     background-color: #6a4f4f;
@@ -24,10 +25,10 @@
     transition: all .4s;
   }
   
-  .card-common:hover {
+  /*.card-common:hover {
     box-shadow: 2px 3px 15px rgb(128, 81, 81);
     transform: scale(1.05);
-  }
+  }*/
 
   .card-img {
       width: 100%;
@@ -45,4 +46,45 @@
     background-color: #887d7d;
     color: rgb(245, 244, 244);
     font-size: .8rem;
+}
+
+
+.rotate {
+  perspective: 100rem;
+}
+
+
+.back {
+  position: absolute;
+  background: linear-gradient(rgba(0, 0, 0, .7), rgba(0,0,0,.8)), 
+  fixed center no-repeat /cover;
+  /*background-color: #fafafa;*/
+  top: -100%;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  user-select: none;
+  pointer-events: none;
+  transform: rotateY(180deg);
+  transition: top .8s, opacity .4s;
+}
+
+.back-content {
+  position: absolute;
+  color: rgb(242, 231, 194);
+  font-size: 1rem;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+}
+
+.rotate:hover .card-common {
+  transform: rotateY(180deg);
+}
+
+.rotate:hover .back {
+  opacity: 1;
+  top: 0;
+  user-select: auto;
+  pointer-events: auto;
 }

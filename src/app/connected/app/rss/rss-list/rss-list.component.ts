@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RssService } from '../services/rss.service';
 import { constants } from '../../../../../helpers/constants'
@@ -16,7 +16,20 @@ export class RssListComponent implements OnInit {
   feeds: any[] = [];
   loading: boolean = false;
 
-  constructor(private rssService: RssService) { }
+  screenHeight:any;
+  screenWidth:any;
+  rotate: boolean = false;
+
+  @HostListener('window:resize', ['$event'])
+  getScreenSize(event?) {
+        this.screenHeight = window.innerHeight;
+        this.screenWidth = window.innerWidth;
+        console.log(this.screenHeight, this.screenWidth);
+  }
+
+  constructor(private rssService: RssService) { 
+    this.getScreenSize();
+  }
 
   ngOnInit() {
 
@@ -42,6 +55,14 @@ export class RssListComponent implements OnInit {
   ngOnDestroy() {
     this.feedSubscription.unsubscribe();
     this.beginLoadingSubscription.unsubscribe();
+  }
+
+  showFaceDetails(i) {
+    if (this.screenWidth < 700) {
+      this.rotate = true;
+    } else {
+      this.rotate = !this.rotate;
+    }
   }
 
 }
