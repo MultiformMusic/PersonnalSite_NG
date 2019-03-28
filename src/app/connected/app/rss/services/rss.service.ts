@@ -23,9 +23,9 @@ export class RssService {
         }
         this.http.post(url, rss, {headers: headers}).subscribe(
             res => {
-                console.log(res.json().items);
+                console.log(res.json());
                 this.beginLoading.next(false);
-                this.feedLoading.next(res.json().items);
+                this.feedLoading.next(res.json());
             },
             (err) => {
                 this.beginLoading.next(false);
