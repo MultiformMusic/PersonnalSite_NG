@@ -22,12 +22,12 @@ export const constants = {
     */
 
     /** RSS functions */
-    //FEED_FROM_URL: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/rssDatasFromUrl',
+    FEED_FROM_URL: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/rssDatasFromUrl',
 
-    FEED_FROM_URL: '/personnalsite/us-central1/rssDatasFromUrl',
+    //FEED_FROM_URL: '/personnalsite/us-central1/rssDatasFromUrl',
    
 
     // URL
 
-    arrayOfRssUrl: ['https://www.futura-sciences.com/rss/actualites.xml', 'https://www.lemonde.fr/rss/une.xml'],
+    arrayOfRssUrl: ['https://www.futura-sciences.com/rss/actualites.xml', 'https://www.lemonde.fr/rss/une.xml', 'http://feedcleaner.nick.pro/sanitize?url=https%3A%2F%2Ffeeds.feedburner.com%2Ffrandroid%3Fformat%3Dxml&format=rss'],
 }

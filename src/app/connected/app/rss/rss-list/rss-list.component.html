@@ -11,7 +11,7 @@
           <div class="card card-common">
             <div class="card-body">
               <div class="">
-                <img class="card-img" src={{item.enclosure.url}} alt="">
+                <img *ngIf="item.enclosure" class="card-img" src={{item.enclosure.url}} alt="">
                 <div class="text-left">
                   <p class="item-title">{{item.title}}</p>
                 </div>
@@ -24,8 +24,10 @@
             <div class="back">
               <div class="back-content">
                 <p>{{item.content}}</p>
-                <a target="_blank" href={{item.link}} class="px-4 btn">Read more</a>
               </div>
+              
+              <a style="margin-top: 20rem; margin-left: 8rem" target="_blank" href={{item.link}} class="px-4 btn">Read more 1</a>
+             
             </div>
           </div>
         </div>
