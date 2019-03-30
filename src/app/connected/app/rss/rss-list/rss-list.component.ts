@@ -15,6 +15,9 @@ export class RssListComponent implements OnInit {
 
   feeds: any[] = [];
   loading: boolean = false;
+  stylesFab = {
+    opacity: 0,
+  }
 
   screenHeight:any;
   screenWidth:any;
@@ -24,6 +27,7 @@ export class RssListComponent implements OnInit {
   getScreenSize(event?) {
         this.screenHeight = window.innerHeight;
         this.screenWidth = window.innerWidth;
+        this.showButtonRssTop()
         console.log(this.screenHeight, this.screenWidth);
   }
 
@@ -37,12 +41,14 @@ export class RssListComponent implements OnInit {
       (feeds) => {
         this.feeds = [...feeds];
         this.loading = false;
+        this.showButtonRssTop();
       }
     );
 
     this.beginLoadingSubscription = this.rssService.beginLoading.subscribe(
       (begin) => {
         this.loading = begin;
+        this.showButtonRssTop()
       }
     );
 
@@ -62,6 +68,14 @@ export class RssListComponent implements OnInit {
       this.rotate = true;
     } else {
       this.rotate = !this.rotate;
+    }
+  }
+
+  showButtonRssTop() {
+    if (this.feeds.length > 0 && this.screenWidth < 768) {
+      this.stylesFab.opacity = 0.8;
+    } else {
+      this.stylesFab.opacity = 0;
     }
   }
 

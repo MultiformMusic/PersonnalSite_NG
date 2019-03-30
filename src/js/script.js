@@ -53,7 +53,6 @@ $(document).ready(function() {
 
     $("#rssItemsList").inViewport(function(px){
         //if (viewportWidth > 768 ) {
-            console.log(px);
             if(px) {
                 $("#rssItemsList").addClass("fadeInUp") ;
                 $("#rssItemsList").css("opacity", "1");
@@ -77,6 +76,7 @@ $(document).ready(function() {
     /* permet le scroll vers la section lors click sur navigation */
     $(document).ready(function() {
         $("a").on("click", function(event) {
+
             if (this.hash !== "") {
                 event.preventDefault();
                 var hash = this.hash;
@@ -90,19 +90,20 @@ $(document).ready(function() {
             );
             } 
 
-            /** side menu page connectée */
+            /** Top Menu RSS */
             if (event.currentTarget.innerText === 'RSS') {
+
                 $('.side-navbar').collapse('hide');
                 $('.side-nav-button').removeClass('change');
-                $("#rssheader").addClass("bounceInUp") ;
+                $("#rssheader").addClass("bounceInUp");
                 $("#rssheader").css("opacity", "1");
-            }
 
-
-            /** nav bar RSS : clikc Refresh */
-            if (event.currentTarget.innerText === 'refresh') {
-                $('#rssNavbar').collapse('hide');
-                //$('#rssNavButton').removeClass('change');
+                // attach le click de scroll sur Floating buouton
+                $("#buttonRssTop").click(function() {
+                    $('html,body').animate({
+                        scrollTop: $(".navbar-light").offset().top},
+                        'slow');
+                });
             }
         });
     });
@@ -122,6 +123,7 @@ $(document).ready(function() {
         });
     });
 
+    /** Gestion Carousel page présentation */
     $(document).ready(function() {
         $("#projects-slider").owlCarousel({
             animateOut: 'fadeOut',

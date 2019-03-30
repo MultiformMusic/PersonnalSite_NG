@@ -23,7 +23,7 @@ export class RssService {
         }
         this.http.post(url, rss, {headers: headers}).subscribe(
             res => {
-                console.log(res.json());
+                //console.log(res.json());
                 this.beginLoading.next(false);
                 this.feedLoading.next(res.json());
             },

@@ -10,6 +10,8 @@ import { constants } from '../../../../../../helpers/constants';
 export class RssHeaderComponent implements OnInit {
 
   toggle: boolean = false;
+  collapseValue: string = 'collapse';
+  ariaExpand: boolean = false;
 
   constructor(private rssService: RssService) { }
 
@@ -17,11 +19,13 @@ export class RssHeaderComponent implements OnInit {
   }
 
   refresh() {
-    this.toggleNavBar();
+    this.clikToggleButton();
     this.rssService.getFeedFromUrls(constants.arrayOfRssUrl);
   }
 
-  toggleNavBar() {
+  clikToggleButton() {
     this.toggle = !this.toggle;
+    this.collapseValue = this.toggle ? 'collpase' : 'collpase';
+    this.ariaExpand = this.toggle ? true : false;  
   }
 }

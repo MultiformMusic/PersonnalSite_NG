@@ -1,7 +1,5 @@
-.rss-list {
-    background-color: rgb(38, 16, 16);
-}
 
+/** Gestion du message attente de chargement Loading **/
 .callCloudFunctionMessage {
   color: rgb(226, 183, 41);
   font-size: 1.5rem;
@@ -16,44 +14,47 @@
   50% { opacity: 0; }
 }
 
+
+
+.rss-list {
+    background-color: rgb(38, 16, 16);
+}
+
+
+/** Gestion Card RSS **/
 .card-common {
   position: relative;
-    margin: 6px;
-    height: 23rem;
-    background-color: #6a4f4f;
-    box-shadow: 1px 2px 5px rgb(97, 61, 61);
-    transition: all .4s;
-  }
+  margin: 6px;
+  height: 23rem;
+  background-color: #6a4f4f;
+  box-shadow: 1px 2px 5px rgb(97, 61, 61);
+  transition: all .4s;
+}
   
-  /*.card-common:hover {
-    box-shadow: 2px 3px 15px rgb(128, 81, 81);
-    transform: scale(1.05);
-  }*/
+.card-common:hover {
+  box-shadow: 2px 3px 15px rgb(128, 81, 81);
+  transform: scale(1.05);
+}
 
-  .card-img {
-      width: 100%;
-      height: auto;
-  }
+.card-img {
+    width: 100%;
+    height: auto;
+}
 
 
-  .item-title {
-    margin-top: 1rem;
-    color: rgb(237, 237, 237);
-    font-size: 0.9rem;
-  }
+.item-title {
+  margin-top: 1rem;
+  color: rgb(237, 237, 237);
+  font-size: 0.9rem;
+}
   
 .card-footer-text {
-    background-color: #887d7d;
-    color: rgb(245, 244, 244);
-    font-size: .8rem;
+  background-color: #887d7d;
+  color: rgb(245, 244, 244);
+  font-size: .8rem;
 }
 
-
-.rotate {
-  perspective: 100rem;
-}
-
-
+/** Gestion du back content de la carte **/
 .back {
   position: absolute;
   background: linear-gradient(rgba(0, 0, 0, .7), rgba(0,0,0,.8)), 
@@ -81,11 +82,8 @@
   overflow: hidden;
 }
 
-.back-content-link {
-  position: absolute;
-  color: rgb(242, 231, 194);
-  font-size: 1rem;
-  transform: translate(-50%, -50%);
+.rotate {
+  perspective: 100rem;
 }
 
 .rotate:hover .card-common {
@@ -97,4 +95,20 @@
   top: 0;
   user-select: auto;
   pointer-events: auto;
+}
+
+/** Gestion du floating bouton **/
+.btn-custom {
+  position: fixed;
+  border-radius: 50%;
+  bottom: 1rem;
+  right: 1rem;
+  opacity: 0; 
+}
+
+@media (max-width: 768px) {
+
+  .btn-custom  {
+    opacity: 0.7;
+  }
 }

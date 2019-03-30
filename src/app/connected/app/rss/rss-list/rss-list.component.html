@@ -1,4 +1,4 @@
-<!-- Item RSS -->
+<!-- Item RSS Card -->
 <div *ngIf="loading" class="text-center pt-5">
   <p class="callCloudFunctionMessage blink_me">Loading...</p>
 </div>
@@ -35,5 +35,7 @@
     </div>
   </div>
 </ng-container>
+<!-- end of RSS cards -->
 
-<!-- end of cards -->
+<!-- Naviation top button-->
+<button [ngStyle]="stylesFab" class="btn pmd-btn-fab pmd-ripple-effect btn-primary btn-custom" type="button" id="buttonRssTop"><i class="fas fa-arrow-up"></i></button>
