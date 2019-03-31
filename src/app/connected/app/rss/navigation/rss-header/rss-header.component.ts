@@ -20,7 +20,7 @@ export class RssHeaderComponent implements OnInit {
 
   refresh() {
     this.clikToggleButton();
-    this.rssService.getFeedFromUrls(constants.arrayOfRssUrl);
+    this.rssService.getFeedFromUrls(constants.arrayOfRssUrl, false);
   }
 
   clikToggleButton() {

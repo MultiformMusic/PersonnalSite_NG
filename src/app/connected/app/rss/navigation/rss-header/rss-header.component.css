@@ -79,7 +79,14 @@ a {
 }
 
 .scale-rss-header {
+  position: relative;
   transform: scaleY(1.1);
+  transition: all .4s;
+}
+
+.unscale-rss-header {
+  position: relative;
+  transform: scaleY(1);
   transition: all .4s;
 }
 

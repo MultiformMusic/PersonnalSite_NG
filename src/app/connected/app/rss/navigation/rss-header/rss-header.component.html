@@ -1,5 +1,7 @@
 <!-- top-nav -->
-<div class="col-xl-10 col-lg-9 col-md-8 ml-auto fixed-top py-2 top-navbar">
+<div 
+[ngClass]="toggle ? 'col-xl-10 col-lg-9 col-md-8 ml-auto fixed-top py-2 top-navbar scale-rss-header ' : 'col-xl-10 col-lg-9 col-md-8 ml-auto fixed-top py-2 top-navbar unscale-rss-header'"
+>
     <nav class="navbar navbar-expand-md nav-menu custom-navbar" id="rssheader">
         <a href="#home" class="navbar-brand">
             <span class="ml-2">Advanced RSS Reader</span>

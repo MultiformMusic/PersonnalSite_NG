@@ -49,8 +49,9 @@
 }
   
 .card-footer-text {
-  background-color: #887d7d;
-  color: rgb(245, 244, 244);
+  font-style: italic;
+  background-color: #5b3535;
+  color: rgb(33, 161, 199);
   font-size: .8rem;
 }
 
