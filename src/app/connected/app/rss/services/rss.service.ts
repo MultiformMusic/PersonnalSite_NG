@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import  { constants } from '../../../../../helpers/constants';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Injectable()
 export class RssService {
@@ -12,11 +14,31 @@ export class RssService {
      * - chargement des feeds
      * => mise en cache des feeds
      */
+    rssUrlsLoading = new Subject<any>();
     beginLoading = new Subject<boolean>();
     feedLoading = new Subject<any>();
     cacheFeeds: any[] = [];
 
-    constructor(private http: Http) {}
+    rssUlrs: any[];
+
+    constructor(private http: Http,
+                private db: AngularFirestore) {}
+
+
+    loadUrlRssFromDatabase() {
+
+        this.db.collection('rss-url').valueChanges().subscribe(
+            rssUrlsArray => {
+                let resultRssUrl = rssUrlsArray.map(rssUrl => {
+                    return {
+                        ...rssUrl
+                    }
+                })
+
+                this.rssUrlsLoading.next(resultRssUrl);
+            }
+        );
+    }
 
     /**
      * 
@@ -26,11 +48,11 @@ export class RssService {
      * @param rssUrls 
      * @param cache 
      */
-    getFeedFromUrls(rssUrls: string[], cache: boolean) {
+    getFeedFromUrls(rssUrls: any[], cache: boolean) {
         
         if (cache && this.cacheFeeds.length > 0) {
-            console.log('from cache');
             this.feedLoading.next(this.cacheFeeds);
+            console.log('from cache');
             return;
         }
 

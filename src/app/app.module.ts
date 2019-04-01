@@ -10,6 +10,11 @@ import { PresentationModule } from './presentation/presentation.module';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 
+// pour Firestore : install firebase et firestore
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +29,8 @@ import { MaterialModule } from './material.module';
     ToastrModule.forRoot(),
     MaterialModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [
   ],

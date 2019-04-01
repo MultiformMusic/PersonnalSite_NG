@@ -18,7 +18,8 @@
               </div>
             </div>
             <div class="card-footer card-footer-text">
-              <div>{{item.guid | slice:0:20}}</div>
+              <div>{{item.rssName}}</div>
+              <div>{{item.category}}</div>
               <div>{{item.pubDate}}</div>
             </div>
             <div class="back">
@@ -26,7 +27,7 @@
                 <p>{{item.content}}</p>
               </div>
               
-              <a style="margin-top: 20rem; margin-left: 8rem" target="_blank" href={{item.link}} class="px-4 btn">Read more 1</a>
+              <a style="margin-top: 20rem; margin-left: 8rem" target="_blank" href={{item.link}} class="px-4 btn">Read more</a>
              
             </div>
           </div>

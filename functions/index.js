@@ -17,6 +17,8 @@ const request = require('request');
 const RssParser = require('rss-parser');
 let rssParser = new RssParser();
 
+const he = require('he');
+
 
 /**
  * 
@@ -289,10 +291,17 @@ exports.rssDatasFromUrl = functions.https.onRequest((req, res) => {
 
         let allFeeds = [];
 
-        await Promise.all(rssUrls.map(async (url) => {
+        await Promise.all(rssUrls.map(async (rss) => {
             try {
-                const feed = await rssParser.parseURL(url);
-                allFeeds = [...allFeeds, ...feed.items];
+                const feed = await rssParser.parseURL(rss.url);
+                let items = [...feed.items];
+                items.forEach(function(item) { 
+                    item.title = he.decode(item.title);
+                    item.content = he.decode(item.content);
+                    item.rssName = rss.name; 
+                    item.category = rss.category;
+                });
+                allFeeds = [...allFeeds, ...items];
             } catch (error) {
               console.log('error'+ error);
             }

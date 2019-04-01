@@ -17,6 +17,7 @@ export class RssListComponent implements OnInit {
    *   chargement en cours 
    *   Feeds chargées
   */
+  rssUrlsSubscription: Subscription;
   feedSubscription: Subscription;
   beginLoadingSubscription: Subscription;
 
@@ -24,6 +25,8 @@ export class RssListComponent implements OnInit {
   allFeeds: any[] = [];
   // feeds affichées (évntuellement filtrées)
   feeds: any[] = [];
+
+  rssUrls: any[] = [];
 
   // gère affichage "Loading ...."
   loading: boolean = false;
@@ -53,6 +56,17 @@ export class RssListComponent implements OnInit {
 
   ngOnInit() {
 
+    this.rssUrlsSubscription = this.rssService.rssUrlsLoading.subscribe(
+      (rssUrlsFromDb: any[]) => {
+
+        this.rssUrls = rssUrlsFromDb;
+        
+        // début chargement des feeds : on prend du cache car feeds déjà chargées pas Home
+        this.loading = true;
+        this.rssService.getFeedFromUrls(this.rssUrls, true);
+      }
+    )
+
     /** Subscription top début chargement feeds de RssService (pour afficher Loading) */
     this.beginLoadingSubscription = this.rssService.beginLoading.subscribe(
       (begin) => {
@@ -75,9 +89,7 @@ export class RssListComponent implements OnInit {
       }
     );
 
-    // début chargement des feeds : on prend du cache car feeds déjà chargées pas Home
-    this.loading = true;
-    this.rssService.getFeedFromUrls(constants.arrayOfRssUrl, true);
+    this.rssService.loadUrlRssFromDatabase();
     
   }
 

@@ -29,6 +29,6 @@ export const constants = {
 
     // URL
 
-    arrayOfRssUrl: ['https://www.futura-sciences.com/rss/actualites.xml', 'https://www.lemonde.fr/rss/une.xml', 'http://feedcleaner.nick.pro/sanitize?url=https%3A%2F%2Ffeeds.feedburner.com%2Ffrandroid%3Fformat%3Dxml&format=rss'],
-    //arrayOfRssUrl: ['https://www.futura-sciences.com/rss/actualites.xml'],
+    //arrayOfRssUrl: ['https://www.futura-sciences.com/rss/actualites.xml', 'https://www.lemonde.fr/rss/une.xml', 'http://feedcleaner.nick.pro/sanitize?url=https%3A%2F%2Ffeeds.feedburner.com%2Ffrandroid%3Fformat%3Dxml&format=rss'],
+    arrayOfRssUrl: ['https://www.futura-sciences.com/rss/actualites.xml'],
 }
