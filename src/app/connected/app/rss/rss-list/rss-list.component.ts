@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RssService } from '../services/rss.service';
-import { constants } from '../../../../../helpers/constants'
 
 @Component({
   selector: 'app-rss-list',
@@ -10,7 +9,7 @@ import { constants } from '../../../../../helpers/constants'
 })
 export class RssListComponent implements OnInit {
 
-  // utilisé par Hom pour savoir le nombre de feeds  à afficher
+  // utilisé par Home pour savoir le nombre de feeds  à afficher
   @Input() showNbrFeeds: number;
 
   /**  Subscription sur RssService 
@@ -23,9 +22,10 @@ export class RssListComponent implements OnInit {
 
   // stockage de toutes les feeds
   allFeeds: any[] = [];
-  // feeds affichées (évntuellement filtrées)
+  // feeds affichées (éventuellement filtrées)
   feeds: any[] = [];
 
+  // liste des url rss
   rssUrls: any[] = [];
 
   // gère affichage "Loading ...."
@@ -93,20 +93,33 @@ export class RssListComponent implements OnInit {
     
   }
 
-  ngOnDestroy() {
-    this.feedSubscription.unsubscribe();
-    this.beginLoadingSubscription.unsubscribe();
-  }
-
   /**
    * Gestion du click sur une card RSS Feed pour rotation suivant largeur écrans
    */
-  showBackContent() {
-    
+  showBackContent(index: number) {
+
+    this.markFeedAsReaded(index);
+
     if (this.screenWidth < 700) {
       this.rotate = true;
     } else {
       this.rotate = !this.rotate;
+    }
+  }
+
+  /**
+   * Marque le feed d'index comme lu
+   * 
+   * @param index 
+   *
+   */
+  markFeedAsReaded(index: number) {
+
+    for (let i = 0; i < this.feeds.length; i++) {      
+      if (i === index)  {
+        this.feeds[index].readed = true;
+        break;
+      }
     }
   }
 
@@ -121,5 +134,13 @@ export class RssListComponent implements OnInit {
       this.stylesFab.opacity = 0;
     }
   }
+
+
+  ngOnDestroy() {
+    this.feedSubscription.unsubscribe();
+    this.beginLoadingSubscription.unsubscribe();
+    this.rssUrlsSubscription.unsubscribe();
+  }
+
 
 }

@@ -300,6 +300,7 @@ exports.rssDatasFromUrl = functions.https.onRequest((req, res) => {
                     item.content = he.decode(item.content);
                     item.rssName = rss.name; 
                     item.category = rss.category;
+                    item.readed = false;
                 });
                 allFeeds = [...allFeeds, ...items];
             } catch (error) {

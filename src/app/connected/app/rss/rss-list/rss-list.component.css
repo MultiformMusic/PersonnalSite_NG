@@ -26,7 +26,7 @@
   position: relative;
   margin: 6px;
   height: 23rem;
-  background-color: #6a4f4f;
+  /**background-color: #3a2828;*/
   box-shadow: 1px 2px 5px rgb(97, 61, 61);
   transition: all .4s;
 }
@@ -50,7 +50,7 @@
   
 .card-footer-text {
   font-style: italic;
-  background-color: #5b3535;
+  background-color: #301818;
   color: rgb(33, 161, 199);
   font-size: .8rem;
 }

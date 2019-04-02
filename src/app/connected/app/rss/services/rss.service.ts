@@ -25,6 +25,11 @@ export class RssService {
                 private db: AngularFirestore) {}
 
 
+    /**
+     * 
+     * Chargement des url rss depuis la base firestore
+     * 
+     */
     loadUrlRssFromDatabase() {
 
         this.db.collection('rss-url').valueChanges().subscribe(
@@ -36,6 +41,26 @@ export class RssService {
                 })
 
                 this.rssUrlsLoading.next(resultRssUrl);
+            }
+        );
+    }
+
+    /**
+     * 
+     * Rafraichissement des RSS feeds avec rechargement des url
+     * 
+     */
+    refreshRssFeeds() {
+
+        this.db.collection('rss-url').valueChanges().subscribe(
+            rssUrlsArray => {
+                let resultRssUrl = rssUrlsArray.map(rssUrl => {
+                    return {
+                        ...rssUrl
+                    }
+                })
+
+                this.getFeedFromUrls(resultRssUrl, false);
             }
         );
     }
@@ -56,6 +81,7 @@ export class RssService {
             return;
         }
 
+        console.log('no cache');
         this.beginLoading.next(true);
 
         const url = constants.FEED_FROM_URL;
