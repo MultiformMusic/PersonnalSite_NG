@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RssService } from '../services/rss.service';
+import { RssUrl } from './../models/rss-url';
 
 @Component({
   selector: 'app-rss-list',
@@ -57,7 +58,7 @@ export class RssListComponent implements OnInit {
   ngOnInit() {
 
     this.rssUrlsSubscription = this.rssService.rssUrlsLoading.subscribe(
-      (rssUrlsFromDb: any[]) => {
+      (rssUrlsFromDb: RssUrl[]) => {
 
         this.rssUrls = rssUrlsFromDb;
         

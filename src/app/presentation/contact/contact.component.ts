@@ -38,7 +38,6 @@ export class ContactComponent implements OnInit {
 
   sendContactMessage() {
   
-
     this.callCloudFunction = true;
 
     this.contact.email = this.sanitizer.sanitize(SecurityContext.HTML, this.contactForm.value.email);

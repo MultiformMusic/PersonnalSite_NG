@@ -1,0 +1,14 @@
+<ng-container *ngIf="toggleFilters">
+    <div 
+        [ngClass]="toggleFilters ? 'form-group scale-rss-filters' : 'form-group unscale-rss-filters'"
+        class="form-group">
+        <label class="label-category" for="category">Categories</label>
+        <select [(ngModel)]="filters.category" name="category" #selectCategory (change)="applyFilterCategory(selectCategory.value)" class="form-control select-category" id="category" required>
+            <option *ngFor="let category of rssService.categories" [value]="category">{{category}}</option>
+        </select>
+        <label class="label-category" for="name">RSS Name</label>
+        <select [(ngModel)]="filters.rssName" name="rssName" #selectName (change)="applyFilterRssName(selectName.value)" class="form-control select-category" id="name" required>
+            <option *ngFor="let name of rssService.rssNames" [value]="name">{{name}}</option>
+        </select>
+    </div>
+</ng-container> 

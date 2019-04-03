@@ -10,6 +10,8 @@ import { MaterialModule } from '../material.module';
 import { RssModule } from './app/rss/rss.module';
 import { RssHeaderComponent } from './app/rss/navigation/rss-header/rss-header.component';
 import { RssListComponent } from './app/rss/rss-list/rss-list.component';
+import { RssFiltersComponent } from './app/rss/navigation/rss-filters/rss-filters.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
     { path: 'connected', 
@@ -31,11 +33,13 @@ const routes: Routes = [
         RssComponent,
         RssListComponent,
         RssHeaderComponent,
+        RssFiltersComponent
     ],
     imports: [
         CommonModule,
         RssModule,
         MaterialModule,
+        FormsModule,
         RouterModule.forChild(routes)
     ],
     providers: [AuthenticationGuard]

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
 import  { constants } from '../../../../../helpers/constants';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { RssUrl } from './../models/rss-url';
 
 @Injectable()
 export class RssService {
@@ -14,12 +14,18 @@ export class RssService {
      * - chargement des feeds
      * => mise en cache des feeds
      */
-    rssUrlsLoading = new Subject<any>();
+    rssUrlsLoading = new Subject<RssUrl[]>();
     beginLoading = new Subject<boolean>();
     feedLoading = new Subject<any>();
     cacheFeeds: any[] = [];
 
-    rssUlrs: any[];
+    /**
+     * 
+     * Nécessaire aux filtrages
+     * 
+     */
+    rssNames: string[] = [];
+    categories: string[] = [];
 
     constructor(private http: Http,
                 private db: AngularFirestore) {}
@@ -33,13 +39,23 @@ export class RssService {
     loadUrlRssFromDatabase() {
 
         this.db.collection('rss-url').valueChanges().subscribe(
-            rssUrlsArray => {
+            (rssUrlsArray: RssUrl[]) => {
                 let resultRssUrl = rssUrlsArray.map(rssUrl => {
+                    
+                    this.rssNames.push(rssUrl.name);
+                    if (!this.categories.includes(rssUrl.category)) {
+                        this.categories.push(rssUrl.category);
+                    }
+
                     return {
                         ...rssUrl
                     }
                 })
 
+                this.categories.sort();
+                this.rssNames.sort();
+                this.categories.unshift(constants.CATEGORY_ALL);
+                this.rssNames.unshift(constants.RSS_NAME_ALL);
                 this.rssUrlsLoading.next(resultRssUrl);
             }
         );
@@ -53,7 +69,7 @@ export class RssService {
     refreshRssFeeds() {
 
         this.db.collection('rss-url').valueChanges().subscribe(
-            rssUrlsArray => {
+            (rssUrlsArray: RssUrl[]) => {
                 let resultRssUrl = rssUrlsArray.map(rssUrl => {
                     return {
                         ...rssUrl
@@ -73,7 +89,7 @@ export class RssService {
      * @param rssUrls 
      * @param cache 
      */
-    getFeedFromUrls(rssUrls: any[], cache: boolean) {
+    getFeedFromUrls(rssUrls: RssUrl[], cache: boolean) {
         
         if (cache && this.cacheFeeds.length > 0) {
             this.feedLoading.next(this.cacheFeeds);
@@ -104,5 +120,46 @@ export class RssService {
                 console.log(err);
             }
         );
+    }
+
+    /**
+     * 
+     * Filtrage des feeds suivant category / rss name
+     * 
+     * @param filters 
+     */
+    applyFilters(filters: any) {
+    
+        let filteredFeeds = this.cacheFeeds;
+
+        if (filters.category !== constants.CATEGORY_ALL) {
+            filteredFeeds = filteredFeeds.filter(
+                feed => feed.category === filters.category
+            );
+        }
+
+        if (filters.rssName !== constants.RSS_NAME_ALL) {
+            filteredFeeds = filteredFeeds.filter(
+                feed => feed.rssName === filters.rssName
+            );
+        }
+
+        this.feedLoading.next(filteredFeeds);
+
+    }
+
+
+    /**
+     * 
+     * Getter sur champs privés
+     * 
+     * 
+     */
+    getRssNames() {
+        return {...this.rssNames}
+    }
+
+    getCategories() {
+        return {...this.categories}
     }
 }

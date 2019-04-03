@@ -1,7 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { RssService } from '../../services/rss.service';
-import { constants } from '../../../../../../helpers/constants';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-rss-header',
@@ -14,6 +12,8 @@ export class RssHeaderComponent implements OnInit {
   toggle: boolean = false;
   collapseValue: string = 'collapse';
   ariaExpand: boolean = false;
+
+  toggleFilters: boolean = false;
 
 
   constructor(private rssService: RssService) { }
@@ -28,7 +28,9 @@ export class RssHeaderComponent implements OnInit {
    */
   refresh() {
     this.rssService.refreshRssFeeds();
-    this.clikToggleButton();
+    if (this.toggle) {
+      this.toggle = false;
+    }
   }
 
   /**
@@ -40,5 +42,12 @@ export class RssHeaderComponent implements OnInit {
     this.toggle = !this.toggle;
     this.collapseValue = this.toggle ? 'collpase' : 'collpase';
     this.ariaExpand = this.toggle ? true : false;  
+  }
+
+  clickToggleFilters() {
+    this.toggleFilters = !this.toggleFilters;
+    if (!this.toggleFilters && this.toggle) {
+      this.clikToggleButton();
+    }
   }
 }

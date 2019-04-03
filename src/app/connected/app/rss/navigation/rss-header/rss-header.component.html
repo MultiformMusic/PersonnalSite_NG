@@ -1,6 +1,6 @@
 <!-- top-nav -->
 <div 
-[ngClass]="toggle ? 'col-xl-10 col-lg-9 col-md-8 ml-auto fixed-top py-2 top-navbar scale-rss-header ' : 'col-xl-10 col-lg-9 col-md-8 ml-auto fixed-top py-2 top-navbar unscale-rss-header'"
+[ngClass]="toggle || toggleFilters ? 'col-xl-10 col-lg-9 col-md-8 ml-auto fixed-top py-2 top-navbar scale-rss-header ' : 'col-xl-10 col-lg-9 col-md-8 ml-auto fixed-top py-2 top-navbar unscale-rss-header'"
 >
     <nav class="navbar navbar-expand-md nav-menu custom-navbar" id="rssheader">
         <a href="#home" class="navbar-brand">
@@ -23,16 +23,17 @@
              id="rssNavbar">
              <ul class="navbar-nav" style="list-style: none">
                 <li class="nav-item">
-                    <a (click)="refresh()" style="cursor: pointer" class="p-2 mb-2 rss-header-link">
+                    <span (click)="refresh()" style="cursor: pointer" class="p-2 mb-2 rss-header-link">
                         <i class="fas fa-sync-alt text-light mr-2"></i>
                             <span class="text-link">Refresh</span>
-                    </a>
+                    </span>
                 </li>
                 <li class="nav-item">
-                    <a (click)="filters()" style="cursor: pointer" class="p-2 mb-2 rss-header-link">
+                    <span (click)="clickToggleFilters()" style="cursor: pointer" class="p-2 mb-2 rss-header-link">
                         <i class="fas fa-filter text-light mr-2"></i>
                         <span class="text-link">Filters</span>
-                    </a>
+                    </span>
+                    <app-rss-filters [toggleFilters]="toggleFilters"></app-rss-filters>
                 </li>
                 <li class="nav-item">
                     <a (click)="manage()" style="cursor: pointer" class="p-2 mb-2 rss-header-link">
