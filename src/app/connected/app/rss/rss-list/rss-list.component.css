@@ -2,6 +2,7 @@
 /** Gestion du message attente de chargement Loading **/
 .callCloudFunctionMessage {
   color: rgb(226, 183, 41);
+  padding-top: 8rem;
   font-size: 1.5rem;
   font-weight: bold;
 }

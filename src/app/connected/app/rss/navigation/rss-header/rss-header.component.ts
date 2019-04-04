@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { RssService } from '../../services/rss.service';
+import { constants } from './../../../../../../helpers/constants';
 
 @Component({
   selector: 'app-rss-header',
@@ -27,7 +28,8 @@ export class RssHeaderComponent implements OnInit {
    * 
    */
   refresh() {
-    this.rssService.refreshRssFeeds();
+ 
+    this.rssService.loadUrlRssFromDatabase(constants.CALLER_REFRESH);
     if (this.toggle) {
       this.toggle = false;
     }

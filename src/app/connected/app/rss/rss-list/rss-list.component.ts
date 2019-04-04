@@ -2,6 +2,7 @@ import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RssService } from '../services/rss.service';
 import { RssUrl } from './../models/rss-url';
+import { constants } from './../../../../../helpers/constants';
 
 @Component({
   selector: 'app-rss-list',
@@ -90,7 +91,7 @@ export class RssListComponent implements OnInit {
       }
     );
 
-    this.rssService.loadUrlRssFromDatabase();
+    this.rssService.loadUrlRssFromDatabase(constants.CALLER_LIST);
     
   }
 

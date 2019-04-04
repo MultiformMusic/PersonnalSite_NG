@@ -12,6 +12,7 @@ import { RssHeaderComponent } from './app/rss/navigation/rss-header/rss-header.c
 import { RssListComponent } from './app/rss/rss-list/rss-list.component';
 import { RssFiltersComponent } from './app/rss/navigation/rss-filters/rss-filters.component';
 import { FormsModule } from '@angular/forms';
+import { RssManageComponent } from './app/rss/rss-manage/rss-manage.component';
 
 const routes: Routes = [
     { path: 'connected', 
@@ -33,7 +34,8 @@ const routes: Routes = [
         RssComponent,
         RssListComponent,
         RssHeaderComponent,
-        RssFiltersComponent
+        RssFiltersComponent,
+        RssManageComponent
     ],
     imports: [
         CommonModule,

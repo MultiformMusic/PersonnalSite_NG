@@ -1,6 +1,9 @@
 <!-- Item RSS Card -->
-<div *ngIf="loading" class="text-center pt-5">
-  <p class="callCloudFunctionMessage blink_me">Loading...</p>
+<div *ngIf="loading" class="text-center">
+  <span>
+    <p class="callCloudFunctionMessage blink_me">Loading...</p>
+    <img src="assets/loader1.gif" width="60" height="auto"/>
+  </span>
 </div>
 <ng-container *ngIf="!loading">
   <div class="row rss-list fadeInUp" id="rssItemsList">
@@ -27,7 +30,7 @@
                 <p>{{item.content}}</p>
               </div>
               
-              <a style="margin-top: 20rem; margin-left: 8rem" target="_blank" href={{item.link}} class="px-4 btn">Read more</a>
+              <a style="margin-top: 20rem; margin-left: 8rem" target="_blank" href={{item.link}} class="px-4 btn">Read more -></a>
              
             </div>
           </div>

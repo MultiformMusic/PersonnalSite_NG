@@ -18,6 +18,7 @@ export class RssService {
     beginLoading = new Subject<boolean>();
     feedLoading = new Subject<any>();
     cacheFeeds: any[] = [];
+    caller: string = '';
 
     /**
      * 
@@ -36,7 +37,15 @@ export class RssService {
      * Chargement des url rss depuis la base firestore
      * 
      */
-    loadUrlRssFromDatabase() {
+    loadUrlRssFromDatabase(caller: string) {
+
+        console.log('loadUrlRssFromDatabase');
+
+        // ré-initialisation
+        this.categories = [];
+        this.rssNames = [];
+
+        this.caller = caller;
 
         this.db.collection('rss-url').valueChanges().subscribe(
             (rssUrlsArray: RssUrl[]) => {
@@ -63,26 +72,6 @@ export class RssService {
 
     /**
      * 
-     * Rafraichissement des RSS feeds avec rechargement des url
-     * 
-     */
-    refreshRssFeeds() {
-
-        this.db.collection('rss-url').valueChanges().subscribe(
-            (rssUrlsArray: RssUrl[]) => {
-                let resultRssUrl = rssUrlsArray.map(rssUrl => {
-                    return {
-                        ...rssUrl
-                    }
-                })
-
-                this.getFeedFromUrls(resultRssUrl, false);
-            }
-        );
-    }
-
-    /**
-     * 
      * Chargement des feeds des url passées an paramètre
      * Cache permet de savoir si on récup les valeurs du cache
      * 
@@ -91,13 +80,12 @@ export class RssService {
      */
     getFeedFromUrls(rssUrls: RssUrl[], cache: boolean) {
         
-        if (cache && this.cacheFeeds.length > 0) {
+        console.log('getFeedFromUrls');
+        if (this.caller !== constants.CALLER_REFRESH && cache && this.cacheFeeds.length > 0) {
             this.feedLoading.next(this.cacheFeeds);
-            console.log('from cache');
             return;
         }
 
-        console.log('no cache');
         this.beginLoading.next(true);
 
         const url = constants.FEED_FROM_URL;

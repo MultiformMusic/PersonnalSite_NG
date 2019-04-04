@@ -22,9 +22,9 @@ export const constants = {
     */
 
     /** RSS functions */
-    //FEED_FROM_URL: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/rssDatasFromUrl',
+    FEED_FROM_URL: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/rssDatasFromUrl',
 
-    FEED_FROM_URL: '/personnalsite/us-central1/rssDatasFromUrl',
+    //FEED_FROM_URL: '/personnalsite/us-central1/rssDatasFromUrl',
    
 
     // URL
@@ -35,4 +35,8 @@ export const constants = {
     /** Filters All */
     CATEGORY_ALL: '-- All categories',
     RSS_NAME_ALL: '-- All RSS',
+
+    /** Caller RssService loadfeedfromurl  */
+    CALLER_REFRESH: 'refresh',
+    CALLER_LIST: 'list'
 }
