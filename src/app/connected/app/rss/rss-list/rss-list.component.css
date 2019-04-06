@@ -15,8 +15,6 @@
   50% { opacity: 0; }
 }
 
-
-
 .rss-list {
     background-color: rgb(38, 16, 16);
 }
@@ -39,7 +37,8 @@
 
 .card-img {
     width: 100%;
-    height: auto;
+    max-height: 9.5rem;
+    /**object-fit: contain;*/
 }
 
 

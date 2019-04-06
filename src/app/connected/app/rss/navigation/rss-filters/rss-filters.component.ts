@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, OnChanges } from '@angular/core';
 import { RssService } from '../../services/rss.service';
 import { constants } from 'src/helpers/constants';
 import { Subscription } from 'rxjs';
@@ -9,10 +9,11 @@ import { RssUrl } from '../../models/rss-url';
   templateUrl: './rss-filters.component.html',
   styleUrls: ['./rss-filters.component.css']
 })
-export class RssFiltersComponent implements OnInit, OnDestroy {
+export class RssFiltersComponent implements OnInit, OnDestroy, OnChanges {
 
   // permet de savoir si le filtrage est visible
   @Input() toggleFilters: boolean = false;
+  toggleFiltersDelayed: boolean = false;
 
   // objet contenant les filtres à appliquer
   filters = {
@@ -34,6 +35,14 @@ export class RssFiltersComponent implements OnInit, OnDestroy {
         this.filters.rssName = constants.RSS_NAME_ALL;
       }
     );
+  }
+
+  ngOnChanges() {
+    console.log("ngOnChanges");
+
+    setTimeout(() => {
+      this.toggleFiltersDelayed = this.toggleFilters
+    }, 5);
   }
 
   /**
@@ -61,6 +70,8 @@ export class RssFiltersComponent implements OnInit, OnDestroy {
   
 
   ngOnDestroy() {
-    this.rssUrlsSubscription.unsubscribe();
+    if (this.rssUrlsSubscription) {
+      this.rssUrlsSubscription.unsubscribe();
+    }
   }
 }

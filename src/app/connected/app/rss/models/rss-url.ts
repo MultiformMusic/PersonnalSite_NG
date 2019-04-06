@@ -5,4 +5,5 @@ export interface RssUrl {
     url: string;
     category: string;
     email: string;
+    active: boolean;
 }

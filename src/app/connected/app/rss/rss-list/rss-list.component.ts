@@ -27,7 +27,7 @@ export class RssListComponent implements OnInit {
   // feeds affichées (éventuellement filtrées)
   feeds: any[] = [];
 
-  // liste des url rss
+  // liste des url rss (active et inactive)
   rssUrls: any[] = [];
 
   // gère affichage "Loading ...."
@@ -63,9 +63,13 @@ export class RssListComponent implements OnInit {
 
         this.rssUrls = rssUrlsFromDb;
         
-        // début chargement des feeds : on prend du cache car feeds déjà chargées pas Home
+        // début chargement des feeds : 
+        // on prend du cache car feeds déjà chargées pas Home
+        // on ne prend que les urls actives
+        //words.filter(word => word.length > 6)
         this.loading = true;
-        this.rssService.getFeedFromUrls(this.rssUrls, true);
+        const rssFilters = this.rssUrls.filter(rssUrl => rssUrl.active === true);
+        this.rssService.getFeedFromUrls(rssFilters, true);
       }
     )
 
@@ -139,9 +143,15 @@ export class RssListComponent implements OnInit {
 
 
   ngOnDestroy() {
-    this.feedSubscription.unsubscribe();
-    this.beginLoadingSubscription.unsubscribe();
-    this.rssUrlsSubscription.unsubscribe();
+    if (this.feedSubscription) {
+      this.feedSubscription.unsubscribe();
+    }
+    if (this.beginLoadingSubscription) {
+      this.beginLoadingSubscription.unsubscribe();
+    }
+    if (this.rssUrlsSubscription) {
+      this.rssUrlsSubscription.unsubscribe();
+    }
   }
 
 

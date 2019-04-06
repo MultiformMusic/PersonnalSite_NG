@@ -1,6 +1,6 @@
 <ng-container *ngIf="toggleFilters">
     <div 
-        [ngClass]="toggleFilters ? 'form-group rss-filters scale-rss-filters' : 'form-group rss-filters unscale-rss-filters'"
+        [ngClass]="toggleFiltersDelayed ? 'form-group rss-filters scale-rss-filters' : 'form-group rss-filters unscale-rss-filters'"
         class="form-group">
         <label class="label-category" for="category">Categories</label>
         <select [(ngModel)]="filters.category" name="category" #selectCategory (change)="applyFilterCategory(selectCategory.value)" class="form-control select-category" id="category" required>

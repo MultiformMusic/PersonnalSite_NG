@@ -17,7 +17,11 @@ export class RssService {
     rssUrlsLoading = new Subject<RssUrl[]>();
     beginLoading = new Subject<boolean>();
     feedLoading = new Subject<any>();
+
+    // feeds en cache
     cacheFeeds: any[] = [];
+
+    // permet de savoir l'appelant : REFRESH (click refresh), CALLER_LIST (component list)
     caller: string = '';
 
     /**
@@ -35,6 +39,7 @@ export class RssService {
     /**
      * 
      * Chargement des url rss depuis la base firestore
+     * Le caller permet de savoir qui appelle : REFRESH, CALLER_LIST
      * 
      */
     loadUrlRssFromDatabase(caller: string) {
@@ -51,9 +56,12 @@ export class RssService {
             (rssUrlsArray: RssUrl[]) => {
                 let resultRssUrl = rssUrlsArray.map(rssUrl => {
                     
-                    this.rssNames.push(rssUrl.name);
-                    if (!this.categories.includes(rssUrl.category)) {
-                        this.categories.push(rssUrl.category);
+                    // si l'url est active on récup rssName et Category pour filtres
+                    if (rssUrl.active) {
+                        this.rssNames.push(rssUrl.name);
+                        if (!this.categories.includes(rssUrl.category)) {
+                            this.categories.push(rssUrl.category);
+                        }
                     }
 
                     return {
