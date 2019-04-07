@@ -18,8 +18,13 @@ const routes: Routes = [
     { path: 'connected', 
      component: ConnectedComponent, canActivate: [AuthenticationGuard], 
      children: [
-         { path: 'home', component: HomeComponent, canActivate: [AuthenticationGuard] },
-         { path: 'rss', component: RssComponent, canActivate: [AuthenticationGuard] },
+         { path: 'home', component: HomeComponent, canActivate: [AuthenticationGuard], },
+         { path: 'rss', component: RssComponent, canActivate: [AuthenticationGuard], 
+         children: [
+            {path: '', component: RssListComponent, canActivate: [AuthenticationGuard]},
+            {path: 'list', component: RssListComponent, canActivate: [AuthenticationGuard]},
+            {path: 'manage', component: RssManageComponent, canActivate: [AuthenticationGuard]},
+         ] },
          { path: '**', component: HomeComponent, canActivate: [AuthenticationGuard] },
      ]
     }

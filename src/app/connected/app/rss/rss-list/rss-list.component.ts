@@ -67,6 +67,7 @@ export class RssListComponent implements OnInit {
         // on prend du cache car feeds déjà chargées pas Home
         // on ne prend que les urls actives
         //words.filter(word => word.length > 6)
+        debugger;
         this.loading = true;
         const rssFilters = this.rssUrls.filter(rssUrl => rssUrl.active === true);
         this.rssService.getFeedFromUrls(rssFilters, true);
@@ -76,6 +77,7 @@ export class RssListComponent implements OnInit {
     /** Subscription top début chargement feeds de RssService (pour afficher Loading) */
     this.beginLoadingSubscription = this.rssService.beginLoading.subscribe(
       (begin) => {
+        debugger;
         this.loading = begin;
         this.showButtonRssTop()
       }
@@ -95,7 +97,7 @@ export class RssListComponent implements OnInit {
       }
     );
 
-    this.rssService.loadUrlRssFromDatabase(constants.CALLER_LIST);
+    this.rssService.loadUrlRssFromDatabase(constants.CALLER_REFRESH);
     
   }
 

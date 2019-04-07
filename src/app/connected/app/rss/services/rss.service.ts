@@ -4,6 +4,8 @@ import { Subject } from 'rxjs';
 import  { constants } from '../../../../../helpers/constants';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { RssUrl } from './../models/rss-url';
+import { AuthenticationService } from 'src/app/Authentication/services/authentication.service';
+import { User } from 'src/app/models/user.model';
 
 @Injectable()
 export class RssService {
@@ -33,6 +35,7 @@ export class RssService {
     categories: string[] = [];
 
     constructor(private http: Http,
+                private authService: AuthenticationService,
                 private db: AngularFirestore) {}
 
 
@@ -44,7 +47,11 @@ export class RssService {
      */
     loadUrlRssFromDatabase(caller: string) {
 
-        console.log('loadUrlRssFromDatabase');
+        debugger;
+        console.log('loadUrlRssFromDatabase caller = ', caller );
+
+        // recherche de l'utilisateur connecté
+        const user: User = this.authService.getUserFromToken();
 
         // ré-initialisation
         this.categories = [];
@@ -52,7 +59,7 @@ export class RssService {
 
         this.caller = caller;
 
-        this.db.collection('rss-url').valueChanges().subscribe(
+        this.db.collection('rss-url', ref => ref.where('email','==', user.email )).valueChanges().subscribe(
             (rssUrlsArray: RssUrl[]) => {
                 let resultRssUrl = rssUrlsArray.map(rssUrl => {
                     
@@ -89,6 +96,7 @@ export class RssService {
     getFeedFromUrls(rssUrls: RssUrl[], cache: boolean) {
         
         console.log('getFeedFromUrls');
+        debugger;
         if (this.caller !== constants.CALLER_REFRESH && cache && this.cacheFeeds.length > 0) {
             this.feedLoading.next(this.cacheFeeds);
             return;

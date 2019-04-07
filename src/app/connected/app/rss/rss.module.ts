@@ -2,19 +2,23 @@ import { NgModule } from '@angular/core';
 import { MaterialModule } from '../../../material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { RssComponent } from './rss.component';
-import { AuthenticationGuard } from 'src/app/Authentication/authentication.guard';
 import { RssService } from './services/rss.service';
+/*
+import { Routes, RouterModule } from '@angular/router';
+import { AuthenticationGuard } from 'src/app/Authentication/authentication.guard';
+import { RssManageComponent } from './rss-manage/rss-manage.component';
+import { RssListComponent } from './rss-list/rss-list.component';
+*/
 
-const routes: Routes = [
+/*const routes: Routes = [
   { path: '', 
    children: [
-       { path: 'rss', component: RssComponent, canActivate: [AuthenticationGuard] },
+       { path: 'list', component: RssListComponent, canActivate: [AuthenticationGuard] },
+       { path: 'manage', component: RssManageComponent, canActivate: [AuthenticationGuard] },
 
    ]
   }
-];
+];*/
 
 @NgModule({
     
@@ -23,7 +27,7 @@ const routes: Routes = [
   imports: [MaterialModule,
             CommonModule,
             HttpClientModule,
-            RouterModule.forChild(routes)     
+            //RouterModule.forChild(routes)     
           ],
 
   providers: [RssService]

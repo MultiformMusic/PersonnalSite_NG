@@ -9,32 +9,52 @@
   <div class="row rss-list fadeInUp" id="rssItemsList">
     <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
       <div class="row pt-md-5 mt-md-3 mb-5">
-        <div (click)="showBackContent(i)" *ngFor="let item of feeds; let i = index" 
-             [ngClass]="rotate ? 'col-xl-3 col-sm-6 p-2 rotate' : 'col-xl-3 col-sm-6 p-2'">
-          <div class="card card-common" [style.background-color]="item.readed ?  'black' : '#3a2828'">
-            <div class="card-body">
-              <div class="">
-                <img *ngIf="item.enclosure" class="card-img" src={{item.enclosure.url}} alt="">
-                <div class="text-left">
-                  <p class="item-title">{{item.title}}</p>
+        <ng-container *ngIf="feeds.length > 0">
+          <div (click)="showBackContent(i)" *ngFor="let item of feeds; let i = index" 
+              [ngClass]="rotate ? 'col-xl-3 col-sm-6 p-2 rotate' : 'col-xl-3 col-sm-6 p-2'">
+            <div class="card card-common" [style.background-color]="item.readed ?  'black' : '#3a2828'">
+              <div class="card-body">
+                <div class="">
+                  <img *ngIf="item.enclosure" class="card-img" src={{item.enclosure.url}} alt="">
+                  <div class="text-left">
+                    <p class="item-title">{{item.title}}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="card-footer card-footer-text">
-              <div>{{item.rssName}}</div>
-              <div>{{item.category}}</div>
-              <div>{{item.pubDate}}</div>
-            </div>
-            <div class="back">
-              <div class="back-content">
-                <p>{{item.content}}</p>
+              <div class="card-footer card-footer-text">
+                <div>{{item.rssName}}</div>
+                <div>{{item.category}}</div>
+                <div>{{item.pubDate}}</div>
               </div>
+              <div class="back">
+                <div class="back-content">
+                  <p>{{item.content}}</p>
+                </div>
+                
+                <a style="margin-top: 20rem; margin-left: 8rem" target="_blank" href={{item.link}} class="px-4 btn">Read more</a>
               
-              <a style="margin-top: 20rem; margin-left: 8rem" target="_blank" href={{item.link}} class="px-4 btn">Read more</a>
-             
+              </div>
             </div>
           </div>
-        </div>
+        </ng-container>
+                
+        <ng-container *ngIf="feeds.length == 0">
+            <div 
+              [ngClass]="rotate ? 'col-xl-3 col-sm-6 p-2 rotate' : 'col-xl-3 col-sm-6 p-2'">
+            <div class="card card-common-empty">
+              <div class="card-body">
+                <div class="">
+                  <img class="card-img-empty" src="https://www.aurovilleradio.org/wp-content/themes/valor/assets/img/_RSS.png" alt="">
+                  <div class="text-center">
+                    <p class="item-title-empty">You don't have configured RSS yet</p>
+                    <a routerLink="/connected/rss/manage" style="cursor: pointer" class="px-4 btn">Clikc here to configure</a>
+                  </div>              
+                </div>           
+              </div>
+            </div>
+          </div>          
+        </ng-container>
+
       </div>
     </div>
   </div>

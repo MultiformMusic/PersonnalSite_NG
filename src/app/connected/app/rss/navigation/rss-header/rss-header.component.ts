@@ -29,6 +29,7 @@ export class RssHeaderComponent implements OnInit {
    */
   refresh() {
  
+    debugger;
     this.rssService.loadUrlRssFromDatabase(constants.CALLER_REFRESH);
     if (this.toggle) {
       this.toggle = false;

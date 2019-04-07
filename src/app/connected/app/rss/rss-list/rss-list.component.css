@@ -98,6 +98,28 @@
   pointer-events: auto;
 }
 
+/** Card vide si pas de RSS */
+.card-img-empty {
+  width: auto;
+  max-height: 5rem;
+  /**object-fit: contain;*/
+}
+
+.card-common-empty {
+  position: relative;
+  margin: 6px;
+  height: 15rem;
+  background-color: #3a2828;
+  box-shadow: 1px 2px 5px rgb(97, 61, 61);
+  transition: all .4s;
+}
+
+.item-title-empty {
+  margin-top: 1rem;
+  color: rgb(255, 238, 140);
+  font-size: 1.2rem;
+}
+
 /** Gestion du floating bouton **/
 .btn-custom {
   position: fixed;
