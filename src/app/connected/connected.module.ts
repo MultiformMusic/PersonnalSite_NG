@@ -14,6 +14,11 @@ import { RssFiltersComponent } from './app/rss/navigation/rss-filters/rss-filter
 import { FormsModule } from '@angular/forms';
 import { RssManageComponent } from './app/rss/rss-manage/rss-manage.component';
 
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './connected.reducer';
+import { RssUrlsComponent } from './app/rss/rss-manage/rss-urls/rss-urls.component';
+import { RssCategoriesComponent } from './app/rss/rss-manage/rss-categories/rss-categories.component';
+
 const routes: Routes = [
     { path: 'connected', 
      component: ConnectedComponent, canActivate: [AuthenticationGuard], 
@@ -40,13 +45,16 @@ const routes: Routes = [
         RssListComponent,
         RssHeaderComponent,
         RssFiltersComponent,
-        RssManageComponent
+        RssManageComponent,
+        RssUrlsComponent, 
+        RssCategoriesComponent
     ],
     imports: [
         CommonModule,
         RssModule,
         MaterialModule,
         FormsModule,
+        StoreModule.forRoot(reducers),
         RouterModule.forChild(routes)
     ],
     providers: [AuthenticationGuard]

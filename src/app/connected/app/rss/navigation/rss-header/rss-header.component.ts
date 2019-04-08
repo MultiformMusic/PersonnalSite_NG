@@ -1,6 +1,10 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { RssService } from '../../services/rss.service';
-import { constants } from './../../../../../../helpers/constants';
+import { Router } from '@angular/router';
+
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../../../connected.reducer';
+import * as Rss from '../../ngrx/rss.actions';
 
 @Component({
   selector: 'app-rss-header',
@@ -17,7 +21,9 @@ export class RssHeaderComponent implements OnInit {
   toggleFilters: boolean = false;
 
 
-  constructor(private rssService: RssService) { }
+  constructor(private rssService: RssService,
+              private router: Router,
+              private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
   }
@@ -30,10 +36,16 @@ export class RssHeaderComponent implements OnInit {
   refresh() {
  
     debugger;
-    this.rssService.loadUrlRssFromDatabase(constants.CALLER_REFRESH);
+
+    this.store.dispatch(new Rss.setLoading(true));
+    
+    this.rssService.loadUrlRssFromDatabase();
     if (this.toggle) {
       this.toggle = false;
     }
+    
+    this.router.navigate(['/connected/rss/list']);
+  
   }
 
   /**

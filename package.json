@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
     "@auth0/angular-jwt": "^2.1.0",
+    "@ngrx/store": "^7.4.0",
     "angular-animations": "0.0.8",
     "core-js": "^2.5.4",
     "firebase": "^5.9.2",

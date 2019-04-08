@@ -1,11 +1,12 @@
 <!-- Item RSS Card -->
-<div *ngIf="loading" class="text-center">
+<div *ngIf="isLoading$ | async" class="text-center">
   <span>
     <p class="callCloudFunctionMessage blink_me">Loading...</p>
     <img src="assets/loader1.gif" width="60" height="auto"/>
   </span>
 </div>
-<ng-container *ngIf="!loading">
+
+<ng-container *ngIf="!(isLoading$ | async)">
   <div class="row rss-list fadeInUp" id="rssItemsList">
     <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
       <div class="row pt-md-5 mt-md-3 mb-5">

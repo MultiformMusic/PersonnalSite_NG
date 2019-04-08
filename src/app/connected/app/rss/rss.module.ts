@@ -3,6 +3,7 @@ import { MaterialModule } from '../../../material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RssService } from './services/rss.service';
+
 /*
 import { Routes, RouterModule } from '@angular/router';
 import { AuthenticationGuard } from 'src/app/Authentication/authentication.guard';
@@ -21,8 +22,6 @@ import { RssListComponent } from './rss-list/rss-list.component';
 ];*/
 
 @NgModule({
-    
-  declarations: [],
 
   imports: [MaterialModule,
             CommonModule,

@@ -7,6 +7,10 @@ import { RssUrl } from './../models/rss-url';
 import { AuthenticationService } from 'src/app/Authentication/services/authentication.service';
 import { User } from 'src/app/models/user.model';
 
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../../connected.reducer';
+import * as Rss from '../ngrx/rss.actions';
+
 @Injectable()
 export class RssService {
 
@@ -17,14 +21,10 @@ export class RssService {
      * => mise en cache des feeds
      */
     rssUrlsLoading = new Subject<RssUrl[]>();
-    beginLoading = new Subject<boolean>();
     feedLoading = new Subject<any>();
 
     // feeds en cache
     cacheFeeds: any[] = [];
-
-    // permet de savoir l'appelant : REFRESH (click refresh), CALLER_LIST (component list)
-    caller: string = '';
 
     /**
      * 
@@ -36,19 +36,18 @@ export class RssService {
 
     constructor(private http: Http,
                 private authService: AuthenticationService,
-                private db: AngularFirestore) {}
+                private db: AngularFirestore,
+                private store: Store<fromRoot.State>) {}
 
 
     /**
      * 
      * Chargement des url rss depuis la base firestore
-     * Le caller permet de savoir qui appelle : REFRESH, CALLER_LIST
      * 
      */
-    loadUrlRssFromDatabase(caller: string) {
+    loadUrlRssFromDatabase() {
 
-        debugger;
-        console.log('loadUrlRssFromDatabase caller = ', caller );
+        console.log('loadUrlRssFromDatabase');
 
         // recherche de l'utilisateur connecté
         const user: User = this.authService.getUserFromToken();
@@ -56,8 +55,6 @@ export class RssService {
         // ré-initialisation
         this.categories = [];
         this.rssNames = [];
-
-        this.caller = caller;
 
         this.db.collection('rss-url', ref => ref.where('email','==', user.email )).valueChanges().subscribe(
             (rssUrlsArray: RssUrl[]) => {
@@ -97,12 +94,13 @@ export class RssService {
         
         console.log('getFeedFromUrls');
         debugger;
-        if (this.caller !== constants.CALLER_REFRESH && cache && this.cacheFeeds.length > 0) {
+        if (cache && this.cacheFeeds.length > 0) {
             this.feedLoading.next(this.cacheFeeds);
+            
+            // NGRX
+            this.store.dispatch(new Rss.setLoading(false));
             return;
         }
-
-        this.beginLoading.next(true);
 
         const url = constants.FEED_FROM_URL;
         const headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
@@ -112,15 +110,21 @@ export class RssService {
         }
         this.http.post(url, rss, {headers: headers}).subscribe(
             res => {
+
+                // NGRX
+                this.store.dispatch(new Rss.setLoading(false));
+
                 console.log(res.json());
-                this.beginLoading.next(false);
                 this.cacheFeeds = res.json();
                 this.cacheFeeds .sort((val1, val2)=> {
                     return <any>(new Date(val2.pubDate)) - <any>(new Date(val1.pubDate))})
                 this.feedLoading.next(this.cacheFeeds);
             },
             (err) => {
-                this.beginLoading.next(false);
+
+                // NGRX
+                this.store.dispatch(new Rss.setLoading(false));
+
                 console.log(err);
             }
         );

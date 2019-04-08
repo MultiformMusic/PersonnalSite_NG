@@ -1,8 +1,11 @@
 import { Component, OnInit, Input, HostListener } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { RssService } from '../services/rss.service';
 import { RssUrl } from './../models/rss-url';
 import { constants } from './../../../../../helpers/constants';
+
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../../connected.reducer';
 
 @Component({
   selector: 'app-rss-list',
@@ -20,7 +23,6 @@ export class RssListComponent implements OnInit {
   */
   rssUrlsSubscription: Subscription;
   feedSubscription: Subscription;
-  beginLoadingSubscription: Subscription;
 
   // stockage de toutes les feeds
   allFeeds: any[] = [];
@@ -29,9 +31,10 @@ export class RssListComponent implements OnInit {
 
   // liste des url rss (active et inactive)
   rssUrls: any[] = [];
+  rssUrls$: Observable<RssUrl[]>;
 
   // gère affichage "Loading ...."
-  loading: boolean = false;
+  isLoading$: Observable<boolean>;
   
   // gère visibilité bouton "Up" (opacity 0 => pas visible)
   stylesFab = {
@@ -52,11 +55,17 @@ export class RssListComponent implements OnInit {
           this.showButtonRssTop()
   }
 
-  constructor(private rssService: RssService) { 
+  constructor(private rssService: RssService,
+              private store: Store<fromRoot.State>) { 
+
     this.getScreenSize();
   }
 
   ngOnInit() {
+
+    // NGRX : abonnement au store
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
+    this.rssUrls$ = this.store.select(fromRoot.getRssUrls);
 
     this.rssUrlsSubscription = this.rssService.rssUrlsLoading.subscribe(
       (rssUrlsFromDb: RssUrl[]) => {
@@ -67,21 +76,12 @@ export class RssListComponent implements OnInit {
         // on prend du cache car feeds déjà chargées pas Home
         // on ne prend que les urls actives
         //words.filter(word => word.length > 6)
-        debugger;
-        this.loading = true;
-        const rssFilters = this.rssUrls.filter(rssUrl => rssUrl.active === true);
-        this.rssService.getFeedFromUrls(rssFilters, true);
+
+        const rssActive= this.rssUrls.filter(rssUrl => rssUrl.active === true);
+        this.rssService.getFeedFromUrls(rssActive, true);
       }
     )
 
-    /** Subscription top début chargement feeds de RssService (pour afficher Loading) */
-    this.beginLoadingSubscription = this.rssService.beginLoading.subscribe(
-      (begin) => {
-        debugger;
-        this.loading = begin;
-        this.showButtonRssTop()
-      }
-    );
 
     /** Subscription chargement feeds de RssService */
     this.feedSubscription = this.rssService.feedLoading.subscribe(
@@ -92,12 +92,12 @@ export class RssListComponent implements OnInit {
         } else {
           this.feeds = this.allFeeds;
         }
-        this.loading = false;
+
         this.showButtonRssTop();
       }
     );
 
-    this.rssService.loadUrlRssFromDatabase(constants.CALLER_REFRESH);
+    this.rssService.loadUrlRssFromDatabase();
     
   }
 
@@ -147,9 +147,6 @@ export class RssListComponent implements OnInit {
   ngOnDestroy() {
     if (this.feedSubscription) {
       this.feedSubscription.unsubscribe();
-    }
-    if (this.beginLoadingSubscription) {
-      this.beginLoadingSubscription.unsubscribe();
     }
     if (this.rssUrlsSubscription) {
       this.rssUrlsSubscription.unsubscribe();
