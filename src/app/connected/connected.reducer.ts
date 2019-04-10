@@ -17,4 +17,4 @@ export const reducers: ActionReducerMap<State> = {
 export const getRssState = createFeatureSelector<fromRss.RssState>('rss');
 export const getIsLoading = createSelector(getRssState, fromRss.getIsLoading);
 export const getRssUrls = createSelector(getRssState, fromRss.getRssUrls);
-export const showFilters = createSelector(getRssState, fromRss.getShowFilters);
+export const getShowFilters = createSelector(getRssState, fromRss.getShowFilters);

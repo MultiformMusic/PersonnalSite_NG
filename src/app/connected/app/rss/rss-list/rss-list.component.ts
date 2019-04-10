@@ -63,6 +63,8 @@ export class RssListComponent implements OnInit {
 
   ngOnInit() {
 
+    console.log('Rss list ngOnInit')
+    
     // NGRX : abonnement au store
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.rssUrls$ = this.store.select(fromRoot.getRssUrls);

@@ -1,0 +1,17 @@
+.manage-rss {
+    background-color: black;
+}
+
+.custom-link {
+    cursor: pointer;
+    background-color: rgb(193, 193, 134);
+    transition: all .5s;
+}
+
+.active-link {
+    background-color: rgb(245, 245, 220)  !important;
+}
+
+.custom-link:hover {
+    background-color: rgb(245, 245, 220) !important;
+}

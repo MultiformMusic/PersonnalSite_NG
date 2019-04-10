@@ -62,7 +62,10 @@ export class RssService {
                     
                     // si l'url est active on récup rssName et Category pour filtres
                     if (rssUrl.active) {
-                        this.rssNames.push(rssUrl.name);
+
+                        if (!this.rssNames.includes(rssUrl.name)) {
+                            this.rssNames.push(rssUrl.name);
+                        }
                         if (!this.categories.includes(rssUrl.category)) {
                             this.categories.push(rssUrl.category);
                         }
@@ -75,8 +78,12 @@ export class RssService {
 
                 this.categories.sort();
                 this.rssNames.sort();
-                this.categories.unshift(constants.CATEGORY_ALL);
-                this.rssNames.unshift(constants.RSS_NAME_ALL);
+                if (!this.rssNames.includes(constants.RSS_NAME_ALL)) {
+                    this.categories.unshift(constants.CATEGORY_ALL);
+                    this.rssNames.unshift(constants.RSS_NAME_ALL);
+                }
+                console.log('loadUrlRssFromDatabase categorie = ', this.categories);
+                console.log('loadUrlRssFromDatabase rssNames = ', this.rssNames);
                 this.rssUrlsLoading.next(resultRssUrl);
             }
         );
@@ -95,6 +102,7 @@ export class RssService {
         console.log('getFeedFromUrls');
         debugger;
         if (cache && this.cacheFeeds.length > 0) {
+
             this.feedLoading.next(this.cacheFeeds);
             
             // NGRX

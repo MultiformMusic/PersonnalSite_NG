@@ -28,7 +28,7 @@
                             <span class="text-link">Refresh</span>
                     </span>
                 </li>
-                <li class="nav-item">
+                <li *ngIf="showFilters$ | async" class="nav-item">
                     <span (click)="clickToggleFilters()" style="cursor: pointer" class="p-2 mb-2 rss-header-link">
                         <i class="fas fa-filter text-light mr-2"></i>
                         <span class="text-link">Filters</span>
@@ -36,10 +36,10 @@
                     <app-rss-filters [toggleFilters]="toggleFilters"></app-rss-filters>
                 </li>
                 <li class="nav-item">
-                    <a routerLink="/connected/rss/manage" style="cursor: pointer" class="p-2 mb-2 rss-header-link">
+                    <span (click)="manage()" style="cursor: pointer" class="p-2 mb-2 rss-header-link">
                         <i class="fas fa-cogs text-light mr-2"></i>
                         <span class="text-link">Manage RSS</span>
-                    </a>
+                    </span>
                 </li>
             </ul>
         </div>

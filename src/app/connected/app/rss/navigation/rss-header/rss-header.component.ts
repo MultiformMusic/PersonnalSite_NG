@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { RssService } from '../../services/rss.service';
 import { Router } from '@angular/router';
-
+import { Observable, from } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../../connected.reducer';
 import * as Rss from '../../ngrx/rss.actions';
@@ -20,12 +20,15 @@ export class RssHeaderComponent implements OnInit {
 
   toggleFilters: boolean = false;
 
+  showFilters$: Observable<boolean>;
 
   constructor(private rssService: RssService,
               private router: Router,
               private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
+
+    this.showFilters$ = this.store.select(fromRoot.getShowFilters);
   }
 
   /**
@@ -34,17 +37,31 @@ export class RssHeaderComponent implements OnInit {
    * 
    */
   refresh() {
- 
-    debugger;
 
+    this.store.dispatch(new Rss.showFilters(true));
     this.store.dispatch(new Rss.setLoading(true));
     
-    this.rssService.loadUrlRssFromDatabase();
     if (this.toggle) {
       this.toggle = false;
     }
     
     this.router.navigate(['/connected/rss/list']);
+  
+  }
+
+    /**
+   * 
+   * Click bouton Refresh
+   * 
+   */
+  manage() {
+
+    
+    if (this.toggle) {
+      this.toggle = false;
+    }
+    
+    this.router.navigate(['/connected/rss/manage']);
   
   }
 
