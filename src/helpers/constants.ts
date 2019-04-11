@@ -14,17 +14,17 @@ export const constants = {
 
     /** Mongo DB */
     
-    //MONGO_CREATE_USER: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/mongoCreateUser',
-    //MONGO_LOGIN_USER: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/mongoLogin',
+    MONGO_CREATE_USER: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/mongoCreateUser',
+    MONGO_LOGIN_USER: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/mongoLogin',
     
-    MONGO_CREATE_USER: '/personnalsite/us-central1/mongoCreateUser',
-    MONGO_LOGIN_USER: '/personnalsite/us-central1/mongoLogin',
+    //MONGO_CREATE_USER: '/personnalsite/us-central1/mongoCreateUser',
+    //MONGO_LOGIN_USER: '/personnalsite/us-central1/mongoLogin',
     
 
     /** RSS functions */
-    //FEED_FROM_URL: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/rssDatasFromUrl',
+    FEED_FROM_URL: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/rssDatasFromUrl',
 
-    FEED_FROM_URL: '/personnalsite/us-central1/rssDatasFromUrl',
+    //FEED_FROM_URL: '/personnalsite/us-central1/rssDatasFromUrl',
    
 
     // URL

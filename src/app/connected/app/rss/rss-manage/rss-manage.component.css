@@ -2,16 +2,30 @@
     background-color: black;
 }
 
+.tab-title {
+    color: rgb(114, 84, 39)
+}
+
 .custom-link {
     cursor: pointer;
-    background-color: rgb(193, 193, 134);
+    background-color: rgb(245, 245, 220);
     transition: all .5s;
 }
 
 .active-link {
-    background-color: rgb(245, 245, 220)  !important;
+    background-color: rgb(193, 193, 134) !important;
 }
 
 .custom-link:hover {
-    background-color: rgb(245, 245, 220) !important;
+    background-color: rgb(193, 193, 134) !important;
 }
+
+.categories-mt {
+    margin-top:  0px;
+}
+
+@media (max-width:360px) {
+    .categories-mt {
+        margin-top: 8px;
+    }
+  }

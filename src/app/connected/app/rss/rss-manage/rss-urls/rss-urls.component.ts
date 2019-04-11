@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { RssUrl } from '../../models/rss-url';
+import { RssService } from '../../services/rss.service';
 
 @Component({
   selector: 'app-rss-urls',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RssUrlsComponent implements OnInit {
 
-  constructor() { }
+  rssUrls$: Observable<RssUrl[]>;
+
+  constructor(private rssService: RssService) { }
 
   ngOnInit() {
+
+    this.rssUrls$ = this.rssService.loadsRssUrlsForManage();
+  }
+
+  updateName(rssUrl: RssUrl) {
+    debugger;
+    const rssUrlModif = {...rssUrl, name: rssUrl.name + ' modif'};
+    this.rssService.updateRssUrl(rssUrlModif);
   }
 
 }

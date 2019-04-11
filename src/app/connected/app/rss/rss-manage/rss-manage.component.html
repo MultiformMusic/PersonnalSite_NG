@@ -8,24 +8,25 @@
                 <span (click)="rssConfiguration()" 
                       [ngClass]="rssActive ? 'nav-link active-link custom-link' : 'nav-link custom-link'"
                       >
-                      RSS Configuration
+                      <span class="tab-title">RSS Configuration</span>
                 </span>
               </li>
 
-              <li class="nav-item">
+              <li class="nav-item ml-1">
                 <span 
                   (click)="categoriesConfiguration()" 
-                  [ngClass]="categoriesActive ? 'nav-link active-link custom-link' : 'nav-link custom-link'">
-                    Categories
+                  [ngClass]="categoriesActive ? 'nav-link active-link custom-link categories-mt ' : 'nav-link custom-link categories-mt '"
+                  >
+                    <span class="tab-title">Categories</span>
                 </span>
               </li>
 
             </ul>
             <div class="row mb-4 justify-content-center">
-              <div *ngIf="rssActive" class="col-xl-6 col-12">
+              <div *ngIf="rssActive" class="col-xl-6 col-12 fadeInLeftSpeed">
                 <app-rss-urls></app-rss-urls>
               </div>
-              <div *ngIf="categoriesActive" class="col-xl-6 col-12">
+              <div *ngIf="categoriesActive" class="col-xl-6 col-12 fadeInLeftSpeed">
                 <app-rss-categories></app-rss-categories>
               </div>
           </div>

@@ -1,6 +1,7 @@
 
 export interface RssUrl {
 
+    id: string;
     name: string;
     url: string;
     category: string;

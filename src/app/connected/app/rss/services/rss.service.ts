@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import  { constants } from '../../../../../helpers/constants';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { RssUrl } from './../models/rss-url';
 import { AuthenticationService } from 'src/app/Authentication/services/authentication.service';
 import { User } from 'src/app/models/user.model';
@@ -31,8 +32,10 @@ export class RssService {
      * Nécessaire aux filtrages
      * 
      */
-    rssNames: string[] = [];
-    categories: string[] = [];
+    private rssNames: string[] = [];
+    private categories: string[] = [];
+
+    private rssUrlsCollection: AngularFirestoreCollection<RssUrl>;
 
     constructor(private http: Http,
                 private authService: AuthenticationService,
@@ -57,7 +60,9 @@ export class RssService {
         this.rssNames = [];
 
         this.db.collection('rss-url', ref => ref.where('email','==', user.email )).valueChanges().subscribe(
+            
             (rssUrlsArray: RssUrl[]) => {
+
                 let resultRssUrl = rssUrlsArray.map(rssUrl => {
                     
                     // si l'url est active on récup rssName et Category pour filtres
@@ -87,6 +92,54 @@ export class RssService {
                 this.rssUrlsLoading.next(resultRssUrl);
             }
         );
+    }
+
+    /**
+     * 
+     * Chargement des url RSS pour la partie Manage
+     * 
+     * Retourne un tableau d'observable pour chaque Url Rss
+     * 
+     */
+    loadsRssUrlsForManage(): Observable<RssUrl[]> {
+
+        // recherche de l'utilisateur connecté
+        const user: User = this.authService.getUserFromToken();
+
+        // handler sur la collection rss-url
+        this.rssUrlsCollection = this.db.collection<RssUrl>('rss-url', ref => ref.where('email','==', user.email));
+        debugger;
+
+        // construction tableau Observable sur les rss url de la collection
+        return this.rssUrlsCollection.snapshotChanges().pipe(
+            map(actions => actions.map(a => {
+              //console.log(a);
+              const data = a.payload.doc.data() as RssUrl;
+              const id = a.payload.doc.id;
+              return {id, ...data };
+            }))
+          );
+
+        /*this.db.collection('rss-url', ref => ref.where('email','==', user.email ))
+        .snapshotChanges()
+        .pipe(
+          map((docArray: any[]) => {
+            debugger;
+            return docArray.map(doc => {
+              const datas:any = doc.payload.doc.data()
+              return {
+                id: doc.payload.doc.id,
+              }
+            })
+          })
+        );*/
+
+    }
+
+    updateRssUrl(rssUrl: RssUrl) {
+        debugger;
+        const itemDoc = this.db.doc<RssUrl>('rss-url/' + rssUrl.id);
+        itemDoc.update(rssUrl);
     }
 
     /**
@@ -178,4 +231,5 @@ export class RssService {
     getCategories() {
         return {...this.categories}
     }
+
 }

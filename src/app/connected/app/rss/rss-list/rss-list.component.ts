@@ -2,7 +2,7 @@ import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { RssService } from '../services/rss.service';
 import { RssUrl } from './../models/rss-url';
-import { constants } from './../../../../../helpers/constants';
+import * as actions from '../ngrx/rss.actions';
 
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../connected.reducer';
@@ -68,6 +68,8 @@ export class RssListComponent implements OnInit {
     // NGRX : abonnement au store
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.rssUrls$ = this.store.select(fromRoot.getRssUrls);
+
+    this.store.dispatch(new actions.showFilters(true));
 
     this.rssUrlsSubscription = this.rssService.rssUrlsLoading.subscribe(
       (rssUrlsFromDb: RssUrl[]) => {
