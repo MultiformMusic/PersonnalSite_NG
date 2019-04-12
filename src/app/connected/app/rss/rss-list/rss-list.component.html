@@ -23,7 +23,7 @@
                 </div>
               </div>
               <div class="card-footer card-footer-text">
-                <div>{{item.rssName}}</div>
+                <div style="margin-bottom: 5px"><img *ngIf="item.icon" class="item-icon" src={{item.icon}} alt=""> {{item.rssName}}</div>
                 <div>{{item.category}}</div>
                 <div>{{item.pubDate}}</div>
               </div>

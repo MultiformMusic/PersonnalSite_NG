@@ -152,16 +152,18 @@ export class RssService {
      */
     getFeedFromUrls(rssUrls: RssUrl[], cache: boolean) {
         
-        console.log('getFeedFromUrls');
-        debugger;
+        console.log('getFeedFromUrls = ', rssUrls);
         if (cache && this.cacheFeeds.length > 0) {
 
+            console.log('getFeedFromUrls from cache');
             this.feedLoading.next(this.cacheFeeds);
             
             // NGRX
             this.store.dispatch(new Rss.setLoading(false));
             return;
         }
+
+        console.log('getFeedFromUrls no cache');
 
         const url = constants.FEED_FROM_URL;
         const headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });

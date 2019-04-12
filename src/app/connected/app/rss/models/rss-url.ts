@@ -7,4 +7,5 @@ export interface RssUrl {
     category: string;
     email: string;
     active: boolean;
+    icon: string;
 }

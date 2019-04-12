@@ -301,6 +301,7 @@ exports.rssDatasFromUrl = functions.https.onRequest((req, res) => {
                     item.rssName = rss.name; 
                     item.category = rss.category;
                     item.readed = false;
+                    item.icon = rss.icon;
                 });
                 allFeeds = [...allFeeds, ...items];
             } catch (error) {

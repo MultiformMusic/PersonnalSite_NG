@@ -20,8 +20,13 @@ export class RssUrlsComponent implements OnInit {
   }
 
   updateName(rssUrl: RssUrl) {
-    debugger;
-    const rssUrlModif = {...rssUrl, name: rssUrl.name + ' modif'};
+    const rssUrlModif = {...rssUrl, name: rssUrl.name};
+    this.rssService.updateRssUrl(rssUrlModif);
+  }
+
+  toggleActivated(rssUrl: RssUrl) {
+    const activeModif = !rssUrl.active;
+    const rssUrlModif = {...rssUrl, active: activeModif};
     this.rssService.updateRssUrl(rssUrlModif);
   }
 
