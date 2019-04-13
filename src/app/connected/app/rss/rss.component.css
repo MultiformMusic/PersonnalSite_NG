@@ -1,11 +1,11 @@
 .rss-content {
-    margin-top: 12vh;
-    height: 75vh;
+    margin-top: 0vh;
+    height: 90vh;
 }
 
-@media screen and ( max-height: 600px ) { 
+@media screen and ( max-height: 700px ) { 
     .rss-content {
-        margin-top: 18vh;  
+        margin-top: 14vh;  
     }
 }
 

@@ -87,8 +87,7 @@ export class RssService {
                     this.categories.unshift(constants.CATEGORY_ALL);
                     this.rssNames.unshift(constants.RSS_NAME_ALL);
                 }
-                console.log('loadUrlRssFromDatabase categorie = ', this.categories);
-                console.log('loadUrlRssFromDatabase rssNames = ', this.rssNames);
+
                 this.rssUrlsLoading.next(resultRssUrl);
             }
         );
@@ -118,22 +117,7 @@ export class RssService {
               const id = a.payload.doc.id;
               return {id, ...data };
             }))
-          );
-
-        /*this.db.collection('rss-url', ref => ref.where('email','==', user.email ))
-        .snapshotChanges()
-        .pipe(
-          map((docArray: any[]) => {
-            debugger;
-            return docArray.map(doc => {
-              const datas:any = doc.payload.doc.data()
-              return {
-                id: doc.payload.doc.id,
-              }
-            })
-          })
-        );*/
-
+        );
     }
 
     updateRssUrl(rssUrl: RssUrl) {
@@ -180,7 +164,7 @@ export class RssService {
                 console.log(res.json());
                 this.cacheFeeds = res.json();
                 this.cacheFeeds .sort((val1, val2)=> {
-                    return <any>(new Date(val2.pubDate)) - <any>(new Date(val1.pubDate))})
+                return <any>(new Date(val2.pubDate)) - <any>(new Date(val1.pubDate))})
                 this.feedLoading.next(this.cacheFeeds);
             },
             (err) => {

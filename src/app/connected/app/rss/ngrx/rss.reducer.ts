@@ -1,7 +1,8 @@
 import { RssActions, 
          SET_LOADING, 
          LOAD_RSS_URL,
-         SHOW_FILTERS} from './rss.actions';
+         SHOW_FILTERS,
+         SET_FROM_CACHE} from './rss.actions';
 import { RssUrl } from '../models/rss-url';
 
 // interface state du reducer
@@ -10,6 +11,7 @@ export interface RssState {
     rssUrls: RssUrl[];
     isLoading: boolean;
     showFilters: boolean;
+    fromCache: boolean;
 }
 
 // state initial
@@ -18,6 +20,7 @@ const INITIAL_STATE: RssState = {
     rssUrls: [],
     isLoading: true,
     showFilters: true,
+    fromCache: false,
 }
 
 // reducer rss => modifie le state suivant action reçue
@@ -47,6 +50,13 @@ export function rssReducer(state = INITIAL_STATE, action: RssActions) {
                     showFilters: action.payload
             }
 
+        case SET_FROM_CACHE: 
+
+            return {
+                ...state,
+                fromCache: action.payload
+            }
+
         default:
 
             return state;
@@ -57,3 +67,4 @@ export function rssReducer(state = INITIAL_STATE, action: RssActions) {
 export const getIsLoading = (state: RssState) => state.isLoading;
 export const getRssUrls = (state: RssState) => state.rssUrls;
 export const getShowFilters = (state: RssState) => state.showFilters;
+export const getFromCache = (state: RssState) => state.fromCache;

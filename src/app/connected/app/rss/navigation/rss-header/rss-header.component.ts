@@ -38,13 +38,19 @@ export class RssHeaderComponent implements OnInit {
    */
   refresh() {
 
+    // dispatch modification
     this.store.dispatch(new Rss.showFilters(true));
     this.store.dispatch(new Rss.setLoading(true));
+    this.store.dispatch(new Rss.setFromCache(false));
     
     if (this.toggle) {
       this.toggle = false;
     }
     
+    // lance le rechargement
+    this.rssService.loadUrlRssFromDatabase();
+
+    // navigue vers la liste des feeds rss
     this.router.navigate(['/connected/rss/list']);
   
   }

@@ -5,6 +5,7 @@ import { RssUrl } from '../models/rss-url';
 export const SET_LOADING = '[RSS] SET_LOADING';
 export const LOAD_RSS_URL = '[RSS] LOAD_RSS_URL';
 export const SHOW_FILTERS = '[RSS] SHOW_FILTERS';
+export const SET_FROM_CACHE = '[RSS] SET_FROM_CACHE';
 
 /** class :  Action Type/ Action Creator */
 
@@ -30,7 +31,15 @@ export class showFilters implements Action {
     constructor(public payload: boolean) {}
 }
 
+export class setFromCache implements Action {
+
+    readonly type = SET_FROM_CACHE;
+
+    constructor(public payload: boolean) {}
+}
+
 export type RssActions = setLoading |
                          loadRssUrls |
-                         showFilters
+                         showFilters |
+                         setFromCache
                          ;

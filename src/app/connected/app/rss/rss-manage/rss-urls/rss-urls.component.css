@@ -1,12 +1,30 @@
+.rss-card {
+    background-color: rgb(249, 245, 245);
+    transition: all .3s;
+}
+
+.rss-card:hover {
+    background-color: rgb(254, 230, 193);
+    box-shadow: 3px 4px 2px #999;
+    transform: translateY(-1px);
+}
+
 .title {
     color: rgb(193, 175, 153);
+}
+
+.icon-add {
+    transition: all .5s;
+}
+.icon-add:hover {
+    color: rgb(177, 154, 125) !important;
 }
 
 .icon-edit {
     transition: all .5s;
 }
 .icon-edit:hover {
-    color: rgb(130, 218, 104) !important;
+    color: rgb(93, 191, 63) !important;
 }
 
 .icon-trash {

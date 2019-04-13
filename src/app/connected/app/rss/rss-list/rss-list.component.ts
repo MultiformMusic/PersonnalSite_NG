@@ -2,7 +2,7 @@ import { Component, OnInit, Input, HostListener } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { RssService } from '../services/rss.service';
 import { RssUrl } from './../models/rss-url';
-import * as actions from '../ngrx/rss.actions';
+import * as Rss from '../ngrx/rss.actions';
 
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../connected.reducer';
@@ -32,6 +32,7 @@ export class RssListComponent implements OnInit {
   // liste des url rss (active et inactive)
   rssUrls: any[] = [];
   rssUrls$: Observable<RssUrl[]>;
+  fromCache: boolean = false;
 
   // gère affichage "Loading ...."
   isLoading$: Observable<boolean>;
@@ -68,8 +69,12 @@ export class RssListComponent implements OnInit {
     // NGRX : abonnement au store
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.rssUrls$ = this.store.select(fromRoot.getRssUrls);
+    this.store.select(fromRoot.getFromCache).subscribe(
+      (fromCache: boolean) => this.fromCache = fromCache
+    );
 
-    this.store.dispatch(new actions.showFilters(true));
+    // dispatch action : filtres de nouveau visibles
+    this.store.dispatch(new Rss.showFilters(true));
 
     this.rssUrlsSubscription = this.rssService.rssUrlsLoading.subscribe(
       (rssUrlsFromDb: RssUrl[]) => {
@@ -82,7 +87,8 @@ export class RssListComponent implements OnInit {
         //words.filter(word => word.length > 6)
 
         const rssActive= this.rssUrls.filter(rssUrl => rssUrl.active === true);
-        this.rssService.getFeedFromUrls(rssActive, true);
+
+        this.rssService.getFeedFromUrls(rssActive, this.fromCache);
       }
     )
 

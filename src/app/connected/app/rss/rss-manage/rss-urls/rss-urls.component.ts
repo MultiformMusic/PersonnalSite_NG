@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RssUrl } from '../../models/rss-url';
 import { RssService } from '../../services/rss.service';
+import { Store } from '@ngrx/store';
+import * as fromRoot from '../../../../connected.reducer';
+import * as actions from '../../ngrx/rss.actions';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-rss-urls',
@@ -12,7 +16,9 @@ export class RssUrlsComponent implements OnInit {
 
   rssUrls$: Observable<RssUrl[]>;
 
-  constructor(private rssService: RssService) { }
+  constructor(private rssService: RssService,
+              private store: Store<fromRoot.State>,
+              private router: Router) { }
 
   ngOnInit() {
 
@@ -24,10 +30,26 @@ export class RssUrlsComponent implements OnInit {
     this.rssService.updateRssUrl(rssUrlModif);
   }
 
+  /**
+   * 
+   *  change l'état actif/inactif de l'url rss
+   * 
+   * @param rssUrl 
+   * 
+   */
   toggleActivated(rssUrl: RssUrl) {
+
     const activeModif = !rssUrl.active;
     const rssUrlModif = {...rssUrl, active: activeModif};
     this.rssService.updateRssUrl(rssUrlModif);
+
+    this.store.dispatch(new actions.setFromCache(false));
+  }
+
+  backRssList() {
+    this.store.dispatch(new actions.setFromCache(true));
+    this.router.navigate(['/connected/rss/list']);
+
   }
 
 }

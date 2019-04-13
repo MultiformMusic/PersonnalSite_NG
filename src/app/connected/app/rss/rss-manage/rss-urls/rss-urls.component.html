@@ -1,9 +1,14 @@
 
 <span class="row align-items-center mb-4 mt-4">
     <h4 class="title">RSS configuration</h4>
-    <i class="fas fa-plus-circle fa-2x title ml-4"></i>
+    <a (click)=backRssList() style="cursor: pointer;" data-toggle="tooltip" data-html="true" title="Back Rss List" data-placement="top">
+      <i class="fas fa-arrow-circle-left fa-2x title ml-4 icon-add"></i>
+    </a>
+    <a style="cursor: pointer;" data-toggle="tooltip" data-html="true" title="Add Rss" data-placement="top">
+      <i class="fas fa-plus-circle fa-2x title ml-4 icon-add"></i>
+    </a>
   </span>
-  <div *ngFor="let rssUrl of rssUrls$ | async" class="bg-white">
+  <div *ngFor="let rssUrl of rssUrls$ | async" class="rss-card">
     <div class="row py-3 mb-4 task-border align-items-center">
       <div class="ml-2">
         <input (click)="toggleActivated(rssUrl)" type="checkbox" [checked]="rssUrl.active">
