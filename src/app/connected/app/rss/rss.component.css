@@ -3,9 +3,27 @@
     height: 90vh;
 }
 
+@media screen and ( max-height: 900px ) { 
+    .rss-content {
+        margin-top: 10vh;  
+    }
+}
+
+@media screen and ( max-height: 800px ) { 
+    .rss-content {
+        margin-top: 10vh;  
+    }
+}
+
 @media screen and ( max-height: 700px ) { 
     .rss-content {
-        margin-top: 14vh;  
+        margin-top: 12vh;  
+    }
+}
+
+@media screen and ( max-height: 600px ) { 
+    .rss-content {
+        margin-top: 16vh;  
     }
 }
 

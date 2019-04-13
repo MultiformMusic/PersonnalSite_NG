@@ -1,31 +1,39 @@
 
 <span class="row align-items-center mb-4 mt-4">
-    <h4 class="title">RSS configuration</h4>
-    <a (click)=backRssList() style="cursor: pointer;" data-toggle="tooltip" data-html="true" title="Back Rss List" data-placement="top">
-      <i class="fas fa-arrow-circle-left fa-2x title ml-4 icon-add"></i>
-    </a>
-    <a style="cursor: pointer;" data-toggle="tooltip" data-html="true" title="Add Rss" data-placement="top">
-      <i class="fas fa-plus-circle fa-2x title ml-4 icon-add"></i>
-    </a>
-  </span>
-  <div *ngFor="let rssUrl of rssUrls$ | async" class="rss-card">
-    <div class="row py-3 mb-4 task-border align-items-center">
-      <div class="ml-2">
-        <input (click)="toggleActivated(rssUrl)" type="checkbox" [checked]="rssUrl.active">
-      </div>
-      <div class="col-7" style="overflow-wrap: break-word;">
-        {{ rssUrl.name }}
-      </div>
-      <div class="col-1 edit-margin">
-        <a (click)="updateName(rssUrl)" style="cursor: pointer" data-toggle="tooltip" data-html="true" title="Edit" data-placement="top">
-          <i class="fas fa-edit fa-lg text-success mr-2 icon-edit"></i>
-        </a>
-      </div>
-      <div class="col-1">
-        <a  style="cursor: pointer" data-toggle="tooltip" data-html="true" title="Delete" data-placement="top">
-          <i class="fas fa-trash-alt fa-lg text-danger mr-2 icon-trash"></i>
-        </a>
-      </div>
+  <h4 class="title">RSS configuration</h4>
+  <a (click)=backRssList() style="cursor: pointer;" data-toggle="tooltip" data-html="true" title="Back Rss List" data-placement="top">
+    <i class="fas fa-arrow-circle-left fa-2x title ml-4 icon-add"></i>
+  </a>
+  <a (click)="modalRssAdd.openModal()" style="cursor: pointer;" data-toggle="tooltip" data-html="true" title="Add Rss" data-placement="top">
+    <i class="fas fa-plus-circle fa-2x title ml-4 icon-add"></i>
+  </a>
+</span>
+<div *ngFor="let rssUrl of rssUrls$ | async" class="rss-card">
+  <div class="row py-3 mb-4 task-border align-items-center">
+    <div class="ml-2">
+      <input (click)="toggleActivated(rssUrl)" type="checkbox" [checked]="rssUrl.active">
+    </div>
+    <div class="col-7" style="overflow-wrap: break-word;">
+      <span class="rss-name">{{ rssUrl.name }}</span>
+      <ng-container *ngIf="showInfos">
+        <br/>
+        <span class="rss-infos">{{ rssUrl.url }}</span>
+        <br/>
+        <span class="rss-infos">{{ rssUrl.category }}</span>
+      </ng-container>
+    </div>
+    <div class="col-1 edit-margin">
+      <a (click)="updateName(rssUrl)" style="cursor: pointer" data-toggle="tooltip" data-html="true" title="Edit" data-placement="top">
+        <i class="fas fa-edit fa-lg text-success mr-2 icon-edit"></i>
+      </a>
+    </div>
+    <div class="col-1">
+      <a  style="cursor: pointer" data-toggle="tooltip" data-html="true" title="Delete" data-placement="top">
+        <i class="fas fa-trash-alt fa-lg text-danger mr-2 icon-trash"></i>
+      </a>
     </div>
   </div>
-  
+</div>
+
+
+<rss-modal-add #modalRssAdd></rss-modal-add>

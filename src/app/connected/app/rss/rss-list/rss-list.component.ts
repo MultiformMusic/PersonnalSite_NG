@@ -108,6 +108,7 @@ export class RssListComponent implements OnInit {
     );
 
     this.rssService.loadUrlRssFromDatabase();
+    document.getElementById("idSidemenuRssLink").click();
     
   }
 
@@ -149,8 +150,12 @@ export class RssListComponent implements OnInit {
     if (this.feeds.length > 0 && this.screenWidth < 768) {
       this.stylesFab.opacity = 0.8;
     } else {
-      this.stylesFab.opacity = 0;
+      this.stylesFab.opacity = 0.8;
     }
+  }
+
+  scrollToView() {
+    document.getElementById("sidemenu").scrollIntoView();
   }
 
 

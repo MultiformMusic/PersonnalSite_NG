@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RssUrl } from '../../models/rss-url';
 import { RssService } from '../../services/rss.service';
@@ -15,10 +15,20 @@ import { Router } from '@angular/router';
 export class RssUrlsComponent implements OnInit {
 
   rssUrls$: Observable<RssUrl[]>;
+  showInfos: boolean = true;
+
+  @HostListener('window:resize', ['$event'])
+    getScreenSize(event?) {
+
+        this.showInfos = window.innerWidth < 550 ? false : true;        
+  }
 
   constructor(private rssService: RssService,
               private store: Store<fromRoot.State>,
-              private router: Router) { }
+              private router: Router) { 
+              
+      this.getScreenSize();
+  }
 
   ngOnInit() {
 
@@ -47,6 +57,7 @@ export class RssUrlsComponent implements OnInit {
   }
 
   backRssList() {
+  
     this.store.dispatch(new actions.setFromCache(true));
     this.router.navigate(['/connected/rss/list']);
 

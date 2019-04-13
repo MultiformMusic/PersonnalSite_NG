@@ -11,13 +11,14 @@ import { RssModule } from './app/rss/rss.module';
 import { RssHeaderComponent } from './app/rss/navigation/rss-header/rss-header.component';
 import { RssListComponent } from './app/rss/rss-list/rss-list.component';
 import { RssFiltersComponent } from './app/rss/navigation/rss-filters/rss-filters.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RssManageComponent } from './app/rss/rss-manage/rss-manage.component';
 
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './connected.reducer';
 import { RssUrlsComponent } from './app/rss/rss-manage/rss-urls/rss-urls.component';
 import { RssCategoriesComponent } from './app/rss/rss-manage/rss-categories/rss-categories.component';
+import { RssModalAddComponent } from './app/rss/rss-manage/rss-modal-add/rss-modal-add.component';
 
 const routes: Routes = [
     { path: 'connected', 
@@ -47,13 +48,15 @@ const routes: Routes = [
         RssFiltersComponent,
         RssManageComponent,
         RssUrlsComponent, 
-        RssCategoriesComponent
+        RssCategoriesComponent,
+        RssModalAddComponent
     ],
     imports: [
         CommonModule,
         RssModule,
         MaterialModule,
         FormsModule,
+        ReactiveFormsModule,
         StoreModule.forRoot(reducers),
         RouterModule.forChild(routes)
     ],

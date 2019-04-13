@@ -25,7 +25,7 @@
               <div class="card-footer card-footer-text">
                 <div style="margin-bottom: 5px"><img *ngIf="item.icon" class="item-icon" src={{item.icon}} alt=""> {{item.rssName}}</div>
                 <div>{{item.category}}</div>
-                <div>{{item.pubDate}}</div>
+                <div>{{item.pubDate | date:'dd/MM/yyyy HH:mm'}}</div>
               </div>
               <div class="back">
                 <div class="back-content">
@@ -63,4 +63,6 @@
 <!-- end of RSS cards -->
 
 <!-- Naviation top button-->
-<button [ngStyle]="stylesFab" class="btn pmd-btn-fab pmd-ripple-effect btn-primary btn-custom" type="button" id="buttonRssTop"><i class="fas fa-arrow-up"></i></button>
+<button [ngStyle]="stylesFab" class="btn pmd-btn-fab pmd-ripple-effect btn-primary btn-custom" type="button" id="buttonRssTop">
+  <i class="fas fa-arrow-up"></i>
+</button>

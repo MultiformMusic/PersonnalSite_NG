@@ -91,6 +91,7 @@ $(document).ready(function() {
             } 
 
             /** Top Menu RSS */
+            console.log(event.currentTarget.innerText)
             if (event.currentTarget.innerText === 'RSS') {
 
                 $('.side-navbar').collapse('hide');
