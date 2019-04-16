@@ -11,6 +11,16 @@
     background-color: #eee;
 }
 
+.modal-title {
+    font-size: 1.2rem;
+    line-height: 1.1;
+}
+
+.modal-subtitle {
+    font-size: .9rem;
+    margin-left: 10px;
+}
+
 .callCloudFunctionMessage {
     color: rgb(150, 115, 0);
     font-size: 18px;
@@ -20,6 +30,14 @@
     animation: blinker 1s linear infinite;
 }
   
+.select-rssName {
+    width: 90%;
+}
+
+.input-keywords {
+    width: 70%;
+}
+
 @keyframes blinker {  
     50% { opacity: 0; }
 }

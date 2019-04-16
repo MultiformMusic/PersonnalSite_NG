@@ -267,7 +267,7 @@ exports.mongoInitDb = functions.https.onRequest((req, res) => {
                 fakeDb.pushDatasToDb().then(
                     res.status(200).send({'seek db': true})
                 ).catch(error => {
-                    res.status(400).send({'error': error})
+                    res.status(400).send({'error': error});
                 });
             
             }).catch(error => {
@@ -285,7 +285,6 @@ exports.mongoInitDb = functions.https.onRequest((req, res) => {
 exports.rssDatasFromUrl = functions.https.onRequest((req, res) => {
 
     const { rssUrls } = req.body;
-    //const arrayRssUrls = rssUrls.split('|');
 
     cors( req, res, async () => { 
 
@@ -310,6 +309,29 @@ exports.rssDatasFromUrl = functions.https.onRequest((req, res) => {
           }))
           
         return res.json(allFeeds);
+    });
+
+});
+
+/**
+*   Cherche les url RSS par mot-clés
+* 
+*/
+exports.searchRssUrls = functions.https.onRequest((req, res) => {
+
+    const { keywords } = req.body;
+
+    cors( req, res, () => { 
+
+        const url = constantes.apiKeys.URL_FEEDLY + keywords;
+
+        request(url, function(error, response, body) {
+
+            if (error) {
+                res.status(400).send({'error': error}) 
+            }
+            return res.status(200).send(body);
+        });
     });
 
 });

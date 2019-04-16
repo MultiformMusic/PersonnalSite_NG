@@ -36,7 +36,12 @@ export const constants = {
     CATEGORY_ALL: '-- All categories',
     RSS_NAME_ALL: '-- All RSS',
 
-    /** Caller RssService loadfeedfromurl  */
-    CALLER_REFRESH: 'refresh',
-    CALLER_LIST: 'list'
+    /** Liste déroulant rss url search */
+    RSS_SEARCH_LIST: '-- Do a search to have list',
+    RSS_SELECT_LIST: '-- Please select a rss',
+
+    //URL_FEEDLY: '/personnalsite/us-central1/searchRssUrls',
+    URL_FEEDLY: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/searchRssUrls',
+    URL_RSS_PREFIX: 'feed/'
+
 }

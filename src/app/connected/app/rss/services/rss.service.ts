@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, Response } from '@angular/http';
 import { Subject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import  { constants } from '../../../../../helpers/constants';
@@ -17,12 +17,14 @@ export class RssService {
 
     /**
      * Emission événements :
+     * 
      * - début chargement : pour afficher "Loading"
      * - chargement des feeds
-     * => mise en cache des feeds
+     * - retour recherche des url rss
      */
     rssUrlsLoading = new Subject<RssUrl[]>();
     feedLoading = new Subject<any>();
+    rssUrlsResultSearch = new Subject<RssUrl[]>();
 
     // feeds en cache
     cacheFeeds: any[] = [];
@@ -107,7 +109,6 @@ export class RssService {
 
         // handler sur la collection rss-url
         this.rssUrlsCollection = this.db.collection<RssUrl>('rss-url', ref => ref.where('email','==', user.email));
-        debugger;
 
         // construction tableau Observable sur les rss url de la collection
         return this.rssUrlsCollection.snapshotChanges().pipe(
@@ -217,5 +218,70 @@ export class RssService {
     getCategories() {
         return {...this.categories}
     }
+
+    /**
+     * 
+     * Recherche des url RSS par mots clef
+     * 
+     * @param keywords 
+     * 
+     */
+    searchRssUrls(keywords: string) {
+        
+        const headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+
+        this.http.post(constants.URL_FEEDLY, {keywords}, {headers: headers}).subscribe(
+          (rssUrls: any) => {
+            
+            console.log(JSON.parse(rssUrls._body).results);
+            const arrayRssUrls = JSON.parse(rssUrls._body).results.map(rssUrl => {
+                return this.convertToRssUrls(rssUrl);
+            })
+
+            console.log("arrayRssUrls = " , arrayRssUrls.sort(this.compare));
+            this.rssUrlsResultSearch.next(arrayRssUrls.sort(this.compare));
+
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
+
+    /**
+     * 
+     * Converti une rss url trouvée par la recherche en RssUrl
+     * 
+     * @param rssUrl 
+     */
+    convertToRssUrls(rssUrl: any): RssUrl {
+    
+        return {
+            id: undefined,
+            name:  rssUrl.title,
+            url: rssUrl.feedId.substring(constants.URL_RSS_PREFIX.length),
+            category: rssUrl.hint,
+            email: undefined,
+            active: true,
+            icon: rssUrl.iconUrl
+        }
+    }
+
+
+    /**
+     * 
+     * Fonction de comparaison sur les noms rss pour tri
+     * 
+     * @param a 
+     * @param b 
+     */
+    compare(a,b) {
+        if (a.name < b.name)
+          return -1;
+        if (a.name > b.name)
+          return 1;
+        return 0;
+      }
+      
 
 }
