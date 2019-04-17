@@ -4,6 +4,8 @@ import { RssService } from '../../services/rss.service';
 import { Subscription } from 'rxjs';
 import { RssUrl } from '../../models/rss-url';
 import { constants } from 'src/helpers/constants';
+import { AuthenticationService } from 'src/app/Authentication/services/authentication.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'rss-modal-add',
@@ -19,13 +21,20 @@ export class RssModalAddComponent implements OnInit, OnDestroy {
   resultSearchRssUrls: Subscription;
   rssUrlsFromSearch: RssUrl[] = [];
   selectedRssUrlName: string = constants.RSS_SEARCH_LIST;
+  defaultRssName = constants.RSS_SELECT_LIST;
   keywords: string = '';
+  loadingRss: boolean = false;
+  user: User;
 
   modalAddRssForm: FormGroup;
 
-  constructor(private rssService: RssService) { }
+  constructor(private rssService: RssService,
+              private authService: AuthenticationService) { }
 
   ngOnInit() {
+
+    this.user = this.authService.getUserFromToken();
+    console.log(this.user);
 
     this.rssUrlsFromSearch.push({
       id: '',
@@ -44,7 +53,10 @@ export class RssModalAddComponent implements OnInit, OnDestroy {
 
       // subscription aux résultats recherche url rss
       this.resultSearchRssUrls = this.rssService.rssUrlsResultSearch.subscribe(
+
         (rssUrlsFromSearch: RssUrl[]) => {
+
+          this.loadingRss = false;
 
           rssUrlsFromSearch.unshift({
             id: '',
@@ -57,10 +69,12 @@ export class RssModalAddComponent implements OnInit, OnDestroy {
           })
 
           this.rssUrlsFromSearch = rssUrlsFromSearch;
+        }, 
+        (error) => {
+          this.loadingRss = false;
+          console.log(error);
         }
       );
-
-      this.doSearchRssUrls();
 
       this.modalRssAdd.nativeElement.style.display = 'block';
 
@@ -74,6 +88,7 @@ export class RssModalAddComponent implements OnInit, OnDestroy {
       this.resultSearchRssUrls.unsubscribe();
 
       this.selectedRssUrlName = constants.RSS_SEARCH_LIST;
+
       this.rssUrlsFromSearch.push({
         id: '',
         name: constants.RSS_SEARCH_LIST,
@@ -93,10 +108,29 @@ export class RssModalAddComponent implements OnInit, OnDestroy {
 
     addRss() {
 
+      const rssUrl = this.rssUrlsFromSearch.find(rss => rss.name === this.selectedRssUrlName);
+      if (rssUrl) {
+        rssUrl.id = rssUrl.url;
+        rssUrl.email = this.user.email;
+        if (!rssUrl.category) {
+          rssUrl.category = 'Misceallous';
+        }
+        console.log(rssUrl)
+
+        this.rssService.addRssUrl(rssUrl)
+                       .then(
+                         rss => console.log(rss)
+                       )
+                       .catch(
+                         err => console.log(err)                       
+                       );
+      }
     }
-    
+
     doSearchRssUrls() {
-      this.rssService.searchRssUrls('science');
+      console.log('keywords = ', this.keywords);
+      this.loadingRss = true;
+      this.rssService.searchRssUrls(this.keywords);
     }
 
     selectedRssName(rssName: string) {

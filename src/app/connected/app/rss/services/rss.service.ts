@@ -248,6 +248,10 @@ export class RssService {
         );
       }
 
+      addRssUrl(rssUrl: RssUrl): Promise<any> {
+        return this.db.collection('rss-url').add(rssUrl);
+      }
+
     /**
      * 
      * Converti une rss url trouvée par la recherche en RssUrl

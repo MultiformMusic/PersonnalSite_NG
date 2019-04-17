@@ -1,12 +1,12 @@
 .rss-card {
     
-    background-color: rgb(255, 240, 218);
+    background-color: rgb(249, 245, 245);
     box-shadow: 2px 3px 2px #999;
     transition: all .3s;
 }
 
 .rss-card:hover {
-    background-color: rgb(249, 245, 245);
+    background-color: rgb(255, 240, 218);
     box-shadow: 3px 4px 2px #999;
     transform: translateY(-1px);
 }

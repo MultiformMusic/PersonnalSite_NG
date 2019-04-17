@@ -12,7 +12,10 @@
           
           <input [(ngModel)]="keywords" type="text" placeholder="Put keyword (ex: science)" class="form-control input-keywords mb-4" > 
           <div>
-            <button [disabled]="keywords.length < 3" class="btn btn-primary" style="margin-left: 7px;">Search</button>
+            <button (click)="doSearchRssUrls()" [disabled]="keywords.length < 3" class="btn btn-primary" style="margin-left: 7px;">Search</button>
+          </div>
+          <div *ngIf="loadingRss">
+            <img src="assets/loader1.gif" width="40" height="auto"/>
           </div>
           <!-- liste déroulante résultat recherche -->
           <select *ngIf="rssUrlsFromSearch.length > 0" 
@@ -28,8 +31,8 @@
         </div>
 
         <div class="modal-footer">
+          <button [disabled]="rssUrlsFromSearch.length == 1 || selectedRssUrlName == defaultRssName " (click)="addRss()" type="button" class="btn btn-success" >Add</button>
           <button (click)="closeModal()" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-          <button (click)="addRss()" type="button" class="btn btn-success" >Add</button>
         </div>
       </div>
     </div>
