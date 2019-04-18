@@ -43,6 +43,10 @@ export class RssUrlsComponent implements OnInit {
     this.rssService.updateRssUrl(rssUrlModif);
   }
 
+  deleteRssUrl(rssUrl: RssUrl) {
+    this.rssService.deleteRssUrl(rssUrl);
+  }
+
   /**
    * 
    *  change l'état actif/inactif de l'url rss

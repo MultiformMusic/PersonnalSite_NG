@@ -18,7 +18,7 @@
 
 .modal-subtitle {
     font-size: .9rem;
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 .callCloudFunctionMessage {
@@ -32,6 +32,21 @@
   
 .select-rssName {
     width: 90%;
+}
+
+.select-category {
+    width: 90%;
+    margin-top: 10px;
+}
+
+.result-add-ok {
+    color: rgb(51, 147, 51);
+    margin-right: 20px;
+}
+
+.result-add-nok {
+    color: rgb(206, 60, 44);
+    margin-right: 20px;
 }
 
 .input-keywords {

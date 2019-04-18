@@ -26,13 +26,30 @@
 
                 <option *ngFor="let rssUrl of rssUrlsFromSearch" [value]="rssUrl.name">{{rssUrl.name}}</option>
             
-              </select>
+          </select>
+          
+          <!-- liste déroulante catégories  -->
+          <select *ngIf="categoriesList.length > 0" 
+                    [(ngModel)]="selectedCategory" 
+                    (change)="selectedCategoryName(selectCategory.value)" 
+                    name="category" #selectCategory
+                    class="form-control select-category" id="category" required>
+
+                <option *ngFor="let category of categoriesList" [value]="category.name">{{category.name}}</option>
+            
+          </select>
 
         </div>
-
         <div class="modal-footer">
-          <button [disabled]="rssUrlsFromSearch.length == 1 || selectedRssUrlName == defaultRssName " (click)="addRss()" type="button" class="btn btn-success" >Add</button>
-          <button (click)="closeModal()" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            <img *ngIf="addingRss" src="assets/loader1.gif" width="40" height="auto"/>
+            <div [class]="resultClass">{{resultMessage}}</div>
+          <button [disabled]="rssUrlsFromSearch.length == 1 || selectedRssUrlName == defaultRssName || selectedCategory == defaultCategory " 
+                  (click)="addRss()" 
+                  type="button" 
+                  class="btn btn-success" >
+                  Add
+          </button>
+          <button (click)="closeModal()" type="button" class="btn btn-danger" data-dismiss="modal">Back to list</button>
         </div>
       </div>
     </div>

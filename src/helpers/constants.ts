@@ -40,6 +40,9 @@ export const constants = {
     RSS_SEARCH_LIST: '-- Do a search to have list',
     RSS_SELECT_LIST: '-- Please select a rss',
 
+    /** Liste déroulante category */
+    CATEGORY_SELECT_LIST: '-- Please select a category',
+
     //URL_FEEDLY: '/personnalsite/us-central1/searchRssUrls',
     URL_FEEDLY: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/searchRssUrls',
     URL_RSS_PREFIX: 'feed/'

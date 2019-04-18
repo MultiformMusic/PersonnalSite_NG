@@ -11,6 +11,7 @@ import { User } from 'src/app/models/user.model';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../connected.reducer';
 import * as Rss from '../ngrx/rss.actions';
+import { Category } from '../models/category';
 
 @Injectable()
 export class RssService {
@@ -25,6 +26,12 @@ export class RssService {
     rssUrlsLoading = new Subject<RssUrl[]>();
     feedLoading = new Subject<any>();
     rssUrlsResultSearch = new Subject<RssUrl[]>();
+
+    // événement pour le chargement catégories
+    categoriesLoading = new Subject<Category[]>();
+
+    // événement pour rss valid
+    rssValid = new Subject<boolean>();
 
     // feeds en cache
     cacheFeeds: any[] = [];
@@ -44,6 +51,20 @@ export class RssService {
                 private db: AngularFirestore,
                 private store: Store<fromRoot.State>) {}
 
+
+
+    loadCategoriesFromDatabase() {
+
+        // recherche de l'utilisateur connecté
+        const user: User = this.authService.getUserFromToken();
+
+        this.db.collection('categories', ref => ref.where('email','==', user.email ))
+               .valueChanges().subscribe(
+                   (categories: Category[]) => {
+                        this.categoriesLoading.next(categories.sort(this.compare));
+                   }    
+               );
+    }
 
     /**
      * 
@@ -113,7 +134,7 @@ export class RssService {
         // construction tableau Observable sur les rss url de la collection
         return this.rssUrlsCollection.snapshotChanges().pipe(
             map(actions => actions.map(a => {
-              //console.log(a);
+              console.log(a);
               const data = a.payload.doc.data() as RssUrl;
               const id = a.payload.doc.id;
               return {id, ...data };
@@ -122,9 +143,19 @@ export class RssService {
     }
 
     updateRssUrl(rssUrl: RssUrl) {
-        debugger;
+        rssUrl.name = rssUrl.name + ' modif';
         const itemDoc = this.db.doc<RssUrl>('rss-url/' + rssUrl.id);
         itemDoc.update(rssUrl);
+    }
+
+    deleteRssUrl(rssUrl: RssUrl) {
+        const itemDoc = this.db.doc<RssUrl>('rss-url/' + rssUrl.id);
+        itemDoc.delete()
+               .then(res => {
+                   console.log(res)
+               })
+               .catch(err => {
+                    console.log(err)})
     }
 
     /**
@@ -176,6 +207,26 @@ export class RssService {
                 console.log(err);
             }
         );
+    }
+
+    /**
+     * 
+     * Détermine si une URL RSS est valide, cad a au moins un feeds
+     * 
+     * @param rssUrl 
+     */
+    async isUrlFeedValid(rssUrl: RssUrl): Promise<boolean>{
+        
+        const url = constants.FEED_FROM_URL;
+        const headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+    
+        const rss = {
+            rssUrls: [rssUrl]
+        }
+
+        return this.http.post(url, rss, {headers: headers}).toPromise()
+                  .then (res => res.json().length > 1)
+                  .catch (err => false)
     }
 
     /**
@@ -248,9 +299,16 @@ export class RssService {
         );
       }
 
-      addRssUrl(rssUrl: RssUrl): Promise<any> {
-        return this.db.collection('rss-url').add(rssUrl);
-      }
+      /**
+       * 
+       * Ajout RSS URL à Firestore
+       * 
+       * @param rssUrl 
+       * 
+       */
+    addRssUrl(rssUrl: RssUrl): Promise<any> {
+        return this.db.collection('rss-url').doc(rssUrl.id).set(rssUrl);
+    }
 
     /**
      * 

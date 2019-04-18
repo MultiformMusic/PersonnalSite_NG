@@ -5,7 +5,8 @@
             <ul class="nav nav-tabs">
 
               <li class="nav-item">
-                <span (click)="rssConfiguration()" 
+                <span style="border: none"
+                      (click)="rssConfiguration()" 
                       [ngClass]="rssActive ? 'nav-link active-link custom-link' : 'nav-link custom-link'"
                       >
                       <span class="tab-title">RSS Configuration</span>
@@ -13,7 +14,7 @@
               </li>
 
               <li class="nav-item ml-1">
-                <span 
+                <span style="border: none"
                   (click)="categoriesConfiguration()" 
                   [ngClass]="categoriesActive ? 'nav-link active-link custom-link categories-mt ' : 'nav-link custom-link categories-mt '"
                   >
