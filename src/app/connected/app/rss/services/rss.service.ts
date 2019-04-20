@@ -142,20 +142,29 @@ export class RssService {
         );
     }
 
+    /**
+     * 
+     * Mise à jour du RSS
+     * 
+     * @param rssUrl 
+     * 
+     */
     updateRssUrl(rssUrl: RssUrl) {
-        rssUrl.name = rssUrl.name + ' modif';
+        //rssUrl.name = rssUrl.name + ' modif';
         const itemDoc = this.db.doc<RssUrl>('rss-url/' + rssUrl.id);
         itemDoc.update(rssUrl);
     }
 
-    deleteRssUrl(rssUrl: RssUrl) {
+    /**
+     * 
+     * Suppression RSS
+     * 
+     * @param rssUrl 
+     * 
+     */
+    deleteRssUrl(rssUrl: RssUrl): Promise<void> {
         const itemDoc = this.db.doc<RssUrl>('rss-url/' + rssUrl.id);
-        itemDoc.delete()
-               .then(res => {
-                   console.log(res)
-               })
-               .catch(err => {
-                    console.log(err)})
+        return itemDoc.delete();
     }
 
     /**

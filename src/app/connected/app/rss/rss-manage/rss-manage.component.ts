@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, OnChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../connected.reducer';
 import * as actions from '../ngrx/rss.actions';
@@ -8,16 +8,25 @@ import * as actions from '../ngrx/rss.actions';
   templateUrl: './rss-manage.component.html',
   styleUrls: ['./rss-manage.component.css']
 })
-export class RssManageComponent implements OnInit {
+export class RssManageComponent implements OnInit, OnChanges {
 
   rssActive: boolean = true;
   categoriesActive: boolean = false;
 
-  constructor(private store: Store<fromRoot.State>) { }
+  constructor(private store: Store<fromRoot.State>,
+              private el: ElementRef) { }
 
   ngOnInit() {
 
     this.store.dispatch(new actions.showFilters(false));
+  }
+
+  ngOnChanges() {
+    let linkHome = this.el.nativeElement.querySelector('#idSidemenuHome');
+    debugger;
+    if (linkHome) {
+      linkHome.classList.remove('current');
+    }
   }
 
   rssConfiguration() {

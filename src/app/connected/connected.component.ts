@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-connected',
@@ -7,8 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConnectedComponent implements OnInit {
 
-  ngOnInit() {
+  constructor() {}
 
+  ngOnInit() {
+    
+    /*let linkHome = this.el.nativeElement.querySelector('#idSidemenuRssLink');
+    debugger;
+    if (linkHome) {
+      linkHome.classList.add('current');
+    }*/
   }
 
 }

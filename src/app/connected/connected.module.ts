@@ -19,6 +19,7 @@ import { reducers } from './connected.reducer';
 import { RssUrlsComponent } from './app/rss/rss-manage/rss-urls/rss-urls.component';
 import { RssCategoriesComponent } from './app/rss/rss-manage/rss-categories/rss-categories.component';
 import { RssModalAddComponent } from './app/rss/rss-manage/rss-modal-add/rss-modal-add.component';
+import { ModalConfirmDeleteComponent } from './app/rss/rss-manage/modal-confirm-delete/modal-confirm-delete.component';
 
 const routes: Routes = [
     { path: 'connected', 
@@ -49,7 +50,8 @@ const routes: Routes = [
         RssManageComponent,
         RssUrlsComponent, 
         RssCategoriesComponent,
-        RssModalAddComponent
+        RssModalAddComponent,
+        ModalConfirmDeleteComponent
     ],
     imports: [
         CommonModule,

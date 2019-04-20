@@ -53,7 +53,7 @@ export class RssListComponent implements OnInit {
     getScreenSize(event?) {
           this.screenHeight = window.innerHeight;
           this.screenWidth = window.innerWidth;
-          this.showButtonRssTop()
+          this.showButtonRssTop();
   }
 
   constructor(private rssService: RssService,
@@ -157,7 +157,6 @@ export class RssListComponent implements OnInit {
   scrollToView() {
     document.getElementById("sidemenu").scrollIntoView();
   }
-
 
   ngOnDestroy() {
     if (this.feedSubscription) {

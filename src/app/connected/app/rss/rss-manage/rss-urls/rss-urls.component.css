@@ -15,6 +15,11 @@
     color: rgb(235, 231, 225);
 }
 
+.empty-rss {
+    color: rgb(244, 203, 141);
+    font-size: 1.2rem;
+}
+
 .rss-name {
     font-size: 1.1rem;
     font-weight: bold;

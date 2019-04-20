@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../../connected.reducer';
 import * as actions from '../../ngrx/rss.actions';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-rss-urls',
@@ -26,6 +27,7 @@ export class RssUrlsComponent implements OnInit {
   }
 
   constructor(private rssService: RssService,
+              private toastr: ToastrService,
               private store: Store<fromRoot.State>,
               private router: Router) { 
               
@@ -44,7 +46,10 @@ export class RssUrlsComponent implements OnInit {
   }
 
   deleteRssUrl(rssUrl: RssUrl) {
-    this.rssService.deleteRssUrl(rssUrl);
+    console.log('delete = ', rssUrl);
+    this.rssService.deleteRssUrl(rssUrl)
+        .then(() => this.toastr.info('RSS deleted'))
+        .catch(() => this.toastr.error('Error to delete'));
   }
 
   /**

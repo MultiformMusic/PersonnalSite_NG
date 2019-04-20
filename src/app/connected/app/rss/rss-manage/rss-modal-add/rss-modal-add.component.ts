@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { RssService } from '../../services/rss.service';
 import { Subscription } from 'rxjs';
 import { RssUrl } from '../../models/rss-url';
@@ -16,7 +15,6 @@ import { Category } from '../../models/category';
 export class RssModalAddComponent implements OnInit, OnDestroy {
 
   @ViewChild('modalRssAdd') modalRssAdd: any;
-  @ViewChild('modalContainer') modalContainer: any;
 
   // subscription au résultat recherche url rss
   resultSearchRssUrls: Subscription;
@@ -117,7 +115,7 @@ export class RssModalAddComponent implements OnInit, OnDestroy {
       this.modalRssAdd.nativeElement.style.display = 'block';
       setTimeout( () => {
         this.modalRssAdd.nativeElement.className = 'modal fade show modal-transition-in';
-      }, 100)
+      }, 100);
     }
   
     /**
@@ -147,7 +145,7 @@ export class RssModalAddComponent implements OnInit, OnDestroy {
       this.modalRssAdd.nativeElement.className = 'modal fade modal-transition-in';
       setTimeout( () => {
         this.modalRssAdd.nativeElement.style.display = 'none';
-      }, 200)
+      }, 200);
       
     }
 

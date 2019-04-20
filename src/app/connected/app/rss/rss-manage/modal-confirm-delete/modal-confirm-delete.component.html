@@ -1,0 +1,27 @@
+<!-- Modal -->
+<div #modalConfirmDelete class="modal fade" id="modal-confirm-delete">
+    <div class="modal-dialog">
+      <div class="modal-content" [ngStyle]="{'margin-top.px': screenHeight}">
+        <div class="modal-header">
+          <h4 class="modal-title">Delete this RSS ?</h4>
+          <button (click)="closeModal()" type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="row justify-content-center bg-light">
+          <br>
+          <div *ngIf="rssUrlToDelete">
+            <div class="font-weight-bold py-4 text-danger">{{ rssUrlToDelete.name }}</div>
+          </div>
+          <br>
+        </div>
+        <div class="modal-footer">
+            <button (click)="closeModal()" type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+            <button (click)="deleteRss()" 
+                  type="button" 
+                  class="btn btn-danger" >
+                  Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal -->

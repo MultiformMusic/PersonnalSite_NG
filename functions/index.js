@@ -12,6 +12,7 @@ const { normalizeErrors } = require('./helpers/mongoose');
 
 const User = require('./models/user');
 const { getToken } = require('./helpers/tokenHelper');
+const { getImage } = require('./helpers/rssFeedHelper');
 
 const request = require('request');
 const RssParser = require('rss-parser');
@@ -301,6 +302,15 @@ exports.rssDatasFromUrl = functions.https.onRequest((req, res) => {
                     item.category = rss.category;
                     item.readed = false;
                     item.icon = rss.icon;
+
+                    if (!item.enclosure) {
+                        const imageUrl = getImage(item);
+                        if (imageUrl) {
+                            item.enclosure = {
+                                url: imageUrl
+                            };
+                        }
+                    }
                 });
                 allFeeds = [...allFeeds, ...items];
             } catch (error) {

@@ -2,7 +2,7 @@
 <div #rssUrlsList class="fadeInLeftSpeed">
 
   <span class="row align-items-center mb-4 mt-4">
-    <h4 class="title">RSS configuration</h4>
+    <h4 class="title">RSS configuration ({{(rssUrls$ | async)?.length}})</h4>
     <a (click)=backRssList() style="cursor: pointer;" data-toggle="tooltip" data-html="true" title="Back Rss List" data-placement="top">
       <i class="fas fa-arrow-circle-left fa-2x title ml-4 icon-add"></i>
     </a>
@@ -30,14 +30,26 @@
         </a>
       </div>
       <div class="col-1">
-        <a (click)="deleteRssUrl(rssUrl)" style="cursor: pointer" data-toggle="tooltip" data-html="true" title="Delete" data-placement="top">
-          <i class="fas fa-trash-alt fa-lg text-danger mr-2 icon-trash"></i>
+        <a (click)="modalConfirmDelete.openModal(rssUrl)" style="cursor: pointer" data-toggle="tooltip" data-html="true" title="Delete" data-placement="top">
+          <i class="fas fa-trash-alt fa-lg text-danger ml-2 mr-2 icon-trash"></i>
         </a>
       </div>
     </div>
   </div>
 
+  <ng-container *ngIf="(rssUrls$ | async)?.length==0">
+    <div class="row py-3 mb-4 task-border align-items-center">
+      <div class="empty-rss">No Rss in your list, click 
+          <a (click)="modalRssAdd.openModal()" style="cursor: pointer;" data-toggle="tooltip" data-html="true" title="Add Rss" data-placement="top">
+          <i class="fas fa-plus-circle mx-1 icon-add"></i> 
+          </a>
+          to add one 
+        </div>
+    </div>
+  </ng-container>
 
   <rss-modal-add #modalRssAdd></rss-modal-add>
+
+  <app-modal-confirm-delete (confirmDeleteEvent)="deleteRssUrl($event)" #modalConfirmDelete></app-modal-confirm-delete>
 
 </div>

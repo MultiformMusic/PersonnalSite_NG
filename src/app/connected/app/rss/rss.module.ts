@@ -3,7 +3,6 @@ import { MaterialModule } from '../../../material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RssService } from './services/rss.service';
-import { ReactiveFormsModule } from '@angular/forms';
 
 /*
 import { Routes, RouterModule } from '@angular/router';
@@ -31,7 +30,5 @@ import { RssListComponent } from './rss-list/rss-list.component';
           ],
 
   providers: [RssService],
-
-  declarations: []
 })
 export class RssModule {}
