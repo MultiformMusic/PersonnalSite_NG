@@ -6,6 +6,7 @@ import * as Rss from '../ngrx/rss.actions';
 
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../../connected.reducer';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-rss-list',
@@ -57,7 +58,8 @@ export class RssListComponent implements OnInit {
   }
 
   constructor(private rssService: RssService,
-              private store: Store<fromRoot.State>) { 
+              private store: Store<fromRoot.State>,
+              public sanitizer: DomSanitizer) { 
 
     this.getScreenSize();
   }

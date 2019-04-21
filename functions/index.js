@@ -16,7 +16,12 @@ const { getImage } = require('./helpers/rssFeedHelper');
 
 const request = require('request');
 const RssParser = require('rss-parser');
-let rssParser = new RssParser();
+let rssParser = new RssParser({
+    customFields: {
+        item: ['media:content'],
+      }
+    }
+);
 
 const he = require('he');
 
@@ -297,7 +302,9 @@ exports.rssDatasFromUrl = functions.https.onRequest((req, res) => {
                 let items = [...feed.items];
                 items.forEach(function(item) { 
                     item.title = he.decode(item.title);
-                    item.content = he.decode(item.content);
+                    if (item.content) {
+                        item.content = he.decode(item.content);
+                    }
                     item.rssName = rss.name; 
                     item.category = rss.category;
                     item.readed = false;

@@ -20,6 +20,8 @@ import { RssUrlsComponent } from './app/rss/rss-manage/rss-urls/rss-urls.compone
 import { RssCategoriesComponent } from './app/rss/rss-manage/rss-categories/rss-categories.component';
 import { RssModalAddComponent } from './app/rss/rss-manage/rss-modal-add/rss-modal-add.component';
 import { ModalConfirmDeleteComponent } from './app/rss/rss-manage/modal-confirm-delete/modal-confirm-delete.component';
+import { SafePipe } from '../pipe/safe.pipe';
+
 
 const routes: Routes = [
     { path: 'connected', 
@@ -51,7 +53,8 @@ const routes: Routes = [
         RssUrlsComponent, 
         RssCategoriesComponent,
         RssModalAddComponent,
-        ModalConfirmDeleteComponent
+        ModalConfirmDeleteComponent,
+        SafePipe
     ],
     imports: [
         CommonModule,

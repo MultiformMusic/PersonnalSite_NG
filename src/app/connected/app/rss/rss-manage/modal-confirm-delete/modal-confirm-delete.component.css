@@ -1,3 +1,20 @@
+.modal-header {
+    background-color: rgb(247, 224, 204);
+}
+
 .modal-content {
     margin: auto;
+}
+
+.modal-text-content {
+
+    background-color: rgb(249, 246, 241);
+}
+
+.rss-name {
+    font-size: 1.2rem;
+}
+
+.modal-footer {
+    background-color: rgb(247, 224, 204);
 }

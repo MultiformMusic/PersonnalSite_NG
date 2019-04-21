@@ -18,6 +18,11 @@ export class RssManageComponent implements OnInit, OnChanges {
 
   ngOnInit() {
 
+    let elementRss = document.getElementById("idSidemenuRssLink");
+    elementRss.classList.add("current");
+    let elementHome = document.getElementById("idSidemenuHome");
+    elementHome.classList.remove("current");
+
     this.store.dispatch(new actions.showFilters(false));
   }
 

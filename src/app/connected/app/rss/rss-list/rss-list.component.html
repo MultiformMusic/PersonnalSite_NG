@@ -13,11 +13,19 @@
         <ng-container *ngIf="feeds.length > 0">
           <div (click)="showBackContent(i)" *ngFor="let item of feeds; let i = index" 
               [ngClass]="rotate ? 'col-xl-3 col-sm-6 p-2 rotate' : 'col-xl-3 col-sm-6 p-2'">
-            <div class="card card-common" [style.background-color]="item.readed ?  'black' : '#3a2828'">
+              <div class="card card-common" [style.background-color]="item.readed ?  'black' : '#3a2828'">
               <div class="card-body">
                 <div class="">
-                  <img *ngIf="item.enclosure" class="card-img" src={{item.enclosure.url}} alt="">
-                  <div class="text-left">
+                    
+                  <ng-container *ngIf="item.enclosure">
+                      
+                      <div *ngIf="item.enclosure.url.includes('youtube')" class="embed-responsive embed-responsive-16by9">
+                          <iframe class="embed-responsive-item" [src]="(item.enclosure.url | safe)" allowfullscreen></iframe>
+                      </div>
+                      
+                      <img *ngIf="!item.enclosure.url.includes('youtube')" class="card-img" src={{item.enclosure.url}} alt="">
+                  </ng-container>
+                     <div class="text-left">
                     <p class="item-title">{{item.title}}</p>
                   </div>
                 </div>
@@ -47,7 +55,7 @@
                 <div class="">
                   <img class="card-img-empty" src="https://www.aurovilleradio.org/wp-content/themes/valor/assets/img/_RSS.png" alt="">
                   <div class="text-center">
-                    <p class="item-title-empty">You don't have configured RSS yet</p>
+                    <p class="item-title-empty">You don't have configured or active RSS yet</p>
                     <a routerLink="/connected/rss/manage" style="cursor: pointer" class="px-4 btn">Click here to configure</a>
                   </div>              
                 </div>           
