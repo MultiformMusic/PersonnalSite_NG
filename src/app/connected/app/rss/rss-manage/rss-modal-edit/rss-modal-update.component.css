@@ -1,0 +1,94 @@
+.modal {
+    transition: all 0.4s;  
+}
+
+.modal-transition-in {
+
+    background: linear-gradient(rgba(0,0,0, 0.5), rgba(0,0,0, 0.8));
+}
+
+.modal-header {
+    background-color: rgb(220, 208, 190);
+}
+
+.modal-content {
+    background-color: rgb(235, 227, 216);
+}
+
+.modal-title {
+    font-size: 1.4rem;
+    line-height: 1.2rem;
+}
+
+.modal-subtitle {
+    font-size: .9rem;
+    margin-left: 15px;
+}
+
+.modal-footer {
+    background-color: rgb(233, 219, 197);
+}
+
+input {
+    width: 90%;
+}
+
+.callCloudFunctionMessage {
+    color: rgb(150, 115, 0);
+    font-size: 18px;
+}
+
+.blink_me {
+    animation: blinker 1s linear infinite;
+}
+  
+.select-rssName {
+    width: 90%;
+}
+
+.select-category {
+    width: 90%;
+    margin-top: 10px;
+}
+
+.result-add-ok {
+    color: rgb(51, 147, 51);
+    margin-right: 20px;
+}
+
+.result-add-nok {
+    color: rgb(206, 60, 44);
+    margin-right: 20px;
+}
+
+.input-keywords {
+    width: 70%;
+}
+
+@keyframes blinker {  
+    50% { opacity: 0; }
+}
+
+@media screen and ( max-height: 900px ) { 
+    .modal-transition-in{
+        padding-top: 10vh;  
+    }
+}
+
+@media screen and ( max-height: 800px ) { 
+    .modal-transition-in {
+        padding-top: 10vh;
+    }
+}
+
+@media screen and ( max-height: 700px ) { 
+    .modal-transition-in {
+        padding-top: 12vh;  
+    }
+}
+
+@media screen and ( max-height: 600px ) { 
+    .modal-transition-in {
+        padding-top: 16vh;  
+    }
+}

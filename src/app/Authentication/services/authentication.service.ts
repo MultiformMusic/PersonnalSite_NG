@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {map} from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { EmailValidator } from '@angular/forms';
 
 @Injectable()
 export class AuthenticationService {
@@ -13,7 +15,8 @@ export class AuthenticationService {
     decodedToken: any;
     rawToken: string;
 
-    constructor(private http: Http) {
+    constructor(private http: Http, 
+                private db: AngularFirestore) {
 
         this.jwtHelper = new JwtHelperService();
     }
@@ -114,5 +117,43 @@ export class AuthenticationService {
         localStorage.setItem(constants.LOCALSTORAGE_TOKEN, token);
         localStorage.setItem(constants.LOCALSTORAGE_META_DATA, JSON.stringify(this.decodedToken));
         return token;
+    }
+
+    /**
+     * 
+     * Ajoute un utilisateur à la db FIRESTORE
+     * 
+     */
+    public addUserToDb(user: any): Promise<any> {
+
+        const userDb = {
+            id: user.email,
+            username: user.username,
+        }
+        return this.db.collection('users').doc(userDb.id).set(userDb);
+    }
+
+    /**
+     * 
+     * Ajoute les categories par défaut à l'utilisateur créé
+     * 
+     * @param userEmail 
+     * 
+     */
+    public addCategoriesToUser(userEmail: string) {
+
+        const categories = [
+            {name: 'News'}, 
+            {name: 'Science'}, 
+            {name: 'Informatic'}, 
+            {name: 'Misceallous'}, 
+            {name: 'Music'},
+            {name: 'Apple'},
+            {name: 'Android'},
+        ];
+
+        categories.map((category: any) => {
+            this.db.collection(`users/${userEmail}/categories`).doc(category.name).set(category);
+        });
     }
 }

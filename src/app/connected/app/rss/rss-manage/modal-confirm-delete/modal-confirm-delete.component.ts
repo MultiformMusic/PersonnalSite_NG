@@ -3,7 +3,7 @@ import { RssUrl } from '../../models/rss-url';
 
 
 @Component({
-  selector: 'app-modal-confirm-delete',
+  selector: 'modal-confirm-delete',
   templateUrl: './modal-confirm-delete.component.html',
   styleUrls: ['./modal-confirm-delete.component.css']
 })
@@ -19,7 +19,7 @@ export class ModalConfirmDeleteComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?) {
         this.screenHeight = (window.innerHeight / 2) - 100;
-}
+  }
   constructor() { 
     this.getScreenSize();
   }

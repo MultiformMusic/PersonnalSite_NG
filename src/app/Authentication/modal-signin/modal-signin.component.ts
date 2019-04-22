@@ -133,6 +133,12 @@ export class ModalSigninComponent implements OnInit {
         this.errors.push(JSON.parse(errorResponse._body).errors[0]);
       }
     );
-  }
 
+    // ajout user dans firestore
+    this.authenticationService.addUserToDb(user)
+      .then(userRes => {
+        this.authenticationService.addCategoriesToUser(user.email)
+      })
+      .catch(err => {});
+    }
 }

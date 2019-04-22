@@ -30,5 +30,7 @@ import { RssListComponent } from './rss-list/rss-list.component';
           ],
 
   providers: [RssService],
+
+  declarations: [],
 })
 export class RssModule {}

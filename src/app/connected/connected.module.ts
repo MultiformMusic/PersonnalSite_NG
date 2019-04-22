@@ -21,6 +21,7 @@ import { RssCategoriesComponent } from './app/rss/rss-manage/rss-categories/rss-
 import { RssModalAddComponent } from './app/rss/rss-manage/rss-modal-add/rss-modal-add.component';
 import { ModalConfirmDeleteComponent } from './app/rss/rss-manage/modal-confirm-delete/modal-confirm-delete.component';
 import { SafePipe } from '../pipe/safe.pipe';
+import { RssModalUpdateComponent } from './app/rss/rss-manage/rss-modal-edit/rss-modal-update.component';
 
 
 const routes: Routes = [
@@ -54,6 +55,7 @@ const routes: Routes = [
         RssCategoriesComponent,
         RssModalAddComponent,
         ModalConfirmDeleteComponent,
+        RssModalUpdateComponent,
         SafePipe
     ],
     imports: [

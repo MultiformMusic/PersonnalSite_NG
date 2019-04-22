@@ -1,0 +1,55 @@
+<!-- Modal -->
+<div #modalRssUpdate class="modal fade" id="modal-rss-update">
+    <div class="modal-dialog">
+      <div class="modal-content" [ngStyle]="{'margin-top.px': screenHeight}">
+        <div class="modal-header">
+            <div class="row align-items-center">
+                <i class="fas fa-edit fa-2x text-success mr-4"></i>
+              <div class="column">
+                <h4 class="modal-title">Edit RSS</h4>
+                <span class="text-info font-weight-bold" *ngIf="rssUrlToUpdate">{{ rssUrlToUpdate.name }}</span>
+              </div>
+            </div>
+          <button (click)="closeModal()" type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="column text-center form-group">
+            
+          <!-- Nom -->
+          <div class="mb-3">
+
+            <label class="font-weight-bold mt-3">Change name</label>
+            <div class="row justify-content-center">
+              <input [(ngModel)]="nameUpdated" type="text" placeholder={{nameUpdated}} class="form-control" > 
+            </div>
+          </div>
+
+          <!-- liste déroulante catégories  -->
+          <label class="font-weight-bold">Change category</label>
+          <div class="row justify-content-center">
+            <select *ngIf="categoriesList.length > 0" 
+                      [(ngModel)]="selectedCategory" 
+                      (change)="selectedCategoryName(selectCategory.value)" 
+                      name="category" #selectCategory
+                      class="form-control select-category" id="category" required>
+
+                  <option *ngFor="let category of categoriesList" [value]="category.name">{{category.name}}</option>
+              
+            </select>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+            <img *ngIf="updatingRss" src="assets/loader1.gif" width="40" height="auto"/>
+            
+            <button (click)="closeModal()" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            <button 
+                  (click)="updateRss()" 
+                  type="button" 
+                  class="btn btn-success" >
+                  Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Modal -->

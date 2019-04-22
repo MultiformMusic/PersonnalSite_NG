@@ -57,13 +57,20 @@ export class RssService {
 
         // recherche de l'utilisateur connecté
         const user: User = this.authService.getUserFromToken();
-
-        this.db.collection('categories', ref => ref.where('email','==', user.email ))
+        /*this.db.collection('categories', ref => ref.where('email','==', user.email ))
                .valueChanges().subscribe(
                    (categories: Category[]) => {
                         this.categoriesLoading.next(categories.sort(this.compare));
                    }    
-               );
+               );*/
+
+        console.log('user email = ', user.email)
+        this.db.collection(`users/${user.email}/categories`)
+               .valueChanges().subscribe(
+                    (categories: Category[]) => {
+                        this.categoriesLoading.next(categories.sort(this.compare));
+                    }    
+                );
     }
 
     /**
@@ -82,7 +89,7 @@ export class RssService {
         this.categories = [];
         this.rssNames = [];
 
-        this.db.collection('rss-url', ref => ref.where('email','==', user.email )).valueChanges().subscribe(
+        this.db.collection(`users/${user.email}/rss-url`).valueChanges().subscribe(
             
             (rssUrlsArray: RssUrl[]) => {
 
@@ -129,7 +136,7 @@ export class RssService {
         const user: User = this.authService.getUserFromToken();
 
         // handler sur la collection rss-url
-        this.rssUrlsCollection = this.db.collection<RssUrl>('rss-url', ref => ref.where('email','==', user.email));
+        this.rssUrlsCollection = this.db.collection<RssUrl>(`users/${user.email}/rss-url`);
 
         // construction tableau Observable sur les rss url de la collection
         return this.rssUrlsCollection.snapshotChanges().pipe(
@@ -149,9 +156,10 @@ export class RssService {
      * @param rssUrl 
      * 
      */
-    updateRssUrl(rssUrl: RssUrl) {
+    updateRssUrl(rssUrl: RssUrl, userEmail: string) {
         //rssUrl.name = rssUrl.name + ' modif';
-        const itemDoc = this.db.doc<RssUrl>('rss-url/' + rssUrl.id);
+        console.log(rssUrl);
+        const itemDoc = this.db.doc<RssUrl>(`users/${userEmail}/rss-url/${rssUrl.id}`);
         itemDoc.update(rssUrl);
     }
 
@@ -162,8 +170,8 @@ export class RssService {
      * @param rssUrl 
      * 
      */
-    deleteRssUrl(rssUrl: RssUrl): Promise<void> {
-        const itemDoc = this.db.doc<RssUrl>('rss-url/' + rssUrl.id);
+    deleteRssUrl(rssUrl: RssUrl, userEmail: string): Promise<void> {
+        const itemDoc = this.db.doc<RssUrl>(`users/${userEmail}/rss-url/${rssUrl.id}`);
         return itemDoc.delete();
     }
 
@@ -308,15 +316,15 @@ export class RssService {
         );
       }
 
-      /**
-       * 
-       * Ajout RSS URL à Firestore
-       * 
-       * @param rssUrl 
-       * 
-       */
-    addRssUrl(rssUrl: RssUrl): Promise<any> {
-        return this.db.collection('rss-url').doc(rssUrl.id).set(rssUrl);
+    /**
+     * 
+     * Ajout RSS URL à Firestore
+     * 
+     * @param rssUrl 
+     * 
+     */
+    addRssUrl(rssUrl: RssUrl, userEmail: string): Promise<any> {
+        return this.db.collection(`users/${userEmail}/rss-url`).doc(rssUrl.id).set(rssUrl);
     }
 
     /**

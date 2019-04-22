@@ -64,7 +64,7 @@ export class RssModalAddComponent implements OnInit, OnDestroy {
      * 
      * - on initialise les subscriptions
      * - on lance la première récupération des feeds
-     * 
+     * - on lance résupération catégories
      * 
      */
     openModal() {
@@ -108,7 +108,7 @@ export class RssModalAddComponent implements OnInit, OnDestroy {
         }
       );
 
-      // chargement des feeds
+      // chargement des categories
       this.rssService.loadCategoriesFromDatabase();
 
       // affichage modal
@@ -162,7 +162,7 @@ export class RssModalAddComponent implements OnInit, OnDestroy {
       const rssUrl = this.rssUrlsFromSearch.find(rss => rss.name === this.selectedRssUrlName);
       if (rssUrl) {
 
-        rssUrl.id = cyrb53(rssUrl.url);
+        rssUrl.id = rssUrl.name;
         rssUrl.email = this.user.email;
         rssUrl.category = this.selectedCategory;
 
@@ -179,7 +179,7 @@ export class RssModalAddComponent implements OnInit, OnDestroy {
           return;
         }
 
-        this.rssService.addRssUrl(rssUrl)
+        this.rssService.addRssUrl(rssUrl, this.user.email)
                        .then(
                          rss => {
                            this.addingRss = false;

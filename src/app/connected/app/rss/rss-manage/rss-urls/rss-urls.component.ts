@@ -17,6 +17,8 @@ export class RssUrlsComponent implements OnInit {
 
   rssUrls$: Observable<RssUrl[]>;
   showInfos: boolean = true;
+  useFeedsCache: boolean = true;
+
 
   @ViewChild('rssUrlsList') rssUrlsList: any;
 
@@ -36,20 +38,39 @@ export class RssUrlsComponent implements OnInit {
 
   ngOnInit() {
 
+    this.useFeedsCache = true;
     this.rssUrls$ = this.rssService.loadsRssUrlsForManage();
-
   }
 
+  /**
+   * 
+   * Mise à jour d'une URL RSS
+   * 
+   * @param rssUrl 
+   * 
+   */
   updateName(rssUrl: RssUrl) {
+
     const rssUrlModif = {...rssUrl, name: rssUrl.name};
-    this.rssService.updateRssUrl(rssUrlModif);
+    this.rssService.updateRssUrl(rssUrlModif, rssUrl.email);
+
+    this.useFeedsCache = false;
   }
 
+  /**
+   * 
+   * Suppression d'une URL RSS
+   * 
+   * @param rssUrl 
+   * 
+   */
   deleteRssUrl(rssUrl: RssUrl) {
-    console.log('delete = ', rssUrl);
-    this.rssService.deleteRssUrl(rssUrl)
-        .then(() => this.toastr.info('RSS deleted'))
+
+    this.rssService.deleteRssUrl(rssUrl, rssUrl.email)
+        .then(() => {this.toastr.info('RSS deleted'); this.useFeedsCache = false;})
         .catch(() => this.toastr.error('Error to delete'));
+
+    
   }
 
   /**
@@ -63,26 +84,25 @@ export class RssUrlsComponent implements OnInit {
 
     const activeModif = !rssUrl.active;
     const rssUrlModif = {...rssUrl, active: activeModif};
-    this.rssService.updateRssUrl(rssUrlModif);
+    this.rssService.updateRssUrl(rssUrlModif, rssUrl.email);
 
-    this.store.dispatch(new actions.setFromCache(false));
+    this.useFeedsCache = false;
   }
 
   /**
    * 
    * Appui sur bouton retour => animation puis retour rss feeds list
+   * Si modification => on ne prend pas les feeds du cache
    * 
    */
   backRssList() {
-  
-    this.store.dispatch(new actions.setFromCache(true));
+
+    this.store.dispatch(new actions.setLoading(!this.useFeedsCache));
+    this.store.dispatch(new actions.setFromCache(this.useFeedsCache));
 
     this.rssUrlsList.nativeElement.className = 'bounceOut';
-
     setTimeout(() => {
-
-      this.router.navigate(['/connected/rss/list']);
-    
+      this.router.navigate(['/connected/rss/list']); 
     }, 600);
 
   }
