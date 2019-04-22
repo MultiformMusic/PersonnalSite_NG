@@ -69,8 +69,6 @@ export class RssUrlsComponent implements OnInit {
     this.rssService.deleteRssUrl(rssUrl, rssUrl.email)
         .then(() => {this.toastr.info('RSS deleted'); this.useFeedsCache = false;})
         .catch(() => this.toastr.error('Error to delete'));
-
-    
   }
 
   /**

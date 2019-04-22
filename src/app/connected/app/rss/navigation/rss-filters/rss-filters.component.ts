@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, OnChanges, Output, EventEmitter } from '@angular/core';
 import { RssService } from '../../services/rss.service';
 import { constants } from 'src/helpers/constants';
 import { Subscription } from 'rxjs';
@@ -24,6 +24,9 @@ export class RssFiltersComponent implements OnInit, OnDestroy, OnChanges {
   // permet de savoir si on reload (par refresh) pour raz les filtres
   rssUrlsSubscription: Subscription;
 
+  // permet de savoir si filtre actif
+  @Output() activeFilters = new EventEmitter<any>();
+
   constructor(public rssService: RssService) { }
 
   ngOnInit() {
@@ -38,7 +41,6 @@ export class RssFiltersComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges() {
-    console.log("ngOnChanges");
 
     setTimeout(() => {
       this.toggleFiltersDelayed = this.toggleFilters
@@ -52,7 +54,9 @@ export class RssFiltersComponent implements OnInit, OnDestroy, OnChanges {
    * 
    */
   applyFilterCategory(category: string) {
+
     this.filters.category = category;
+    this.checkEmitEvent();
     this.rssService.applyFilters(this.filters);
   }
 
@@ -64,10 +68,53 @@ export class RssFiltersComponent implements OnInit, OnDestroy, OnChanges {
    * 
    */
   applyFilterRssName(rssName: string) {
+
     this.filters.rssName = rssName;
+    this.checkEmitEvent();
     this.rssService.applyFilters(this.filters);
   }
   
+  /**
+   * 
+   * Détermine si un filtre est actif et emet un événement vers
+   * le Header Component pour afficher modif lien suivant si un filtre
+   * est actif
+   * 
+   */
+  private checkEmitEvent() {
+
+    debugger;
+    let categoryFilter = undefined;
+    let rssNameFilter = undefined;
+    let isFiltersActive = false;
+
+    if (this.filters.category !== constants.CATEGORY_ALL) {
+      isFiltersActive = true;
+      categoryFilter = this.filters.category;
+    }
+
+    if (this.filters.rssName !== constants.RSS_NAME_ALL) {
+      isFiltersActive = true;
+      rssNameFilter = this.filters.rssName;
+    }
+
+    this.activeFilters.emit({
+      isFiltersActive,
+      rssNameFilter,
+      categoryFilter
+    });
+
+    /*if (this.filters.category !== constants.CATEGORY_ALL || 
+        this.filters.rssName !== constants.RSS_NAME_ALL) {
+
+          this.activeFilters.emit(true);
+
+    } else {
+
+        this.activeFilters.emit(false);
+    }*/
+
+  }
 
   ngOnDestroy() {
     if (this.rssUrlsSubscription) {

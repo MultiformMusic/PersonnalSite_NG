@@ -21,6 +21,7 @@ export class RssHeaderComponent implements OnInit {
   toggleFilters: boolean = false;
 
   showFilters$: Observable<boolean>;
+  filtersActive: any = undefined;
 
   constructor(private rssService: RssService,
               private router: Router,
@@ -87,5 +88,18 @@ export class RssHeaderComponent implements OnInit {
     if (!this.toggleFilters && this.toggle) {
       this.clikToggleButton();
     }
+  }
+
+  /**
+   * Provient d'in Emit Event du composant filters pour savoir s'il est actif
+   * et changer couleur de fond au niveau du header
+   * 
+   * @param isFiltersActive 
+   * 
+   */
+  checkActiveFilters(filtersEvent: any) {
+    
+    debugger;
+    this.filtersActive = filtersEvent;
   }
 }

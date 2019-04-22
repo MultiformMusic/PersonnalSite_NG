@@ -62,6 +62,10 @@ a {
     transform: rotate(45deg) translate(-5px, -6px);
 }
 
+.active-link {
+  background-color:rgb(165, 52, 32);  
+}
+
  @media (max-width: 768px) {
 
     .sidebar {

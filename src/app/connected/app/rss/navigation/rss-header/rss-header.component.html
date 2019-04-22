@@ -31,13 +31,15 @@
                 <li *ngIf="showFilters$ | async" class="nav-item">
                     <span (click)="clickToggleFilters()" style="cursor: pointer" class="p-2 mb-2 rss-header-link">
                         <i class="fas fa-filter text-light mr-2"></i>
-                        <span class="text-link">Filters</span>
+                        <span [ngClass]="filtersActive && filtersActive.isFiltersActive ? 'text-link active-link ' : 'text-link'" >Filters</span>
                     </span>
-                    <app-rss-filters [toggleFilters]="toggleFilters"></app-rss-filters>
+                    <app-rss-filters (activeFilters)="checkActiveFilters($event)" [toggleFilters]="toggleFilters"></app-rss-filters>
+                    <div *ngIf="filtersActive && filtersActive.categoryFilter" class="text-info">Category : {{filtersActive.categoryFilter}}</div>
+                    <div *ngIf="filtersActive && filtersActive.rssNameFilter" class="text-info">Name : {{filtersActive.rssNameFilter}}</div>
                 </li>
                 <li class="nav-item">
                     <span (click)="manage()" style="cursor: pointer" class="p-2 mb-2 rss-header-link">
-                        <i class="fas fa-cogs text-light mr-2"></i>
+                        <i  class="fas fa-cogs text-light mr-2"></i>
                         <span class="text-link">Manage RSS</span>
                     </span>
                 </li>
