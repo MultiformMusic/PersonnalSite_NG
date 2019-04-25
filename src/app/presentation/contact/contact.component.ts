@@ -65,15 +65,15 @@ export class ContactComponent implements OnInit {
     );
 
     /** sauvegarde message dans Firebase : Realtime DB */
-    this.contactService.storeContact(this.contact).subscribe(
+    /*this.contactService.storeContact(this.contact).subscribe(
       (response) => console.log("Save message OK"),
       (error) => console.log("Save Message Erro")
-    );
+    );*/
 
     /** sauvegarde message dans Firebase : Firestore */
     this.contactService.storeMessageContact(this.contact)
                         .then(
-                          (document: DocumentReference) => {
+                          () => {
                             console.log("Save Firestore OK");
                           }
                         )

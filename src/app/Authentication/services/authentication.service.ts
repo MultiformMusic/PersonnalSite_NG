@@ -6,7 +6,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import {map} from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { EmailValidator } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/auth'
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthenticationService {
@@ -15,10 +16,15 @@ export class AuthenticationService {
     decodedToken: any;
     rawToken: string;
 
+    // firestore user
+    user: Observable<firebase.User>;
+
     constructor(private http: Http, 
-                private db: AngularFirestore) {
+                private db: AngularFirestore,
+                private firebaseAuth: AngularFireAuth) {
 
         this.jwtHelper = new JwtHelperService();
+        this.user = firebaseAuth.authState;
     }
 
     /**
@@ -156,4 +162,18 @@ export class AuthenticationService {
             this.db.collection(`users/${userEmail}/categories`).doc(category.name).set(category);
         });
     }
+
+    /**
+     * 
+     * Authentification sur firebase
+     * 
+     * @param email 
+     * @param password 
+     */
+    loginFirebase(email: string, password: string): Promise<firebase.auth.UserCredential> {
+        
+        return this.firebaseAuth
+                   .auth
+                   .signInWithEmailAndPassword(email, password);
+      }
 }
