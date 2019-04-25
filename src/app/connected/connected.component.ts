@@ -1,4 +1,6 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
+import { AuthenticationService } from '../Authentication/services/authentication.service';
+import { secureConstants } from '../../helpers/secureConstants';
 
 @Component({
   selector: 'app-connected',
@@ -7,15 +9,16 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 })
 export class ConnectedComponent implements OnInit {
 
-  constructor() {}
+  constructor(private authService: AuthenticationService) {}
 
   ngOnInit() {
     
-    /*let linkHome = this.el.nativeElement.querySelector('#idSidemenuRssLink');
-    debugger;
-    if (linkHome) {
-      linkHome.classList.add('current');
-    }*/
+    this.authService.loginFirebase(secureConstants.FIREBASE_EMAIL, secureConstants.FIREBASE_PASSWORD)
+                    .then(
+                      credential => console.log('credential OK')
+                    ).catch(
+                      err => console.log(err)
+                    );
   }
 
 }

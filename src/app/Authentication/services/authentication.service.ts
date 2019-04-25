@@ -17,14 +17,14 @@ export class AuthenticationService {
     rawToken: string;
 
     // firestore user
-    user: Observable<firebase.User>;
+    userFirebase: Observable<firebase.User>;
 
     constructor(private http: Http, 
                 private db: AngularFirestore,
                 private firebaseAuth: AngularFireAuth) {
 
         this.jwtHelper = new JwtHelperService();
-        this.user = firebaseAuth.authState;
+        this.userFirebase = firebaseAuth.authState;
     }
 
     /**
@@ -107,6 +107,8 @@ export class AuthenticationService {
     
         this.decodedToken = {};
         this.rawToken = '';
+
+        this.firebaseAuth.auth.signOut();
     }
 
     /**
