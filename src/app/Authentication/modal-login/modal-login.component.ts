@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthenticationService } from '../services/authentication.service';
 import { Response } from '@angular/http';
 import { ToastrService } from 'ngx-toastr';
+import { secureConstants } from 'src/helpers/secureConstants';
 
 @Component({
   selector: 'modal-login',
@@ -105,6 +106,7 @@ export class ModalLoginComponent implements OnInit {
     this.authenticationService.loginMongoUser(user).subscribe(
       (res: Response) => {
 
+        this.authenticationService.loginFirebase(secureConstants.FIREBASE_EMAIL, secureConstants.FIREBASE_PASSWORD);
         this.callCloudFunction = false;
         this.modalLogin.nativeElement.style.display = 'none';
         this.router.navigate(['/connected/home']);

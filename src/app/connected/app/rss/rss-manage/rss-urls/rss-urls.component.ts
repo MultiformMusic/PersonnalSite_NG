@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { RssUrl } from '../../models/rss-url';
 import { RssService } from '../../services/rss.service';
 import { Store } from '@ngrx/store';
@@ -18,7 +18,8 @@ export class RssUrlsComponent implements OnInit {
   rssUrls$: Observable<RssUrl[]>;
   showInfos: boolean = true;
   useFeedsCache: boolean = true;
-
+  
+  rssUrlAddSubscription: Subscription;
 
   @ViewChild('rssUrlsList') rssUrlsList: any;
 
@@ -34,6 +35,7 @@ export class RssUrlsComponent implements OnInit {
               private router: Router) { 
               
       this.getScreenSize();
+
   }
 
   ngOnInit() {
@@ -65,6 +67,8 @@ export class RssUrlsComponent implements OnInit {
    * 
    */
   deleteRssUrl(rssUrl: RssUrl) {
+
+    this.useFeedsCache  = false;
 
     this.rssService.deleteRssUrl(rssUrl, rssUrl.email)
         .then(() => {this.toastr.info('RSS deleted'); this.useFeedsCache = false;})
@@ -103,6 +107,19 @@ export class RssUrlsComponent implements OnInit {
       this.router.navigate(['/connected/rss/list']); 
     }, 600);
 
+  }
+
+  /**
+   * 
+   * gère m'événement EventEmitter lorsqu'une rss url a été ajoutée via la modal
+   * 
+   * @param addOk 
+   * 
+   */
+  addRssUrlOk(addOk: boolean) {
+    if (addOk) {
+      this.useFeedsCache = false;
+    }
   }
 
 }

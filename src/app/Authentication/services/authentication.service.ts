@@ -8,6 +8,7 @@ import { User } from 'src/app/models/user.model';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth'
 import * as firebase from 'firebase/app';
+import { secureConstants } from 'src/helpers/secureConstants';
 
 @Injectable()
 export class AuthenticationService {
@@ -132,13 +133,15 @@ export class AuthenticationService {
      * Ajoute un utilisateur à la db FIRESTORE
      * 
      */
-    public addUserToDb(user: any): Promise<any> {
+    public async addUserToDb(user: any): Promise<any> {
 
         const userDb = {
             id: user.email,
             username: user.username,
         }
-        return this.db.collection('users').doc(userDb.id).set(userDb);
+        return this.db.collection('users')
+                      .doc(userDb.id)
+                      .set(userDb);
     }
 
     /**
@@ -148,7 +151,7 @@ export class AuthenticationService {
      * @param userEmail 
      * 
      */
-    public addCategoriesToUser(userEmail: string) {
+    public async addCategoriesToUser(userEmail: string) {
 
         const categories = [
             {name: 'News'}, 
@@ -161,7 +164,14 @@ export class AuthenticationService {
         ];
 
         categories.map((category: any) => {
-            this.db.collection(`users/${userEmail}/categories`).doc(category.name).set(category);
+            this.db.collection(`users/${userEmail}/categories`)
+                   .doc(category.name)
+                   .set(category)
+                   .then(
+                       () => console.log("category added ok")
+                   ).catch(
+                       err => console.log("category added error")
+                   );
         });
     }
 
@@ -172,7 +182,7 @@ export class AuthenticationService {
      * @param email 
      * @param password 
      */
-    loginFirebase(email: string, password: string): Promise<firebase.auth.UserCredential> {
+    async loginFirebase(email: string, password: string): Promise<firebase.auth.UserCredential> {
         
         return this.firebaseAuth
                    .auth

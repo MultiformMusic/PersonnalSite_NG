@@ -99,7 +99,6 @@ export class RssHeaderComponent implements OnInit {
    */
   checkActiveFilters(filtersEvent: any) {
     
-    debugger;
     this.filtersActive = filtersEvent;
   }
 }

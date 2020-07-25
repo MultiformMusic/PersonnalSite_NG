@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { constants } from '../../../helpers/constants';
+import { secureConstants } from '../../../helpers/secureConstants';
 import { AuthenticationService } from '../services/authentication.service';
 import { Response } from '@angular/http';
 import { ToastrService } from 'ngx-toastr';
@@ -105,7 +106,7 @@ export class ModalSigninComponent implements OnInit {
    * - affichage toaster succés => redirection vers connected/home
    * 
    */
-  signin() {
+  async signin() {
 
     this.callCloudFunction = true;
     this.errors = [];
@@ -122,9 +123,9 @@ export class ModalSigninComponent implements OnInit {
         setTimeout( () => {
           this.callCloudFunction = false;
           this.modalSignin.nativeElement.style.display = 'none';
-          //this.toastr.success('', 'Welcome to your personnal page');
-          this.router.navigate(['/connected/home']);
-          location.reload();
+          this.toastr.success('', 'Signin Successfull');
+          //this.router.navigate(['/connected/home']);
+          //location.reload();
         }, 100)
       },
       (errorResponse) => {
@@ -134,11 +135,18 @@ export class ModalSigninComponent implements OnInit {
       }
     );
 
+
+    await this.authenticationService.loginFirebase(secureConstants.FIREBASE_EMAIL, secureConstants.FIREBASE_PASSWORD);
+    await this.authenticationService.addUserToDb(user);
+    await this.authenticationService.addCategoriesToUser(user.email);
+
     // ajout user dans firestore
-    this.authenticationService.addUserToDb(user)
+    /*this.authenticationService.addUserToDb(user)
       .then(userRes => {
+        console.log('User firebase create')
         this.authenticationService.addCategoriesToUser(user.email)
       })
-      .catch(err => {});
+      .catch(err => {console.log('error creta firebase user', err)});
+      */
     }
 }

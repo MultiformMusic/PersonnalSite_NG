@@ -17,8 +17,8 @@ export const constants = {
     MONGO_CREATE_USER: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/mongoCreateUser',
     MONGO_LOGIN_USER: 'https://us-central1-personnalsite-c7bef.cloudfunctions.net/mongoLogin',
     
-    //MONGO_CREATE_USER: '/personnalsite/us-central1/mongoCreateUser',
-    //MONGO_LOGIN_USER: '/personnalsite/us-central1/mongoLogin',
+    //MONGO_CREATE_USER: 'http://localhost:5001/personnalsite-c7bef/us-central1/mongoCreateUser',
+    //MONGO_LOGIN_USER: 'http://localhost:5001/personnalsite-c7bef/us-central1/mongoLogin',
     
 
     /** RSS functions */

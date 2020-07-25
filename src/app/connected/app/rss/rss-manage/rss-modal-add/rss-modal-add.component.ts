@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { RssService } from '../../services/rss.service';
 import { Subscription } from 'rxjs';
 import { RssUrl } from '../../models/rss-url';
@@ -13,6 +13,8 @@ import { Category } from '../../models/category';
   styleUrls: ['./rss-modal-add.component.css']
 })
 export class RssModalAddComponent implements OnInit, OnDestroy {
+
+  @Output() addRssUrlOk = new EventEmitter<boolean>();
 
   @ViewChild('modalRssAdd') modalRssAdd: any;
 
@@ -185,6 +187,7 @@ export class RssModalAddComponent implements OnInit, OnDestroy {
                            this.addingRss = false;
                            this.resultClass = 'result-add-ok';
                            this.resultMessage = 'RSS added';
+                           this.addRssUrlOk.emit(true);
                          }
                        )
                        .catch(

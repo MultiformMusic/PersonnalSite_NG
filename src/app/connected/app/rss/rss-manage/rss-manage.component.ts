@@ -28,7 +28,7 @@ export class RssManageComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     let linkHome = this.el.nativeElement.querySelector('#idSidemenuHome');
-    debugger;
+
     if (linkHome) {
       linkHome.classList.remove('current');
     }

@@ -43,3 +43,4 @@ testem.log
 Thumbs.db
 
 src/helpers/secureConstants.ts
+src/helpers/constants.ts

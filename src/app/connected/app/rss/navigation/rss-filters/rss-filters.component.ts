@@ -83,7 +83,6 @@ export class RssFiltersComponent implements OnInit, OnDestroy, OnChanges {
    */
   private checkEmitEvent() {
 
-    debugger;
     let categoryFilter = undefined;
     let rssNameFilter = undefined;
     let isFiltersActive = false;

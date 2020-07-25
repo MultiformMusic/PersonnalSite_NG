@@ -48,7 +48,7 @@
     </div>
   </ng-container>
 
-  <rss-modal-add #modalRssAdd></rss-modal-add>
+  <rss-modal-add #modalRssAdd (addRssUrlOk)="addRssUrlOk($event)"></rss-modal-add>
   <rss-modal-update #modalRssUpdate></rss-modal-update>
 
   <modal-confirm-delete (confirmDeleteEvent)="deleteRssUrl($event)" #modalConfirmDelete></modal-confirm-delete>
