@@ -17,7 +17,7 @@
     "gmail-send": "^1.2.14",
     "he": "^1.2.0",
     "jsonwebtoken": "^8.5.0",
-    "mongoose": "^5.4.17",
+    "mongoose": "^5.7.5",
     "request": "^2.88.0",
     "rss-parser": "^3.7.0",
     "sendgrid": "^5.2.3"
